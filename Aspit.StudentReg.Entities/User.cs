@@ -35,7 +35,7 @@ namespace Aspit.StudentReg.Entities
             {
                 if(value < 0)
                 {
-                    throw new ArgumentNullException();
+                    throw new ArgumentOutOfRangeException();
                 }
                 id = value;
             }
@@ -50,6 +50,11 @@ namespace Aspit.StudentReg.Entities
 
             set
             {
+                if(value is null)
+                {
+                    throw new ArgumentNullException();
+                }
+                //TODO add checker ting ting
                 name = value;
             }
         }
@@ -63,6 +68,7 @@ namespace Aspit.StudentReg.Entities
 
             set
             {
+                //TODO add checker ting ting
                 username = value;
             }
         }
@@ -76,6 +82,7 @@ namespace Aspit.StudentReg.Entities
 
             set
             {
+                //TODO add checker ting ting
                 attendanceRegistrationsKey = value;
             }
         }

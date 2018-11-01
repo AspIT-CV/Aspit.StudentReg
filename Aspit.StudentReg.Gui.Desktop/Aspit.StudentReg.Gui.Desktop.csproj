@@ -95,6 +95,10 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Aspit.StudentReg.DataAccess\Aspit.StudentReg.DataAccess.csproj">
+      <Project>{4a72d160-56f8-4916-a0ef-a830a919ccc0}</Project>
+      <Name>Aspit.StudentReg.DataAccess</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Aspit.StudentReg.Entities\Aspit.StudentReg.Entities.csproj">
       <Project>{33880357-ae35-4016-ba88-dc226fe27c2b}</Project>
       <Name>Aspit.StudentReg.Entities</Name>

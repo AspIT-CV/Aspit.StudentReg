@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Aspit.StudentReg.Gui.Deskto
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Aspit.StudentReg.Entities", "Aspit.StudentReg.Entities\Aspit.StudentReg.Entities.csproj", "{33880357-AE35-4016-BA88-DC226FE27C2B}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Aspit.StudentReg.DataAccess", "Aspit.StudentReg.DataAccess\Aspit.StudentReg.DataAccess.csproj", "{4A72D160-56F8-4916-A0EF-A830A919CCC0}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{33880357-AE35-4016-BA88-DC226FE27C2B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{33880357-AE35-4016-BA88-DC226FE27C2B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{33880357-AE35-4016-BA88-DC226FE27C2B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4A72D160-56F8-4916-A0EF-A830A919CCC0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4A72D160-56F8-4916-A0EF-A830A919CCC0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4A72D160-56F8-4916-A0EF-A830A919CCC0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4A72D160-56F8-4916-A0EF-A830A919CCC0}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

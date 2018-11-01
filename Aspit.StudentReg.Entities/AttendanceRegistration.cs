@@ -9,7 +9,7 @@ namespace Aspit.StudentReg.Entities
     /// <summary>
     /// Represents an attendance registration
     /// </summary>
-    class AttendanceRegistration
+    public class AttendanceRegistration
     {
         /// <summary>
         /// The id of the AttendanceRegistration

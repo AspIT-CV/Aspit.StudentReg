@@ -17,6 +17,15 @@ namespace Aspit.StudentReg.Entities
         private DateTime leaveTime;
         private DateTime date;
 
+        public AttendanceRegistrations(int id, int userForeignKey, DateTime meetingTime, DateTime leaveTime, DateTime date)
+        {
+            Id = id;
+            UserForeignKey = userForeignKey;
+            MeetingTime = meetingTime;
+            LeaveTime = leaveTime;
+            Date = date;
+        }
+
         public int Id
         {
             get
@@ -26,6 +35,7 @@ namespace Aspit.StudentReg.Entities
 
             set
             {
+                //TODO check for valid value
                 id = value;
             }
         }
@@ -39,6 +49,7 @@ namespace Aspit.StudentReg.Entities
 
             set
             {
+                //TODO check for valid value
                 userForeignKey = value;
             }
         }
@@ -52,6 +63,7 @@ namespace Aspit.StudentReg.Entities
 
             set
             {
+                //TODO check for valid value
                 meetingTime = value;
             }
         }
@@ -65,6 +77,7 @@ namespace Aspit.StudentReg.Entities
 
             set
             {
+                //TODO check for valid value
                 leaveTime = value;
             }
         }
@@ -78,6 +91,7 @@ namespace Aspit.StudentReg.Entities
 
             set
             {
+                //TODO check for valid value
                 date = value;
             }
         }

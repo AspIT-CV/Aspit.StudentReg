@@ -79,5 +79,7 @@ namespace Aspit.StudentReg.DataAccess
             }
             return resultSet;
         }
+
+        // TODO: static method to retrieve conn string from config file.
     }
 }

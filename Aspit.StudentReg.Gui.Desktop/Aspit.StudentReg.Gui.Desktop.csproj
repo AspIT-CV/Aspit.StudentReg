@@ -94,5 +94,11 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Aspit.StudentReg.Entities\Aspit.StudentReg.Entities.csproj">
+      <Project>{33880357-ae35-4016-ba88-dc226fe27c2b}</Project>
+      <Name>Aspit.StudentReg.Entities</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -11,12 +11,39 @@ namespace Aspit.StudentReg.Entities
     /// </summary>
     class AttendanceRegistration
     {
+        /// <summary>
+        /// The id of the AttendanceRegistration
+        /// </summary>
         private int id;
+
+        /// <summary>
+        /// The id of the User this AttendanceRegistration is for
+        /// </summary>
         private int userForeignKey;
+
+        /// <summary>
+        /// The time the user signed in
+        /// </summary>
         private DateTime meetingTime;
+
+        /// <summary>
+        /// The time the user signed out
+        /// </summary>
         private DateTime leaveTime;
+
+        /// <summary>
+        /// The day this AttendanceRegistration is talking about
+        /// </summary>
         private DateTime date;
 
+        /// <summary>
+        /// Intializes a new AttendanceRegistration using the given parameters.
+        /// </summary>
+        /// <param name="id">the registration id</param>
+        /// <param name="userForeignKey">the id of user this attendance is for</param>
+        /// <param name="meetingTime">the time the user signed in</param>
+        /// <param name="leaveTime">the time the user signed out</param>
+        /// <param name="date">the day this attendance is about</param>
         public AttendanceRegistration(int id, int userForeignKey, DateTime meetingTime, DateTime leaveTime, DateTime date)
         {
             Id = id;
@@ -110,5 +137,7 @@ namespace Aspit.StudentReg.Entities
                 date = value;
             }
         }
+
+        //TODO create a duration calculate method
     }
 }

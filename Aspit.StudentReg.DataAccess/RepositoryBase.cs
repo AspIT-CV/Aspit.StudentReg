@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Data.SqlClient;
+using System.Data;
 
 namespace Aspit.StudentReg.DataAccess
 {
@@ -54,6 +55,29 @@ namespace Aspit.StudentReg.DataAccess
             {
                 throw new DataAccessException("Connection attempt failed.", e);
             }
+        }
+
+        /// <summary>
+        /// Executes sql queries against the databse.
+        /// </summary>
+        /// <param name="sql">The sql query to execute.</param>
+        /// <returns>A <see cref="DataSet"/> filled with any data matching the provided sql query.</returns>
+        internal DataSet Execute(string sql)
+        {
+            // TODO: check sql parameter.
+            DataSet resultSet = default;
+            try
+            {
+                using(SqlDataAdapter adapter = new SqlDataAdapter(new SqlCommand(sql, new SqlConnection(connectionString))))
+                {
+                    adapter.Fill(resultSet);
+                }
+            }
+            catch(Exception e)
+            {
+                throw new DataAccessException("Error communicating data with database.", e);
+            }
+            return resultSet;
         }
     }
 }

@@ -60,16 +60,16 @@ namespace Aspit.StudentReg.Entities
             }
         }
 
-        public int AttendanceRegistrationsKey1
+        public int AttendanceRegistrationsKey
         {
             get
             {
-                return AttendanceRegistrationsKey;
+                return attendanceRegistrationsKey;
             }
 
             set
             {
-                AttendanceRegistrationsKey = value;
+                attendanceRegistrationsKey = value;
             }
         }
     }

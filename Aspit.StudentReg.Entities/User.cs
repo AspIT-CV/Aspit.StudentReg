@@ -16,9 +16,12 @@ namespace Aspit.StudentReg.Entities
         string username;
         int attendanceRegistrationsKey;
 
-        public User()
+        public User(int id, string name, string username, int AttendanceRegistrationsKey)
         {
-
+            Id = id;
+            Name = name;
+            Username = username;
+            AttendanceRegistrationsKey = attendanceRegistrationsKey;
         }
 
         public int Id
@@ -30,6 +33,10 @@ namespace Aspit.StudentReg.Entities
 
             set
             {
+                if(value < 0)
+                {
+                    throw new ArgumentNullException();
+                }
                 id = value;
             }
         }

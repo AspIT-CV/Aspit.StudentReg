@@ -9,7 +9,7 @@ namespace Aspit.StudentReg.Entities
     /// <summary>
     /// Represents an attendance registration
     /// </summary>
-    class AttendanceRegistrations
+    class AttendanceRegistration
     {
         private int id;
         private int userForeignKey;
@@ -17,7 +17,7 @@ namespace Aspit.StudentReg.Entities
         private DateTime leaveTime;
         private DateTime date;
 
-        public AttendanceRegistrations(int id, int userForeignKey, DateTime meetingTime, DateTime leaveTime, DateTime date)
+        public AttendanceRegistration(int id, int userForeignKey, DateTime meetingTime, DateTime leaveTime, DateTime date)
         {
             Id = id;
             UserForeignKey = userForeignKey;
@@ -35,7 +35,10 @@ namespace Aspit.StudentReg.Entities
 
             set
             {
-                //TODO check for valid value
+                if(value < 0)
+                {
+                    throw new ArgumentOutOfRangeException("Id cannot be less than 0.");
+                }
                 id = value;
             }
         }
@@ -49,7 +52,10 @@ namespace Aspit.StudentReg.Entities
 
             set
             {
-                //TODO check for valid value
+                if(value < 0)
+                {
+                    throw new ArgumentOutOfRangeException("UserForeignKey cannot be less than 0");
+                }
                 userForeignKey = value;
             }
         }
@@ -63,7 +69,10 @@ namespace Aspit.StudentReg.Entities
 
             set
             {
-                //TODO check for valid value
+                if(value != null && value > DateTime.Now)
+                {
+                    throw new ArgumentException("MeetingTime cannot be in the future.");
+                }
                 meetingTime = value;
             }
         }
@@ -77,7 +86,10 @@ namespace Aspit.StudentReg.Entities
 
             set
             {
-                //TODO check for valid value
+                if(value != null && value > DateTime.Now)
+                {
+                    throw new ArgumentException("LeaveTime cannot be in the future.");
+                }
                 leaveTime = value;
             }
         }
@@ -91,7 +103,10 @@ namespace Aspit.StudentReg.Entities
 
             set
             {
-                //TODO check for valid value
+                if(value != null && value > DateTime.Now)
+                {
+                    throw new ArgumentException("Date cannot be in the future.");
+                }
                 date = value;
             }
         }

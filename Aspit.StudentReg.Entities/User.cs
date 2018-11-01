@@ -11,5 +11,66 @@ namespace Aspit.StudentReg.Entities
     /// </summary>
     public class User
     {
+        int id;
+        string name;
+        string username;
+        int AttendanceRegistrationsKey;
+
+        public User()
+        {
+
+        }
+
+        public int Id
+        {
+            get
+            {
+                return id;
+            }
+
+            set
+            {
+                id = value;
+            }
+        }
+
+        public string Name
+        {
+            get
+            {
+                return name;
+            }
+
+            set
+            {
+                name = value;
+            }
+        }
+
+        public string Username
+        {
+            get
+            {
+                return username;
+            }
+
+            set
+            {
+                username = value;
+            }
+        }
+
+        public int AttendanceRegistrationsKey1
+        {
+            get
+            {
+                return AttendanceRegistrationsKey;
+            }
+
+            set
+            {
+                AttendanceRegistrationsKey = value;
+            }
+        }
     }
 }

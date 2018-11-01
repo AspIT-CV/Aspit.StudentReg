@@ -14,7 +14,7 @@ namespace Aspit.StudentReg.Entities
         int id;
         string name;
         string username;
-        int AttendanceRegistrationsKey;
+        int attendanceRegistrationsKey;
 
         public User()
         {

@@ -29,6 +29,7 @@ namespace Aspit.StudentReg.DataAccess
         public void Update(AttendanceRegistration attendanceRegistration)
         {
             //TODO create the update method
+            throw new NotImplementedException();
         }
 
         /// <summary>
@@ -38,16 +39,39 @@ namespace Aspit.StudentReg.DataAccess
         public void Create(AttendanceRegistration attendanceRegistration)
         {
             //TODO create the create method
+            throw new NotImplementedException();
         }
 
         /// <summary>
         /// Gets all <see cref="AttendanceRegistration"/>s from the database
         /// </summary>
-        /// <returns>a <see cref="IEnumerator<AttendanceRegistration>"/> containing all the <see cref="AttendanceRegistration"/>s</returns>
-        public IEnumerator<AttendanceRegistration> Get()
+        /// <returns>a list containing all the <see cref="AttendanceRegistration"/>s</returns>
+        public List<AttendanceRegistration> GetAll()
         {
-            //TODO create the get method
-            yield break;
+            //TODO create the GetAll method
+            throw new NotImplementedException();
+        }
+
+        /// <summary>
+        /// Gets the given <see cref="User"/>'s current <see cref="AttendanceRegistration"/> from the database
+        /// </summary>
+        /// <param name="student">the <see cref="User"/> to get the <see cref="AttendanceRegistration"/> from</param>
+        /// <returns>the <see cref="User"/>'s current <see cref="AttendanceRegistration"/></returns>
+        public AttendanceRegistration GetStudentsCurrentRegistration(User student)
+        {
+            //TODO create the GetFromId method
+            throw new NotImplementedException();
+        }
+
+        /// <summary>
+        /// Gets the given <see cref="User"/>'s <see cref="AttendanceRegistration"/>s from the database
+        /// </summary>
+        /// <param name="student">the <see cref="User"/> to get the <see cref="AttendanceRegistration"/>s from</param>
+        /// <returns>a lsit containing all the <see cref="AttendanceRegistration"/>s for the student</returns>
+        public List<AttendanceRegistration> GetUsersRegistrations(User student)
+        {
+            //TODO create the GetUsersRegistrations method
+            throw new NotImplementedException();
         }
     }
 }

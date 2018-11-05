@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Aspit.StudentReg.Entities;
 using System.Data.SqlClient;
+using System.Data;
 
 
 namespace Aspit.StudentReg.DataAccess
@@ -49,9 +50,45 @@ namespace Aspit.StudentReg.DataAccess
         /// <returns>a list containing all the <see cref="AttendanceRegistration"/>s</returns>
         public List<AttendanceRegistration> GetAll()
         {
-            //TODO create the GetAll method
-            throw new NotImplementedException();
-            
+            SqlCommand getCommand = new SqlCommand("SELECT * FROM AttandanceRegistrations");
+            DataSet getOutput = Execute(getCommand);
+
+            if(getOutput.Tables.Count < 0)
+            {
+                throw new DataAccessException("Failed to get any tables from database");
+            }
+            else
+            {
+                if(getOutput.Tables[0].Rows.Count < 0)
+                {
+                    return new List<AttendanceRegistration>();
+                }
+                else
+                {
+                    List<AttendanceRegistration> returnList = new List<AttendanceRegistration>();
+                    foreach(DataRow row in getOutput.Tables[0].Rows)
+                    {
+
+                        int id;
+                        DateTime? meetingTime;
+                        DateTime? leavingTime;
+                        try
+                        {
+                            id = row.Field<int>("MeetingTime");
+                            meetingTime = row.Field<DateTime>("MeetingTime");
+                            leavingTime = row.Field<DateTime>("MeetingTime");
+                        }
+                        catch(InvalidCastException)
+                        {
+                            throw new DataAccessException("Failed to convert table row into the needed AttendanceRegistration properties");
+                        }
+
+                        returnList.Add(new AttendanceRegistration(id, meetingTime, leavingTime));
+                    }
+
+                    return returnList;
+                }
+            }
         }
 
         /// <summary>

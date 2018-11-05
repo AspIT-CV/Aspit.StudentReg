@@ -15,6 +15,11 @@ namespace Aspit.StudentReg.Entities
         int id;
         string name;
 
+        public User(int id, string name)
+        {
+            Id = id;
+            Name = name;
+        }
 
         public int Id
         {

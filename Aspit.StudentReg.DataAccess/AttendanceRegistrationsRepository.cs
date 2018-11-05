@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Aspit.StudentReg.Entities;
+using System.Data.SqlClient;
 
 
 namespace Aspit.StudentReg.DataAccess
@@ -50,6 +51,7 @@ namespace Aspit.StudentReg.DataAccess
         {
             //TODO create the GetAll method
             throw new NotImplementedException();
+            
         }
 
         /// <summary>

@@ -13,7 +13,7 @@ namespace Aspit.StudentReg.DataAccess
     /// <summary>
     /// The repository for AttendanceRegistrations
     /// </summary>
-    class AttendanceRegistrationsRepository : RepositoryBase
+    public class AttendanceRegistrationsRepository : RepositoryBase
     {
         /// <summary>
         /// Intializes a new Repository for <see cref="AttendanceRegistration"/> using the given connection string.
@@ -68,10 +68,10 @@ namespace Aspit.StudentReg.DataAccess
                     List<AttendanceRegistration> returnList = new List<AttendanceRegistration>();
                     foreach(DataRow row in getOutput.Tables[0].Rows)
                     {
-
                         int id;
                         DateTime? meetingTime;
                         DateTime? leavingTime;
+
                         try
                         {
                             id = row.Field<int>("MeetingTime");
@@ -90,6 +90,8 @@ namespace Aspit.StudentReg.DataAccess
                 }
             }
         }
+
+
 
         /// <summary>
         /// Gets the given <see cref="User"/>'s current <see cref="AttendanceRegistration"/> from the database
@@ -111,6 +113,49 @@ namespace Aspit.StudentReg.DataAccess
         {
             //TODO create the GetUsersRegistrations method
             throw new NotImplementedException();
+        }
+
+        /// <summary>
+        /// Takes a <see cref="DataRowCollection"/> and converts all its rows into AttendanceRegistrations
+        /// </summary>
+        /// <param name="dataRows">The <see cref="DataRowCollection"/> to convert into AttendanceRegistration list</param>
+        /// <returns>A list of all the AttendanceRegistrations made from the dataRows</returns>
+        private static List<AttendanceRegistration> ConvertDateRowsIntoAttendanceRegistrations(DataRowCollection dataRows)
+        {
+            if(dataRows is null)
+            {
+                throw new ArgumentNullException("datarows cannot be null.");
+            }
+
+            if(dataRows.Count < 0)
+            {
+                return new List<AttendanceRegistration>();
+            }
+            else
+            {
+                List<AttendanceRegistration> returnList = new List<AttendanceRegistration>();
+                foreach(DataRow row in dataRows)
+                {
+                    int id;
+                    DateTime? meetingTime;
+                    DateTime? leavingTime;
+
+                    try
+                    {
+                        id = row.Field<int>("MeetingTime");
+                        meetingTime = row.Field<DateTime>("MeetingTime");
+                        leavingTime = row.Field<DateTime>("MeetingTime");
+                    }
+                    catch(InvalidCastException)
+                    {
+                        throw new DataAccessException("Failed to convert table row into the needed AttendanceRegistration properties");
+                    }
+
+                    returnList.Add(new AttendanceRegistration(id, meetingTime, leavingTime));
+                }
+
+                return returnList;
+            }
         }
     }
 }

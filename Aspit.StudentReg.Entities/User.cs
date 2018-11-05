@@ -108,6 +108,10 @@ namespace Aspit.StudentReg.Entities
 
             set
             {
+                if(value is null)
+                {
+                    throw new ArgumentNullException();
+                }
                 attendanceRegistrations = value;
             }
         }

@@ -14,15 +14,11 @@ namespace Aspit.StudentReg.Entities
     {
         int id;
         string name;
-        string username;
-        AttendanceRegistration attendanceRegistrations;
 
-        public User(int id, string name, string username, AttendanceRegistration AttendanceRegistrations)
+        public User(int id, string name)
         {
             Id = id;
             Name = name;
-            Username = username;
-            AttendanceRegistrations = attendanceRegistrations;
         }
 
         public int Id
@@ -68,51 +64,6 @@ namespace Aspit.StudentReg.Entities
                 }
                 //Make the first letter of each word uppercase
                 name = System.Globalization.CultureInfo.CurrentCulture.TextInfo.ToTitleCase(value.ToLower());
-            }
-        }
-
-        public string Username
-        {
-            get
-            {
-                return username;
-            }
-
-            set
-            {
-                //Check if value is null
-                if(value is null)
-                {
-                    throw new ArgumentNullException();
-                }
-
-                //Trim whitespace
-                value = value.Trim();
-
-                //Check if value is a correct unilogin format
-                var reg = new Regex(@"[a-x0-9]{8}");
-                if (!reg.IsMatch(value))
-                {
-                    throw new ArgumentException();
-                }
-                username = value;
-            }
-        }
-
-        public AttendanceRegistration AttendanceRegistrations
-        {
-            get
-            {
-                return attendanceRegistrations;
-            }
-
-            set
-            {
-                if(value is null)
-                {
-                    throw new ArgumentNullException();
-                }
-                attendanceRegistrations = value;
             }
         }
     }

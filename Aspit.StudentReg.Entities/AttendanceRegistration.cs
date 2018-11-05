@@ -9,7 +9,7 @@ namespace Aspit.StudentReg.Entities
     /// <summary>
     /// Represents an attendance registration
     /// </summary>
-    public class AttendanceRegistration
+    public struct AttendanceRegistration
     {
         /// <summary>
         /// The id of the AttendanceRegistration
@@ -19,26 +19,12 @@ namespace Aspit.StudentReg.Entities
         /// <summary>
         /// The time the user signed in
         /// </summary>
-        private DateTime? meetingTime;
+        private DateTime meetingTime;
 
         /// <summary>
         /// The time the user signed out
         /// </summary>
-        private DateTime? leavingTime;
-
-        /// <summary>
-        /// Intializes a new AttendanceRegistration using the given parameters.
-        /// </summary>
-        /// <param name="id">the registration id</param>
-        /// <param name="meetingTime">the time the user signed in</param>
-        /// <param name="leavingTime">the time the user signed out</param>
-        /// <param name="date">the day this attendance is about</param>
-        public AttendanceRegistration(int id, DateTime? meetingTime, DateTime? leavingTime)
-        {
-            Id = id;
-            MeetingTime = meetingTime;
-            LeavingTime = leavingTime;
-        }
+        private DateTime leavingTime;
 
         /// <summary>
         /// Gets or sets the AttendanceRegistration's Id
@@ -63,7 +49,7 @@ namespace Aspit.StudentReg.Entities
         /// <summary>
         /// Gets or sets the AttendanceRegistration's MeetingTime
         /// </summary>
-        public DateTime? MeetingTime
+        public DateTime MeetingTime
         {
             get
             {
@@ -83,7 +69,7 @@ namespace Aspit.StudentReg.Entities
         /// <summary>
         /// Gets or sets the AttendanceRegistration's LeavingTime
         /// </summary>
-        public DateTime? LeavingTime
+        public DateTime LeavingTime
         {
             get
             {
@@ -107,12 +93,12 @@ namespace Aspit.StudentReg.Entities
         {
             get
             {
-                if(LeavingTime.Value.Date != meetingTime.Value.Date)
+                if(LeavingTime.Date != meetingTime.Date)
                 {
                     throw new InvalidOperationException("Couldn't get date from LeavingTime and MeetingTime since they are 2 different dates.");
                 }
 
-                return meetingTime.Value.Date;
+                return meetingTime.Date;
             }
         }
 

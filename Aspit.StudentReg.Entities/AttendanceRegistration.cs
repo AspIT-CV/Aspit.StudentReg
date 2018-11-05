@@ -32,11 +32,6 @@ namespace Aspit.StudentReg.Entities
         private DateTime leaveTime;
 
         /// <summary>
-        /// The day this AttendanceRegistration is talking about
-        /// </summary>
-        private DateTime date;
-
-        /// <summary>
         /// Intializes a new AttendanceRegistration using the given parameters.
         /// </summary>
         /// <param name="id">the registration id</param>
@@ -44,13 +39,12 @@ namespace Aspit.StudentReg.Entities
         /// <param name="meetingTime">the time the user signed in</param>
         /// <param name="leaveTime">the time the user signed out</param>
         /// <param name="date">the day this attendance is about</param>
-        public AttendanceRegistration(int id, int userForeignKey, DateTime meetingTime, DateTime leaveTime, DateTime date)
+        public AttendanceRegistration(int id, int userForeignKey, DateTime meetingTime, DateTime leaveTime)
         {
             Id = id;
             UserForeignKey = userForeignKey;
             MeetingTime = meetingTime;
             LeaveTime = leaveTime;
-            Date = date;
         }
 
         public int Id
@@ -125,16 +119,12 @@ namespace Aspit.StudentReg.Entities
         {
             get
             {
-                return date;
-            }
-
-            set
-            {
-                if(value != null && value > DateTime.Now)
+                if(LeaveTime.Date != meetingTime.Date)
                 {
-                    throw new ArgumentException("Date cannot be in the future.");
+                    throw new InvalidOperationException("Couldn't get date from LeaveTime and MeetingTime since they are 2 different dates.");
                 }
-                date = value;
+
+                return meetingTime.Date;
             }
         }
 

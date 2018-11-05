@@ -30,15 +30,19 @@ namespace Aspit.StudentReg.DataAccess
         /// <param name="attendanceRegistration">The <see cref="AttendanceRegistration"/> to update</param>
         public void Update(AttendanceRegistration attendanceRegistration)
         {
-            //TODO create the update method
-            throw new NotImplementedException();
+            SqlCommand updateCommand = new SqlCommand("UPDATE AttendanceRegistrations SET MeetingTime=@MeetingTime,LeavingTime=@LeavingTime,Date=@Date");
+            updateCommand.Parameters.AddWithValue("@MeetingTime", attendanceRegistration.MeetingTime);
+            updateCommand.Parameters.AddWithValue("@LeavingTime", attendanceRegistration.LeavingTime);
+            updateCommand.Parameters.AddWithValue("@Date", attendanceRegistration.Date);
+
+            Execute(updateCommand);
         }
 
         /// <summary>
         /// Creates the given <see cref="Student"/>'s <see cref="AttendanceRegistration"/> in the database
         /// </summary>
         /// <param name="attendanceRegistration">The <see cref="Student"/>'s <see cref="AttendanceRegistration"/> to create</param>
-        public void Create(Student student)
+        public void CreateRegistration(Student student)
         {
             SqlCommand createCommand = new SqlCommand("INSERT INTO AttendanceRegistrations (UsersKey,MeetingTime,LeavingTime,Date) OUTPUT inserted.Id VALUES (@UsersKey,@MeetingTime,@LeavingTime,@Date)");
             createCommand.Parameters.AddWithValue("@UsersKey", student.Id);

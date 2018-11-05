@@ -46,15 +46,7 @@ namespace Aspit.StudentReg.DataAccess
             createCommand.Parameters.AddWithValue("@LeavingTime", student.AttendanceRegistrations.LeavingTime);
             createCommand.Parameters.AddWithValue("@Date", student.AttendanceRegistrations.Date);
 
-            DataSet output = Execute(createCommand);
-            if(output.Tables.Count < 1 || output.Tables[0].Rows.Count < 1)
-            {
-                throw new DataAccessException("Failed to get the AttendanceRegistration's new id");
-            }
-            else
-            {
-                student.AttendanceRegistrations.Id = output.Tables[0].Rows[0].Field<int>("Id");
-            }
+            Execute(createCommand);
         }
 
         /// <summary>

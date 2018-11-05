@@ -17,12 +17,12 @@ namespace Aspit.StudentReg.Entities
         string username;
         AttendanceRegistration attendanceRegistrations;
 
-        public User(int id, string name, string username, int AttendanceRegistrationsKey)
+        public User(int id, string name, string username, AttendanceRegistration AttendanceRegistrations)
         {
             Id = id;
             Name = name;
             Username = username;
-            AttendanceRegistrationsKey = attendanceRegistrationsKey;
+            AttendanceRegistrations = attendanceRegistrations;
         }
 
         public int Id

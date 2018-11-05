@@ -82,6 +82,9 @@ namespace Aspit.StudentReg.DataAccess
             return resultSet;
         }
 
-        // TODO: static method to retrieve conn string from config file.
+        public static string RetrieveConnectionString()
+        {
+            return ConfigurationManager.ConnectionStrings["database"].ConnectionString;
+        }
     }
 }

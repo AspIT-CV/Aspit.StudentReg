@@ -15,14 +15,14 @@ namespace Aspit.StudentReg.Entities
         int id;
         string name;
         string username;
-        int attendanceRegistrationsKey;
+        AttendanceRegistration attendanceRegistrations;
 
-        public User(int id, string name, string username, int AttendanceRegistrationsKey)
+        public User(int id, string name, string username, AttendanceRegistration AttendanceRegistrations)
         {
             Id = id;
             Name = name;
             Username = username;
-            AttendanceRegistrationsKey = attendanceRegistrationsKey;
+            AttendanceRegistrations = attendanceRegistrations;
         }
 
         public int Id
@@ -67,7 +67,7 @@ namespace Aspit.StudentReg.Entities
                     throw new ArgumentException();
                 }
                 //Make the first letter of each word uppercase
-                name = System.Threading.Thread.CurrentThread.CurrentCulture.TextInfo.ToTitleCase(value.ToLower());
+                name = System.Globalization.CultureInfo.CurrentCulture.TextInfo.ToTitleCase(value.ToLower());
             }
         }
 
@@ -99,17 +99,16 @@ namespace Aspit.StudentReg.Entities
             }
         }
 
-        public int AttendanceRegistrationsKey
+        public AttendanceRegistration AttendanceRegistrations
         {
             get
             {
-                return attendanceRegistrationsKey;
+                return attendanceRegistrations;
             }
 
             set
             {
-                //TODO add checker ting ting
-                attendanceRegistrationsKey = value;
+                attendanceRegistrations = value;
             }
         }
     }

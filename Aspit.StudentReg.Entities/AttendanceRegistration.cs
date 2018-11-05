@@ -19,12 +19,12 @@ namespace Aspit.StudentReg.Entities
         /// <summary>
         /// The time the user signed in
         /// </summary>
-        private DateTime meetingTime;
+        private DateTime? meetingTime;
 
         /// <summary>
         /// The time the user signed out
         /// </summary>
-        private DateTime leaveTime;
+        private DateTime? leaveTime;
 
         /// <summary>
         /// Intializes a new AttendanceRegistration using the given parameters.
@@ -33,7 +33,7 @@ namespace Aspit.StudentReg.Entities
         /// <param name="meetingTime">the time the user signed in</param>
         /// <param name="leaveTime">the time the user signed out</param>
         /// <param name="date">the day this attendance is about</param>
-        public AttendanceRegistration(int id, DateTime meetingTime, DateTime leaveTime)
+        public AttendanceRegistration(int id, DateTime? meetingTime, DateTime? leaveTime)
         {
             Id = id;
             MeetingTime = meetingTime;
@@ -63,7 +63,7 @@ namespace Aspit.StudentReg.Entities
         /// <summary>
         /// Gets or sets the AttendanceRegistration's MeetingTime
         /// </summary>
-        public DateTime MeetingTime
+        public DateTime? MeetingTime
         {
             get
             {
@@ -83,7 +83,7 @@ namespace Aspit.StudentReg.Entities
         /// <summary>
         /// Gets or sets the AttendanceRegistration's LeaveTime
         /// </summary>
-        public DateTime LeaveTime
+        public DateTime? LeaveTime
         {
             get
             {
@@ -107,12 +107,12 @@ namespace Aspit.StudentReg.Entities
         {
             get
             {
-                if(LeaveTime.Date != meetingTime.Date)
+                if(LeaveTime.Value.Date != meetingTime.Value.Date)
                 {
                     throw new InvalidOperationException("Couldn't get date from LeaveTime and MeetingTime since they are 2 different dates.");
                 }
 
-                return meetingTime.Date;
+                return meetingTime.Value.Date;
             }
         }
 

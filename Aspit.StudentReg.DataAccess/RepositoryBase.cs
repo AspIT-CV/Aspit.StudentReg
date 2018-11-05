@@ -84,7 +84,7 @@ namespace Aspit.StudentReg.DataAccess
 
         public static string RetrieveConnectionString()
         {
-            return ConfigurationManager.ConnectionStrings[0].ConnectionString;
+            return ConfigurationManager.ConnectionStrings["database"].ConnectionString;
         }
     }
 }

@@ -11,6 +11,10 @@ namespace Aspit.StudentReg.DataAccess.Tests
     [TestClass()]
     public class AttendanceRegistrationsRepositoryTests
     {
-
+        [TestMethod]
+        public void Initialization()
+        {
+            AttendanceRegistrationsRepository repository = new AttendanceRegistrationsRepository(RepositoryBase.RetrieveConnectionString());
+        }
     }
 }

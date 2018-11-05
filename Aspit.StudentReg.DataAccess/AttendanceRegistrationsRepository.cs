@@ -59,11 +59,9 @@ namespace Aspit.StudentReg.DataAccess
             }
             else
             {
-                return ConvertDateRowsIntoAttendanceRegistrations(getOutput.Tables[0].Rows);
+                return DateRowsIntoRegistrations(getOutput.Tables[0].Rows);
             }
         }
-
-
 
         /// <summary>
         /// Gets the AttendanceRegistration with the given id
@@ -82,7 +80,7 @@ namespace Aspit.StudentReg.DataAccess
             }
             else
             {
-                List<AttendanceRegistration> registrations = ConvertDateRowsIntoAttendanceRegistrations(getOutput.Tables[0].Rows);
+                List<AttendanceRegistration> registrations = DateRowsIntoRegistrations(getOutput.Tables[0].Rows);
                 if(registrations.Count != 1)
                 {
                     throw new DataAccessException("Failed to get an AttendanceRegistration with the given id");
@@ -101,8 +99,18 @@ namespace Aspit.StudentReg.DataAccess
         /// <returns>a lsit containing all the <see cref="AttendanceRegistration"/>s for the student</returns>
         public List<AttendanceRegistration> GetUsersRegistrations(Student student)
         {
-            //TODO create the GetUsersRegistrations method
-            throw new NotImplementedException();
+            SqlCommand getCommand = new SqlCommand("SELECT * FROM AttandanceRegistrations WHERE UsersKey=@UsersKey");
+            getCommand.Parameters.AddWithValue("@UsersKey",student.Id);
+            DataSet getOutput = Execute(getCommand);
+
+            if(getOutput.Tables.Count < 0)
+            {
+                throw new DataAccessException("Failed to get any tables from database");
+            }
+            else
+            {
+                return DateRowsIntoRegistrations(getOutput.Tables[0].Rows);
+            }
         }
 
         /// <summary>
@@ -110,7 +118,7 @@ namespace Aspit.StudentReg.DataAccess
         /// </summary>
         /// <param name="dataRows">The <see cref="DataRowCollection"/> to convert into AttendanceRegistration list</param>
         /// <returns>A list of all the AttendanceRegistrations made from the dataRows</returns>
-        private static List<AttendanceRegistration> ConvertDateRowsIntoAttendanceRegistrations(DataRowCollection dataRows)
+        private static List<AttendanceRegistration> DateRowsIntoRegistrations(DataRowCollection dataRows)
         {
             if(dataRows is null)
             {

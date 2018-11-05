@@ -10,7 +10,25 @@ namespace Aspit.StudentReg.Tests
         [TestMethod]
         public void Initialization()
         {
-           
+            //Arrange
+            Student s;
+
+            int id = 1;
+
+            string name = "per bosen";
+            string expectedName = "Per Bosen";
+
+            string uniLogin = "per1234k";
+
+            //Act
+
+            s = new Student(id, name, uniLogin);
+
+            //Assert
+
+            Assert.AreEqual(id, s.Id);
+            Assert.AreEqual(expectedName, s.Name);
+            Assert.AreEqual(uniLogin, s.UniLogin);
         }
     }
 }

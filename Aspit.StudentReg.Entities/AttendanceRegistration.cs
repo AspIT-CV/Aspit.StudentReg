@@ -40,6 +40,9 @@ namespace Aspit.StudentReg.Entities
             LeaveTime = leaveTime;
         }
 
+        /// <summary>
+        /// Gets or sets the AttendanceRegistration's Id
+        /// </summary>
         public int Id
         {
             get
@@ -57,6 +60,9 @@ namespace Aspit.StudentReg.Entities
             }
         }
 
+        /// <summary>
+        /// Gets or sets the AttendanceRegistration's MeetingTime
+        /// </summary>
         public DateTime MeetingTime
         {
             get
@@ -74,6 +80,9 @@ namespace Aspit.StudentReg.Entities
             }
         }
 
+        /// <summary>
+        /// Gets or sets the AttendanceRegistration's LeaveTime
+        /// </summary>
         public DateTime LeaveTime
         {
             get
@@ -91,6 +100,9 @@ namespace Aspit.StudentReg.Entities
             }
         }
 
+        /// <summary>
+        /// Gets the AttendanceRegistration's date
+        /// </summary>
         public DateTime Date
         {
             get

@@ -13,7 +13,7 @@ namespace Aspit.StudentReg.DataAccess
     /// <summary>
     /// The repository for AttendanceRegistrations
     /// </summary>
-    public class AttendanceRegistrationsRepository : RepositoryBase
+    public class AttendanceRegistrationsRepository: RepositoryBase
     {
         /// <summary>
         /// Intializes a new Repository for <see cref="AttendanceRegistration"/> using the given connection string.
@@ -35,13 +35,26 @@ namespace Aspit.StudentReg.DataAccess
         }
 
         /// <summary>
-        /// Creates the given <see cref="AttendanceRegistration"/> in the database
+        /// Creates the given <see cref="Student"/>'s <see cref="AttendanceRegistration"/> in the database
         /// </summary>
-        /// <param name="attendanceRegistration">The <see cref="AttendanceRegistration"/> to create</param>
-        public void Create(AttendanceRegistration attendanceRegistration)
+        /// <param name="attendanceRegistration">The <see cref="Student"/>'s <see cref="AttendanceRegistration"/> to create</param>
+        public void Create(Student student)
         {
-            //TODO create the create method
-            throw new NotImplementedException();
+            SqlCommand createCommand = new SqlCommand("INSERT INTO AttendanceRegistrations (UsersKey,MeetingTime,LeavingTime,Date) OUTPUT inserted.Id VALUES (@UsersKey,@MeetingTime,@LeavingTime,@Date)");
+            createCommand.Parameters.AddWithValue("@UsersKey", student.Id);
+            createCommand.Parameters.AddWithValue("@MeetingTime", student.AttendanceRegistrations.MeetingTime);
+            createCommand.Parameters.AddWithValue("@LeavingTime", student.AttendanceRegistrations.LeavingTime);
+            createCommand.Parameters.AddWithValue("@Date", student.AttendanceRegistrations.Date);
+
+            DataSet output = Execute(createCommand);
+            if(output.Tables.Count < 1 || output.Tables[0].Rows.Count < 1)
+            {
+                throw new DataAccessException("Failed to get the AttendanceRegistration's new id");
+            }
+            else
+            {
+                student.AttendanceRegistrations.Id = output.Tables[0].Rows[0].Field<int>("Id");
+            }
         }
 
         /// <summary>
@@ -50,10 +63,10 @@ namespace Aspit.StudentReg.DataAccess
         /// <returns>a list containing all the <see cref="AttendanceRegistration"/>s</returns>
         public List<AttendanceRegistration> GetAll()
         {
-            SqlCommand getCommand = new SqlCommand("SELECT * FROM AttandanceRegistrations");
+            SqlCommand getCommand = new SqlCommand("SELECT * FROM AttendanceRegistrations");
             DataSet getOutput = Execute(getCommand);
 
-            if(getOutput.Tables.Count < 0)
+            if(getOutput.Tables.Count < 1)
             {
                 throw new DataAccessException("Failed to get any tables from database");
             }
@@ -74,7 +87,7 @@ namespace Aspit.StudentReg.DataAccess
             getCommand.Parameters.AddWithValue("@Id",id);
             DataSet getOutput = Execute(getCommand);
 
-            if(getOutput.Tables.Count < 0)
+            if(getOutput.Tables.Count < 1)
             {
                 throw new DataAccessException("Failed to get any tables from database");
             }
@@ -99,11 +112,11 @@ namespace Aspit.StudentReg.DataAccess
         /// <returns>a lsit containing all the <see cref="AttendanceRegistration"/>s for the student</returns>
         public List<AttendanceRegistration> GetUsersRegistrations(Student student)
         {
-            SqlCommand getCommand = new SqlCommand("SELECT * FROM AttandanceRegistrations WHERE UsersKey=@UsersKey");
+            SqlCommand getCommand = new SqlCommand("SELECT * FROM AttendanceRegistrations WHERE UsersKey=@UsersKey");
             getCommand.Parameters.AddWithValue("@UsersKey",student.Id);
             DataSet getOutput = Execute(getCommand);
 
-            if(getOutput.Tables.Count < 0)
+            if(getOutput.Tables.Count < 1)
             {
                 throw new DataAccessException("Failed to get any tables from database");
             }

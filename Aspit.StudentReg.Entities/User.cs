@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Text.RegularExpressions;
 
 namespace Aspit.StudentReg.Entities
 {
@@ -50,12 +51,23 @@ namespace Aspit.StudentReg.Entities
 
             set
             {
+                //Check if value is null
                 if(value is null)
                 {
                     throw new ArgumentNullException();
                 }
-                //TODO add checker ting ting
-                name = value;
+
+                //Trim whitespace
+                value = value.Trim();
+
+                //Check if value only consits of letters and whitespace
+                var reg = new Regex(@"[\p{L} ]+$");
+                if (!reg.IsMatch(value))
+                {
+                    throw new ArgumentException();
+                }
+                //Make the first letter of each word uppercase
+                name = System.Threading.Thread.CurrentThread.CurrentCulture.TextInfo.ToTitleCase(value.ToLower());
             }
         }
 
@@ -68,7 +80,21 @@ namespace Aspit.StudentReg.Entities
 
             set
             {
-                //TODO add checker ting ting
+                //Check if value is null
+                if(value is null)
+                {
+                    throw new ArgumentNullException();
+                }
+
+                //Trim whitespace
+                value = value.Trim();
+
+                //Check if value is a correct unilogin format
+                var reg = new Regex(@"[a-x0-9]{8}");
+                if (!reg.IsMatch(value))
+                {
+                    throw new ArgumentException();
+                }
                 username = value;
             }
         }

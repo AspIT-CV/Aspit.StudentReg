@@ -15,7 +15,7 @@ namespace Aspit.StudentReg.Tests
 
             int id = 1;
 
-            string name = "per bosen";
+            string name = "per Bosen";
             string expectedName = "Per Bosen";
 
             string uniLogin = "per1234k";

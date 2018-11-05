@@ -109,6 +109,7 @@ namespace Aspit.StudentReg.Entities
             set
             {
                 //TODO add checker ting ting
+
                 attendanceRegistrationsKey = value;
             }
         }

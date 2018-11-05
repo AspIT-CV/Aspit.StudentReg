@@ -7,13 +7,13 @@ using System.Text.RegularExpressions;
 
 namespace Aspit.StudentReg.Entities
 {
-    class Student : User
+    public class Student : User
     {
 
         string uniLogin;
         AttendanceRegistration attendanceRegistrations;
 
-        public Student(int id, string name, string uniLogin, AttendanceRegistration attendanceRegistrations):base(id,name)
+        public Student(int id, string name, string uniLogin, AttendanceRegistration attendanceRegistrations = null):base(id,name)
         {
             Id = id;
             Name = name;
@@ -58,10 +58,6 @@ namespace Aspit.StudentReg.Entities
 
             set
             {
-                if (value is null)
-                {
-                    throw new ArgumentNullException();
-                }
                 attendanceRegistrations = value;
             }
         }

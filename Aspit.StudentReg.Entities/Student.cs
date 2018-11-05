@@ -13,7 +13,7 @@ namespace Aspit.StudentReg.Entities
         string uniLogin;
         AttendanceRegistration attendanceRegistrations;
 
-        public Student(int id, string name, string uniLogin, AttendanceRegistration attendanceRegistrations = null):base(id,name)
+        public Student(int id, string name, string uniLogin, AttendanceRegistration attendanceRegistrations = default):base(id,name)
         {
             Id = id;
             Name = name;

@@ -17,11 +17,6 @@ namespace Aspit.StudentReg.Entities
         private int id;
 
         /// <summary>
-        /// The id of the User this AttendanceRegistration is for
-        /// </summary>
-        private int userForeignKey;
-
-        /// <summary>
         /// The time the user signed in
         /// </summary>
         private DateTime meetingTime;
@@ -32,27 +27,22 @@ namespace Aspit.StudentReg.Entities
         private DateTime leaveTime;
 
         /// <summary>
-        /// The day this AttendanceRegistration is talking about
-        /// </summary>
-        private DateTime date;
-
-        /// <summary>
         /// Intializes a new AttendanceRegistration using the given parameters.
         /// </summary>
         /// <param name="id">the registration id</param>
-        /// <param name="userForeignKey">the id of user this attendance is for</param>
         /// <param name="meetingTime">the time the user signed in</param>
         /// <param name="leaveTime">the time the user signed out</param>
         /// <param name="date">the day this attendance is about</param>
-        public AttendanceRegistration(int id, int userForeignKey, DateTime meetingTime, DateTime leaveTime, DateTime date)
+        public AttendanceRegistration(int id, DateTime meetingTime, DateTime leaveTime)
         {
             Id = id;
-            UserForeignKey = userForeignKey;
             MeetingTime = meetingTime;
             LeaveTime = leaveTime;
-            Date = date;
         }
 
+        /// <summary>
+        /// Gets or sets the AttendanceRegistration's Id
+        /// </summary>
         public int Id
         {
             get
@@ -70,23 +60,9 @@ namespace Aspit.StudentReg.Entities
             }
         }
 
-        public int UserForeignKey
-        {
-            get
-            {
-                return userForeignKey;
-            }
-
-            set
-            {
-                if(value < 0)
-                {
-                    throw new ArgumentOutOfRangeException("UserForeignKey cannot be less than 0");
-                }
-                userForeignKey = value;
-            }
-        }
-
+        /// <summary>
+        /// Gets or sets the AttendanceRegistration's MeetingTime
+        /// </summary>
         public DateTime MeetingTime
         {
             get
@@ -104,6 +80,9 @@ namespace Aspit.StudentReg.Entities
             }
         }
 
+        /// <summary>
+        /// Gets or sets the AttendanceRegistration's LeaveTime
+        /// </summary>
         public DateTime LeaveTime
         {
             get
@@ -121,20 +100,19 @@ namespace Aspit.StudentReg.Entities
             }
         }
 
+        /// <summary>
+        /// Gets the AttendanceRegistration's date
+        /// </summary>
         public DateTime Date
         {
             get
             {
-                return date;
-            }
-
-            set
-            {
-                if(value != null && value > DateTime.Now)
+                if(LeaveTime.Date != meetingTime.Date)
                 {
-                    throw new ArgumentException("Date cannot be in the future.");
+                    throw new InvalidOperationException("Couldn't get date from LeaveTime and MeetingTime since they are 2 different dates.");
                 }
-                date = value;
+
+                return meetingTime.Date;
             }
         }
 

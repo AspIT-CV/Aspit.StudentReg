@@ -59,35 +59,7 @@ namespace Aspit.StudentReg.DataAccess
             }
             else
             {
-                if(getOutput.Tables[0].Rows.Count < 0)
-                {
-                    return new List<AttendanceRegistration>();
-                }
-                else
-                {
-                    List<AttendanceRegistration> returnList = new List<AttendanceRegistration>();
-                    foreach(DataRow row in getOutput.Tables[0].Rows)
-                    {
-                        int id;
-                        DateTime? meetingTime;
-                        DateTime? leavingTime;
-
-                        try
-                        {
-                            id = row.Field<int>("MeetingTime");
-                            meetingTime = row.Field<DateTime>("MeetingTime");
-                            leavingTime = row.Field<DateTime>("MeetingTime");
-                        }
-                        catch(InvalidCastException)
-                        {
-                            throw new DataAccessException("Failed to convert table row into the needed AttendanceRegistration properties");
-                        }
-
-                        returnList.Add(new AttendanceRegistration(id, meetingTime, leavingTime));
-                    }
-
-                    return returnList;
-                }
+                return ConvertDateRowsIntoAttendanceRegistrations(getOutput.Tables[0].Rows);
             }
         }
 

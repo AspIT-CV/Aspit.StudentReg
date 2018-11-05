@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Data.SqlClient;
 using System.Data;
+using System.Configuration;
 
 namespace Aspit.StudentReg.DataAccess
 {
@@ -24,7 +25,7 @@ namespace Aspit.StudentReg.DataAccess
         /// <param name="connectionString">The connection string.</param>
         public RepositoryBase(string connectionString)
         {
-            if(String.IsNullOrEmpty(connectionString))
+            if(string.IsNullOrEmpty(connectionString))
             {
                 throw new DataAccessException("Invalid connection string - was null or empty");
             }
@@ -62,13 +63,14 @@ namespace Aspit.StudentReg.DataAccess
         /// </summary>
         /// <param name="sql">The sql query to execute.</param>
         /// <returns>A <see cref="DataSet"/> filled with any data matching the provided sql query.</returns>
-        internal DataSet Execute(string sql)
+        internal DataSet Execute(SqlCommand sql)
         {
             // TODO: check sql parameter.
             DataSet resultSet = default;
             try
             {
-                using(SqlDataAdapter adapter = new SqlDataAdapter(new SqlCommand(sql, new SqlConnection(connectionString))))
+                sql.Connection = new SqlConnection(connectionString);
+                using(SqlDataAdapter adapter = new SqlDataAdapter(sql))
                 {
                     adapter.Fill(resultSet);
                 }

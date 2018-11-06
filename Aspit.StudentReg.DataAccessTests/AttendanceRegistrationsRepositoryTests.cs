@@ -66,5 +66,19 @@ namespace Aspit.StudentReg.DataAccess.Tests
             Assert.AreEqual(new DateTime(2018, 5, 2, 8, 10, 5), registration.MeetingTime);
             Assert.AreEqual(new DateTime(2018, 5, 2, 8, 10, 6), registration.LeavingTime);
         }
+
+        [TestMethod()]
+        public void GetUsersRegistrationsTest()
+        {
+            AttendanceRegistrationsRepository repository = CreateRepository();
+            Student student = new Student(0, "bla", "bla12345", new AttendanceRegistration { MeetingTime = DateTime.Now.AddMilliseconds(-1), LeavingTime = DateTime.Now });
+
+            repository.CreateRegistration(student);
+            student.AttendanceRegistrations = new AttendanceRegistration { MeetingTime = new DateTime(2018, 5, 2, 8, 10, 5), LeavingTime = new DateTime(2018, 5, 2, 8, 10, 6) };
+            repository.CreateRegistration(student);
+
+            List<AttendanceRegistration> registrations = repository.GetUsersRegistrations(student);
+            Assert.IsTrue(registrations.Count >= 2);
+        }
     }
 }

@@ -147,13 +147,13 @@ namespace Aspit.StudentReg.DataAccess
 
                     try
                     {
-                        registration.Id = row.Field<int>("MeetingTime");
+                        registration.Id = row.Field<int>("Id");
                         registration.MeetingTime = row.Field<DateTime>("MeetingTime");
-                        registration.LeavingTime = row.Field<DateTime>("MeetingTime");
+                        registration.LeavingTime = row.Field<DateTime>("LeavingTime");
                     }
-                    catch(InvalidCastException)
+                    catch(InvalidCastException e)
                     {
-                        throw new DataAccessException("Failed to convert table row into the needed AttendanceRegistration properties");
+                        throw new DataAccessException("Failed to convert table row into the needed AttendanceRegistration properties", e);
                     }
 
                     returnList.Add(registration);

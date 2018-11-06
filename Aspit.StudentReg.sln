@@ -11,7 +11,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Aspit.StudentReg.DataAccess
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Aspit.StudentReg.Tests", "Aspit.StudentReg.Tests\Aspit.StudentReg.Tests.csproj", "{D1AA461B-D70A-4C77-AFFD-987199B2F75E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Aspit.StudentReg.DataAccessTests", "Aspit.StudentReg.DataAccessTests\Aspit.StudentReg.DataAccessTests.csproj", "{BFC9A833-0FB7-4CCA-AC06-48E894A72DD4}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Aspit.StudentReg.DataAccess.Tests", "Aspit.StudentReg.DataAccessTests\Aspit.StudentReg.DataAccess.Tests.csproj", "{BFC9A833-0FB7-4CCA-AC06-48E894A72DD4}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

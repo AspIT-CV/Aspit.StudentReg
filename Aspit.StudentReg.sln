@@ -16,6 +16,7 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{73ED50B6-D1DD-4AA9-93BF-92B4BD53915A}"
 	ProjectSection(SolutionItems) = preProject
 		connections.config = connections.config
+		connections.config.template = connections.config.template
 	EndProjectSection
 EndProject
 Global

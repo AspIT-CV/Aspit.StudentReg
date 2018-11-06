@@ -125,6 +125,16 @@ namespace Aspit.StudentReg.Entities
         }
 
         /// <summary>
+        /// Checks if this AttendanceRegistration is equal to a default one
+        /// </summary>
+        /// <returns>True if this is equal to default</returns>
+        public bool IsDefault()
+        {
+            AttendanceRegistration defaultRegistration = default;
+            return Equals(defaultRegistration);
+        }
+
+        /// <summary>
         /// Checks if this attendanceRegistration is equal to the given object
         /// </summary>
         /// <param name="obj">The object to check</param>

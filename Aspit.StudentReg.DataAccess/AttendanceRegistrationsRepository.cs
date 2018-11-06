@@ -30,6 +30,11 @@ namespace Aspit.StudentReg.DataAccess
         /// <param name="attendanceRegistration">The <see cref="AttendanceRegistration"/> to update</param>
         public void Update(AttendanceRegistration attendanceRegistration)
         {
+            if(attendanceRegistration.IsDefault())
+            {
+                throw new ArgumentException("attendanceRegistration cannot be default value");
+            }
+
             SqlCommand updateCommand = new SqlCommand("UPDATE AttendanceRegistrations SET MeetingTime=@MeetingTime,LeavingTime=@LeavingTime,Date=@Date");
             updateCommand.Parameters.AddWithValue("@MeetingTime", attendanceRegistration.MeetingTime);
             updateCommand.Parameters.AddWithValue("@LeavingTime", attendanceRegistration.LeavingTime);
@@ -47,6 +52,10 @@ namespace Aspit.StudentReg.DataAccess
             if(student == null)
             {
                 throw new NullReferenceException("student cannot be null");
+            }
+            else if(student.AttendanceRegistrations.IsDefault())
+            {
+                throw new ArgumentException("the student's current AttendanceRegistration cannot be default value");
             }
 
             SqlCommand createCommand = new SqlCommand("INSERT INTO AttendanceRegistrations (UsersKey,MeetingTime,LeavingTime,Date) OUTPUT inserted.Id VALUES (@UsersKey,@MeetingTime,@LeavingTime,@Date)");
@@ -126,6 +135,11 @@ namespace Aspit.StudentReg.DataAccess
         /// <returns>a lsit containing all the <see cref="AttendanceRegistration"/>s for the student</returns>
         public List<AttendanceRegistration> GetUsersRegistrations(Student student)
         {
+            if(student is null)
+            {
+                throw new ArgumentNullException("student cannot be null");
+            }
+
             SqlCommand getCommand = new SqlCommand("SELECT * FROM AttendanceRegistrations WHERE UsersKey=@UsersKey");
             getCommand.Parameters.AddWithValue("@UsersKey",student.Id);
             DataSet getOutput = Execute(getCommand);

@@ -12,15 +12,30 @@ namespace Aspit.StudentReg.Entities
     /// </summary>
     public class User
     {
+        /// <summary>
+        /// The user's id
+        /// </summary>
         int id;
+
+        /// <summary>
+        /// The user's name
+        /// </summary>
         string name;
 
+        /// <summary>
+        /// Intializes a new <see cref="User"/> with the given id and name
+        /// </summary>
+        /// <param name="id">The user's id</param>
+        /// <param name="name">The user's full name</param>
         public User(int id, string name)
         {
             Id = id;
             Name = name;
         }
 
+        /// <summary>
+        /// Gets or sets the user's id
+        /// </summary>
         public int Id
         {
             get
@@ -32,12 +47,15 @@ namespace Aspit.StudentReg.Entities
             {
                 if(value < 0)
                 {
-                    throw new ArgumentOutOfRangeException();
+                    throw new ArgumentOutOfRangeException("Id cannot be less than 0");
                 }
                 id = value;
             }
         }
 
+        /// <summary>
+        /// Gets or sets the user's name
+        /// </summary>
         public string Name
         {
             get
@@ -50,7 +68,7 @@ namespace Aspit.StudentReg.Entities
                 //Check if value is null
                 if(value is null)
                 {
-                    throw new ArgumentNullException();
+                    throw new ArgumentNullException("Name cannot be null");
                 }
 
                 //Trim whitespace
@@ -60,7 +78,7 @@ namespace Aspit.StudentReg.Entities
                 Regex reg = new Regex(@"^([a-zA-Z ]+)$");
                 if (!reg.IsMatch(value))
                 {
-                    throw new ArgumentException();
+                    throw new ArgumentException("Name is invalid");
                 }
                 //Make the first letter of each word uppercase
                 name = System.Globalization.CultureInfo.CurrentCulture.TextInfo.ToTitleCase(value.ToLower());

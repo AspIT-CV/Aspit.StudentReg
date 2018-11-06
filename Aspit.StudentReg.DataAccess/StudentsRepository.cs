@@ -37,18 +37,19 @@ namespace Aspit.StudentReg.DataAccess
                 List<Student> returnList = new List<Student>();
                 foreach (DataRow row in dataRows)
                 {
-                    Student registration = default;
-
+                    Student registration;
                     try
                     {
-                        registration.Id = row.Field<int>("id");
-                        registration.Name = row.Field<string>("name");
-                        registration.UniLogin = row.Field<string>("username");
+                        int registrationId = row.Field<int>("id");
+                        string registrationName = row.Field<string>("name");
+                        string registrationUniLogin = row.Field<string>("username");
 
                         int AttendanceRegistrationsKey = row.Field<int>("AttendanceRegistrationsKey");
                         AttendanceRegistrationsRepository ARR = new AttendanceRegistrationsRepository(RepositoryBase.RetrieveConnectionString());
                         ARR.GetFromId(AttendanceRegistrationsKey);
-                        registration.AttendanceRegistrations = ARR.GetFromId(AttendanceRegistrationsKey);
+
+
+                        registration = new Student(registrationId, registrationName, registrationUniLogin, ARR.GetFromId(AttendanceRegistrationsKey));
                     }
                     catch (InvalidCastException)
                     {

@@ -49,7 +49,7 @@ namespace Aspit.StudentReg.Entities
                 //Check if value is null
                 if (value is null)
                 {
-                    throw new ArgumentNullException();
+                    throw new ArgumentNullException("Unilogin cannot be null");
                 }
 
                 //Trim whitespace
@@ -59,7 +59,7 @@ namespace Aspit.StudentReg.Entities
                 Regex reg = new Regex(@"^[a-x]{4}[a-x0-9]{4}$");
                 if (!reg.IsMatch(value))
                 {
-                    throw new ArgumentException();
+                    throw new ArgumentException("Unilogin is invalid");
                 }
                 uniLogin = value;
             }

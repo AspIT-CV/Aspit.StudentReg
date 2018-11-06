@@ -42,13 +42,17 @@ namespace Aspit.StudentReg.DataAccess
                     try
                     {
                         registration.Id = row.Field<int>("id");
-                        registration.Name = row.Field<string>("MeetingTime");
-                        registration.UniLogin = row.Field<string>("MeetingTime");
-                        //registration.AttendanceRegistrations = ;
+                        registration.Name = row.Field<string>("name");
+                        registration.UniLogin = row.Field<string>("username");
+
+                        int AttendanceRegistrationsKey = row.Field<int>("AttendanceRegistrationsKey");
+                        AttendanceRegistrationsRepository ARR = new AttendanceRegistrationsRepository(RepositoryBase.RetrieveConnectionString());
+                        ARR.GetFromId(AttendanceRegistrationsKey);
+                        registration.AttendanceRegistrations = ARR.GetFromId(AttendanceRegistrationsKey);
                     }
                     catch (InvalidCastException)
                     {
-                        throw new DataAccessException("Failed to convert table row into the needed AttendanceRegistration properties");
+                        throw new DataAccessException("Failed to convert table row into the needed Student properties");
                     }
 
                     returnList.Add(registration);
@@ -64,7 +68,7 @@ namespace Aspit.StudentReg.DataAccess
         /// <returns>a list containing all the <see cref="Student"/>s</returns>
         public List<Student> GetAll()
         {
-            SqlCommand getCommand = new SqlCommand("SELECT * FROM AttandanceRegistrations");
+            SqlCommand getCommand = new SqlCommand("SELECT * FROM Users");
             DataSet getOutput = Execute(getCommand);
 
             if (getOutput.Tables.Count < 0)

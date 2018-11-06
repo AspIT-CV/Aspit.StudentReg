@@ -7,7 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Aspit.StudentReg.Entities;
 
-namespace Aspit.StudentReg.DataAccess.Tests
+namespace Aspit.StudentReg.Tests
 {
     [TestClass()]
     public class AttendanceRegistrationsRepositoryTests

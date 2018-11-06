@@ -65,7 +65,6 @@ namespace Aspit.StudentReg.DataAccess
         /// <returns>A <see cref="DataSet"/> filled with any data matching the provided sql query.</returns>
         internal DataSet Execute(SqlCommand sql)
         {
-            // TODO: check sql parameter.
             DataSet resultSet = new DataSet("output");
             try
             {

@@ -106,6 +106,9 @@ namespace Aspit.StudentReg.Entities
             }
         }
 
+        /// <summary>
+        /// Gets the AttendanceRegistration's timespan
+        /// </summary>
         public TimeSpan Duration
         {
             get
@@ -119,6 +122,58 @@ namespace Aspit.StudentReg.Entities
 
                 return leavingTime - meetingTime;
             }
+        }
+
+        /// <summary>
+        /// Checks if this AttendanceRegistration is equal to a default one
+        /// </summary>
+        /// <returns>True if this is equal to default</returns>
+        public bool IsDefault()
+        {
+            AttendanceRegistration defaultRegistration = default;
+            return Equals(defaultRegistration);
+        }
+
+        /// <summary>
+        /// Checks if this attendanceRegistration is equal to the given object
+        /// </summary>
+        /// <param name="obj">The object to check</param>
+        /// <returns>returns true if they are equal</returns>
+        public override bool Equals(object obj)
+        {
+            if(!(obj is AttendanceRegistration registration))
+            {
+                throw new ArgumentException("Cannot check if object is equal to attendanceRegistration");
+            }
+            return (LeavingTime == registration.LeavingTime
+                && MeetingTime == registration.MeetingTime);
+        }
+
+        public override int GetHashCode()
+        {
+            throw new NotImplementedException();
+        }
+
+        /// <summary>
+        /// Checks if the given attendanceRegistration are equal
+        /// </summary>
+        /// <param name="left">attendanceRegistration 1</param>
+        /// <param name="right">attendanceRegistration 2</param>
+        /// <returns>Returns true if they are equal</returns>
+        public static bool operator ==(AttendanceRegistration left, AttendanceRegistration right)
+        {
+            return left.Equals(right);
+        }
+
+        /// <summary>
+        /// Checks if the given attendanceRegistration are not equal
+        /// </summary>
+        /// <param name="left">attendanceRegistration 1</param>
+        /// <param name="right">attendanceRegistration 2</param>
+        /// <returns>Returns true if they are not equal</returns>
+        public static bool operator !=(AttendanceRegistration left, AttendanceRegistration right)
+        {
+            return !(left == right);
         }
     }
 }

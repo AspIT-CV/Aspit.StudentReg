@@ -1,0 +1,5 @@
+<connectionStrings>
+  <add name="database"
+       providerName="System.Data.SqlClient"
+       connectionString=""/>
+</connectionStrings>

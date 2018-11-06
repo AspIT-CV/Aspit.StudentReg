@@ -44,12 +44,22 @@ namespace Aspit.StudentReg.DataAccess
                         string registrationName = row.Field<string>("name");
                         string registrationUniLogin = row.Field<string>("username");
 
-                        int AttendanceRegistrationsKey = row.Field<int>("AttendanceRegistrationsKey");
-                        AttendanceRegistrationsRepository ARR = new AttendanceRegistrationsRepository(RepositoryBase.RetrieveConnectionString());
-                        ARR.GetFromId(AttendanceRegistrationsKey);
+                        Nullable<int> AttendanceRegistrationsKey = row.Field<Nullable<int>>("AttendanceRegistrationsKey");
+
+                        AttendanceRegistration attendanceRegistration;
+
+                        if (AttendanceRegistrationsKey is null)
+                        {
+                            attendanceRegistration = default;
+                        }
+                        else
+                        {
+                            AttendanceRegistrationsRepository ARR = new AttendanceRegistrationsRepository(RepositoryBase.RetrieveConnectionString());
+                            attendanceRegistration = ARR.GetFromId(AttendanceRegistrationsKey.Value);
+                        }
 
 
-                        registration = new Student(registrationId, registrationName, registrationUniLogin, ARR.GetFromId(AttendanceRegistrationsKey));
+                                registration = new Student(registrationId, registrationName, registrationUniLogin, attendanceRegistration);
                     }
                     catch (InvalidCastException)
                     {

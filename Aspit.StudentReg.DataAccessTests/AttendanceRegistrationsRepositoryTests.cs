@@ -39,12 +39,21 @@ namespace Aspit.StudentReg.DataAccess.Tests
             Student student = new Student(0,"bla","bla12345",new AttendanceRegistration {MeetingTime = DateTime.Now.AddMilliseconds(-1), LeavingTime = DateTime.Now });
 
             repository.CreateRegistration(student);
+
+            Assert.AreNotEqual(0,student.AttendanceRegistrations.Id);
         }
 
         [TestMethod()]
         public void UpdateTest()
         {
             AttendanceRegistrationsRepository repository = CreateRepository();
+            Student student = new Student(0, "bla", "bla12345", new AttendanceRegistration { MeetingTime = DateTime.Now.AddMilliseconds(-1), LeavingTime = DateTime.Now });
+
+            repository.CreateRegistration(student);
+
+            repository.Update(student.AttendanceRegistrations);
         }
+
+
     }
 }

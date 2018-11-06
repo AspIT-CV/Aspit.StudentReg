@@ -106,6 +106,9 @@ namespace Aspit.StudentReg.Entities
             }
         }
 
+        /// <summary>
+        /// Gets the AttendanceRegistration's timespan
+        /// </summary>
         public TimeSpan Duration
         {
             get

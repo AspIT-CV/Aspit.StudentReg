@@ -106,7 +106,6 @@ namespace Aspit.StudentReg.Entities
             }
         }
 
-        //TODO create a duration calculate method
         public TimeSpan Duration
         {
             get
@@ -115,6 +114,9 @@ namespace Aspit.StudentReg.Entities
                 {
                     throw new InvalidOperationException("Couldn't calculate Duration from LeavingTime and MeetingTime.");
                 }
+
+                TimeSpan output = leavingTime - meetingTime;
+
                 return leavingTime - meetingTime;
             }
         }

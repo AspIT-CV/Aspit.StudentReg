@@ -58,8 +58,7 @@ namespace Aspit.StudentReg.DataAccess
                             attendanceRegistration = ARR.GetFromId(AttendanceRegistrationsKey.Value);
                         }
 
-
-                                registration = new Student(registrationId, registrationName, registrationUniLogin, attendanceRegistration);
+                        registration = new Student(registrationId, registrationName, registrationUniLogin, attendanceRegistration);
                     }
                     catch (InvalidCastException)
                     {
@@ -89,6 +88,35 @@ namespace Aspit.StudentReg.DataAccess
             else
             {
                 return ConvertDateRowsIntoStudents(getOutput.Tables[0].Rows);
+            }
+        }
+
+        /// <summary>
+        /// Gets the AttendanceRegistration with the given id
+        /// </summary>
+        /// <param name="id">the databaseid</param>
+        /// <returns>a AttendanceRegistration from the database</returns>
+        public Student GetFromId(int id)
+        {
+            SqlCommand getCommand = new SqlCommand("SELECT * FROM Users WHERE Id=@Id");
+            getCommand.Parameters.AddWithValue("@Id", id);
+            DataSet getOutput = Execute(getCommand);
+
+            if (getOutput.Tables.Count < 1)
+            {
+                throw new DataAccessException("Failed to get any tables from database");
+            }
+            else
+            {
+                List<Student> registrations = ConvertDateRowsIntoStudents(getOutput.Tables[0].Rows);
+                if (registrations.Count != 1)
+                {
+                    throw new DataAccessException("Failed to get an Student with the given id");
+                }
+                else
+                {
+                    return registrations[0];
+                }
             }
         }
 

@@ -54,6 +54,7 @@
     <Compile Include="AttendanceRegistrationsRepositoryTests.cs" />
     <Compile Include="AttendanceRegistrationTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="StudentsRepositoryTests.cs" />
     <Compile Include="StudentsTests.cs" />
   </ItemGroup>
   <ItemGroup>

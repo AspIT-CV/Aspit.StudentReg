@@ -35,14 +35,5 @@ namespace Aspit.StudentReg.Tests
             Assert.AreEqual(expectedName, s.Name);
             Assert.AreEqual(uniLogin, s.UniLogin);
         }
-
-        [TestMethod()]
-        public void GetAllTest()
-        {
-            StudentsRepository StudentsRepositorys = new StudentsRepository(RepositoryBase.RetrieveConnectionString());
-            List<Student> list = StudentsRepositorys.GetAll();
-
-            Assert.AreNotEqual(0, list.Count);
-        }
     }
 }

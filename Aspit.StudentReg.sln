@@ -13,6 +13,11 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Aspit.StudentReg.Tests", "A
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Aspit.StudentReg.DataAccessTests", "Aspit.StudentReg.DataAccessTests\Aspit.StudentReg.DataAccessTests.csproj", "{BFC9A833-0FB7-4CCA-AC06-48E894A72DD4}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{73ED50B6-D1DD-4AA9-93BF-92B4BD53915A}"
+	ProjectSection(SolutionItems) = preProject
+		connections.config = connections.config
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU

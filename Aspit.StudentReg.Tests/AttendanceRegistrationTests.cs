@@ -13,7 +13,7 @@ namespace Aspit.StudentReg.Tests
     public class AttendanceRegistrationsTests
     {
         [TestMethod()]
-        public void Duration()
+        public void DurationTest()
         {
             AttendanceRegistration registration = new AttendanceRegistration
             {
@@ -27,7 +27,7 @@ namespace Aspit.StudentReg.Tests
         }
 
         [TestMethod()]
-        public void Date()
+        public void DateTest()
         {
             AttendanceRegistration registration = new AttendanceRegistration
             {
@@ -37,6 +37,32 @@ namespace Aspit.StudentReg.Tests
             };
 
             Assert.AreEqual(new DateTime(2018,6,11), registration.Date);
+        }
+
+        [TestMethod()]
+        public void EqualsTest()
+        {
+            AttendanceRegistration registration1 = new AttendanceRegistration
+            {
+                Id = 1,
+                LeavingTime = new DateTime(2018, 6, 11, 23, 59, 59),
+                MeetingTime = new DateTime(2018, 6, 11, 9, 0, 0)
+            };
+            AttendanceRegistration registration2 = new AttendanceRegistration
+            {
+                Id = 2,
+                LeavingTime = new DateTime(2018, 6, 11, 23, 59, 59),
+                MeetingTime = new DateTime(2018, 6, 11, 9, 0, 0)
+            };
+            Assert.IsTrue(registration1.Equals(registration2));
+
+            registration2 = new AttendanceRegistration
+            {
+                Id = 2,
+                LeavingTime = new DateTime(2018, 6, 10, 23, 59, 59),
+                MeetingTime = new DateTime(2018, 6, 10, 9, 0, 0)
+            };
+            Assert.IsFalse(registration1.Equals(registration2));
         }
     }
 }

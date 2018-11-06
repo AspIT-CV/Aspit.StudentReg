@@ -135,9 +135,8 @@ namespace Aspit.StudentReg.Entities
             {
                 throw new ArgumentException("Cannot check if object is equal to attendanceRegistration");
             }
-            return (registration.id == id
-                && registration.LeavingTime == registration.LeavingTime
-                && registration.MeetingTime == registration.MeetingTime);
+            return (LeavingTime == registration.LeavingTime
+                && MeetingTime == registration.MeetingTime);
         }
 
         public override int GetHashCode()

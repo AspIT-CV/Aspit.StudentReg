@@ -18,7 +18,7 @@ namespace Aspit.StudentReg.Tests
             string name = "per Bosen";
             string expectedName = "Per Bosen";
 
-            string uniLogin = "per1234k";
+            string uniLogin = "perx234k";
 
             //Act
 

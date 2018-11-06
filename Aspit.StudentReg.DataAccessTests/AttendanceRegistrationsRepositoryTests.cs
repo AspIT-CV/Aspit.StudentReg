@@ -40,5 +40,11 @@ namespace Aspit.StudentReg.DataAccess.Tests
 
             repository.CreateRegistration(student);
         }
+
+        [TestMethod()]
+        public void UpdateTest()
+        {
+            AttendanceRegistrationsRepository repository = CreateRepository();
+        }
     }
 }

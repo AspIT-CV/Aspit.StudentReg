@@ -58,7 +58,7 @@ namespace Aspit.StudentReg.Entities
 
             set
             {
-                if(value != null && value > DateTime.Now)
+                if(DateTime.Equals(value, default) || value > DateTime.Now)
                 {
                     throw new ArgumentException("MeetingTime cannot be in the future.");
                 }
@@ -78,7 +78,7 @@ namespace Aspit.StudentReg.Entities
 
             set
             {
-                if(value != null && value > DateTime.Now)
+                if(DateTime.Equals(value, default) || value > DateTime.Now)
                 {
                     throw new ArgumentException("LeavingTime cannot be in the future.");
                 }
@@ -93,6 +93,10 @@ namespace Aspit.StudentReg.Entities
         {
             get
             {
+                if(DateTime.Equals(leavingTime, default) || DateTime.Equals(meetingTime, default))
+                {
+                    throw new InvalidOperationException("Couldn't calculate Date from LeavingTime and MeetingTime.");
+                }
                 if(LeavingTime.Date != meetingTime.Date)
                 {
                     throw new InvalidOperationException("Couldn't get date from LeavingTime and MeetingTime since they are 2 different dates.");
@@ -103,5 +107,16 @@ namespace Aspit.StudentReg.Entities
         }
 
         //TODO create a duration calculate method
+        public TimeSpan Duration
+        {
+            get
+            {
+                if(DateTime.Equals(leavingTime, default) || DateTime.Equals(meetingTime, default))
+                {
+                    throw new InvalidOperationException("Couldn't calculate Duration from LeavingTime and MeetingTime.");
+                }
+                return leavingTime - meetingTime;
+            }
+        }
     }
 }

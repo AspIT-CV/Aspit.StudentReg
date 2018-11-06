@@ -9,7 +9,7 @@ using System.Data;
 
 namespace Aspit.StudentReg.DataAccess
 {
-    class StudentsRepository : RepositoryBase
+    public class StudentsRepository : RepositoryBase
     {
         public StudentsRepository(string connectionString) : base(connectionString)
         {

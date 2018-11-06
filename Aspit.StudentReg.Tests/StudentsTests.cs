@@ -1,5 +1,10 @@
-﻿using System;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Aspit.StudentReg.DataAccess;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using Aspit.StudentReg.Entities;
 
 namespace Aspit.StudentReg.Tests
@@ -29,6 +34,15 @@ namespace Aspit.StudentReg.Tests
             Assert.AreEqual(id, s.Id);
             Assert.AreEqual(expectedName, s.Name);
             Assert.AreEqual(uniLogin, s.UniLogin);
+        }
+
+        [TestMethod()]
+        public void GetAllTest()
+        {
+            StudentsRepository StudentsRepositorys = new StudentsRepository(RepositoryBase.RetrieveConnectionString());
+            List<Student> list = StudentsRepositorys.GetAll();
+
+            Assert.AreNotEqual(0, list.Count);
         }
     }
 }

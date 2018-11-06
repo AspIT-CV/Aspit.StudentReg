@@ -25,5 +25,18 @@ namespace Aspit.StudentReg.Tests
             //14:30 - 9:00 = 5:30h = 330m
             Assert.AreEqual(330, registration.Duration.TotalMinutes);
         }
+
+        [TestMethod()]
+        public void Date()
+        {
+            AttendanceRegistration registration = new AttendanceRegistration
+            {
+                Id = 1,
+                LeavingTime = new DateTime(2018, 6, 11, 23, 59, 59),
+                MeetingTime = new DateTime(2018, 6, 11, 9, 0, 0)
+            };
+
+            Assert.AreEqual(new DateTime(2018,6,11), registration.Date);
+        }
     }
 }

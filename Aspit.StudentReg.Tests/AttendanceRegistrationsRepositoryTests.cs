@@ -36,7 +36,7 @@ namespace Aspit.StudentReg.DataAccess.Tests
         public void CreateRegistrationTest()
         {
             AttendanceRegistrationsRepository repository = CreateRepository();
-            Student student = new Student(0,"bla","bla12345",new AttendanceRegistration {MeetingTime = DateTime.Now.AddMilliseconds(-1), LeavingTime = DateTime.Now });
+            Student student = new Student(0,"bla","blax2345",new AttendanceRegistration {MeetingTime = DateTime.Now.AddMilliseconds(-1), LeavingTime = DateTime.Now });
 
             repository.CreateRegistration(student);
 
@@ -47,7 +47,7 @@ namespace Aspit.StudentReg.DataAccess.Tests
         public void UpdateTest()
         {
             AttendanceRegistrationsRepository repository = CreateRepository();
-            Student student = new Student(0, "bla", "bla12345", new AttendanceRegistration { MeetingTime = DateTime.Now.AddMilliseconds(-1), LeavingTime = DateTime.Now });
+            Student student = new Student(0, "bla", "blax2345", new AttendanceRegistration { MeetingTime = DateTime.Now.AddMilliseconds(-1), LeavingTime = DateTime.Now });
 
             repository.CreateRegistration(student);
 
@@ -58,7 +58,7 @@ namespace Aspit.StudentReg.DataAccess.Tests
         public void GetFromIdTest()
         {
             AttendanceRegistrationsRepository repository = CreateRepository();
-            Student student = new Student(0, "bla", "bla12345", new AttendanceRegistration { MeetingTime = new DateTime(2018, 5, 2, 8, 10, 5), LeavingTime = new DateTime(2018, 5, 2, 8, 10, 6) });
+            Student student = new Student(0, "bla", "blax2345", new AttendanceRegistration { MeetingTime = new DateTime(2018, 5, 2, 8, 10, 5), LeavingTime = new DateTime(2018, 5, 2, 8, 10, 6) });
 
             repository.CreateRegistration(student);
 
@@ -71,7 +71,7 @@ namespace Aspit.StudentReg.DataAccess.Tests
         public void GetUsersRegistrationsTest()
         {
             AttendanceRegistrationsRepository repository = CreateRepository();
-            Student student = new Student(0, "bla", "bla12345", new AttendanceRegistration { MeetingTime = DateTime.Now.AddMilliseconds(-1), LeavingTime = DateTime.Now });
+            Student student = new Student(0, "bla", "blax2345", new AttendanceRegistration { MeetingTime = DateTime.Now.AddMilliseconds(-1), LeavingTime = DateTime.Now });
 
             repository.CreateRegistration(student);
             student.AttendanceRegistrations = new AttendanceRegistration { MeetingTime = new DateTime(2018, 5, 2, 8, 10, 5), LeavingTime = new DateTime(2018, 5, 2, 8, 10, 6) };

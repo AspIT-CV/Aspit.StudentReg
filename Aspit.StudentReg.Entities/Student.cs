@@ -40,7 +40,7 @@ namespace Aspit.StudentReg.Entities
                 value = value.Trim();
 
                 //Check if value is a correct unilogin format
-                var reg = new Regex(@"[a-x0-9]{8}");
+                Regex reg = new Regex(@"^[a-x]{4}[a-x0-9]{4}$");
                 if (!reg.IsMatch(value))
                 {
                     throw new ArgumentException();

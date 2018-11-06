@@ -44,13 +44,31 @@ namespace Aspit.StudentReg.DataAccess
         /// <param name="attendanceRegistration">The <see cref="Student"/>'s <see cref="AttendanceRegistration"/> to create</param>
         public void CreateRegistration(Student student)
         {
+            if(student == null)
+            {
+                throw new NullReferenceException("student cannot be null");
+            }
+
             SqlCommand createCommand = new SqlCommand("INSERT INTO AttendanceRegistrations (UsersKey,MeetingTime,LeavingTime,Date) OUTPUT inserted.Id VALUES (@UsersKey,@MeetingTime,@LeavingTime,@Date)");
             createCommand.Parameters.AddWithValue("@UsersKey", student.Id);
             createCommand.Parameters.AddWithValue("@MeetingTime", student.AttendanceRegistrations.MeetingTime);
             createCommand.Parameters.AddWithValue("@LeavingTime", student.AttendanceRegistrations.LeavingTime);
             createCommand.Parameters.AddWithValue("@Date", student.AttendanceRegistrations.Date);
 
-            Execute(createCommand);
+            DataSet output = Execute(createCommand);
+            if(output.Tables.Count < 1 || output.Tables[0].Rows.Count < 1)
+            {
+                throw new DataAccessException("Failed to get the registration's new id");
+            }
+            else
+            {
+                student.AttendanceRegistrations = new AttendanceRegistration
+                {
+                    Id = output.Tables[0].Rows[0].Field<int>("Id"),
+                    LeavingTime = student.AttendanceRegistrations.LeavingTime,
+                    MeetingTime = student.AttendanceRegistrations.MeetingTime
+                };
+            }
         }
 
         /// <summary>
@@ -79,7 +97,7 @@ namespace Aspit.StudentReg.DataAccess
         /// <returns>a AttendanceRegistration from the database</returns>
         public AttendanceRegistration GetFromId(int id)
         {
-            SqlCommand getCommand = new SqlCommand("SELECT * FROM AttandanceRegistrations WHERE Id=@Id");
+            SqlCommand getCommand = new SqlCommand("SELECT * FROM AttendanceRegistrations WHERE Id=@Id");
             getCommand.Parameters.AddWithValue("@Id",id);
             DataSet getOutput = Execute(getCommand);
 
@@ -147,13 +165,13 @@ namespace Aspit.StudentReg.DataAccess
 
                     try
                     {
-                        registration.Id = row.Field<int>("MeetingTime");
+                        registration.Id = row.Field<int>("Id");
                         registration.MeetingTime = row.Field<DateTime>("MeetingTime");
-                        registration.LeavingTime = row.Field<DateTime>("MeetingTime");
+                        registration.LeavingTime = row.Field<DateTime>("LeavingTime");
                     }
-                    catch(InvalidCastException)
+                    catch(InvalidCastException e)
                     {
-                        throw new DataAccessException("Failed to convert table row into the needed AttendanceRegistration properties");
+                        throw new DataAccessException("Failed to convert table row into the needed AttendanceRegistration properties", e);
                     }
 
                     returnList.Add(registration);

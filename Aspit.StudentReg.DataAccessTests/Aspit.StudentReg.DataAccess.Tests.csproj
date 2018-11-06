@@ -68,6 +68,10 @@
       <Project>{4A72D160-56F8-4916-A0EF-A830A919CCC0}</Project>
       <Name>Aspit.StudentReg.DataAccess</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Aspit.StudentReg.Entities\Aspit.StudentReg.Entities.csproj">
+      <Project>{33880357-ae35-4016-ba88-dc226fe27c2b}</Project>
+      <Name>Aspit.StudentReg.Entities</Name>
+    </ProjectReference>
   </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">

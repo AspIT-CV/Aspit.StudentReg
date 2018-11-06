@@ -66,7 +66,7 @@ namespace Aspit.StudentReg.DataAccess
         internal DataSet Execute(SqlCommand sql)
         {
             // TODO: check sql parameter.
-            DataSet resultSet = default;
+            DataSet resultSet = new DataSet("output");
             try
             {
                 sql.Connection = new SqlConnection(connectionString);

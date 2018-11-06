@@ -12,15 +12,30 @@ namespace Aspit.StudentReg.Entities
     /// </summary>
     public class User
     {
+        /// <summary>
+        /// The user's id
+        /// </summary>
         int id;
+
+        /// <summary>
+        /// The user's name
+        /// </summary>
         string name;
 
+        /// <summary>
+        /// Intializes a new <see cref="User"/>
+        /// </summary>
+        /// <param name="id">The user's id</param>
+        /// <param name="name">The user's full name</param>
         public User(int id, string name)
         {
             Id = id;
             Name = name;
         }
 
+        /// <summary>
+        /// Gets or sets the user's id
+        /// </summary>
         public int Id
         {
             get
@@ -38,6 +53,9 @@ namespace Aspit.StudentReg.Entities
             }
         }
 
+        /// <summary>
+        /// Gets or sets the user's name
+        /// </summary>
         public string Name
         {
             get

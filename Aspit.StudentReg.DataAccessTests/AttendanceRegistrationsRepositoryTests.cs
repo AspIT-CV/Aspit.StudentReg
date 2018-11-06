@@ -54,6 +54,17 @@ namespace Aspit.StudentReg.DataAccess.Tests
             repository.Update(student.AttendanceRegistrations);
         }
 
+        [TestMethod()]
+        public void GetFromIdTest()
+        {
+            AttendanceRegistrationsRepository repository = CreateRepository();
+            Student student = new Student(0, "bla", "bla12345", new AttendanceRegistration { MeetingTime = new DateTime(2018, 5, 2, 8, 10, 5), LeavingTime = new DateTime(2018, 5, 2, 8, 10, 6) });
 
+            repository.CreateRegistration(student);
+
+            AttendanceRegistration registration = repository.GetFromId(student.AttendanceRegistrations.Id);
+            Assert.AreEqual(new DateTime(2018, 5, 2, 8, 10, 5), registration.MeetingTime);
+            Assert.AreEqual(new DateTime(2018, 5, 2, 8, 10, 6), registration.LeavingTime);
+        }
     }
 }

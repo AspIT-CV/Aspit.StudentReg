@@ -97,7 +97,7 @@ namespace Aspit.StudentReg.DataAccess
         /// <returns>a AttendanceRegistration from the database</returns>
         public AttendanceRegistration GetFromId(int id)
         {
-            SqlCommand getCommand = new SqlCommand("SELECT * FROM AttandanceRegistrations WHERE Id=@Id");
+            SqlCommand getCommand = new SqlCommand("SELECT * FROM AttendanceRegistrations WHERE Id=@Id");
             getCommand.Parameters.AddWithValue("@Id",id);
             DataSet getOutput = Execute(getCommand);
 

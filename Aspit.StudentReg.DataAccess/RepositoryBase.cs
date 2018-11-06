@@ -23,7 +23,7 @@ namespace Aspit.StudentReg.DataAccess
         /// Base constructor. Call this from deriving constructors.
         /// </summary>
         /// <param name="connectionString">The connection string.</param>
-        public RepositoryBase(string connectionString)
+        protected RepositoryBase(string connectionString)
         {
             if(string.IsNullOrEmpty(connectionString))
             {

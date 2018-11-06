@@ -106,7 +106,6 @@ namespace Aspit.StudentReg.Entities
             }
         }
 
-        //TODO create a duration calculate method
         public TimeSpan Duration
         {
             get

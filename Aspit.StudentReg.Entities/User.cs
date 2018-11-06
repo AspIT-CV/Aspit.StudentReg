@@ -32,7 +32,7 @@ namespace Aspit.StudentReg.Entities
             {
                 if(value < 0)
                 {
-                    throw new ArgumentOutOfRangeException();
+                    throw new ArgumentOutOfRangeException("Id cannot be less than 0");
                 }
                 id = value;
             }
@@ -50,7 +50,7 @@ namespace Aspit.StudentReg.Entities
                 //Check if value is null
                 if(value is null)
                 {
-                    throw new ArgumentNullException();
+                    throw new ArgumentNullException("Name cannot be null");
                 }
 
                 //Trim whitespace
@@ -60,7 +60,7 @@ namespace Aspit.StudentReg.Entities
                 Regex reg = new Regex(@"^([a-zA-Z ]+)$");
                 if (!reg.IsMatch(value))
                 {
-                    throw new ArgumentException();
+                    throw new ArgumentException("Name is invalid");
                 }
                 //Make the first letter of each word uppercase
                 name = System.Globalization.CultureInfo.CurrentCulture.TextInfo.ToTitleCase(value.ToLower());

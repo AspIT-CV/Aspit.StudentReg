@@ -9,10 +9,23 @@ namespace Aspit.StudentReg.Entities
 {
     public class Student : User
     {
-
+        /// <summary>
+        /// The student's unilogin
+        /// </summary>
         string uniLogin;
+
+        /// <summary>
+        /// The student's current <see cref="AttendanceRegistration"/>
+        /// </summary>
         AttendanceRegistration attendanceRegistrations;
 
+        /// <summary>
+        /// Intializes a new <see cref="Student"/> using the given parameters
+        /// </summary>
+        /// <param name="id">The student's id</param>
+        /// <param name="name">The student's name</param>
+        /// <param name="uniLogin">The student's unilogin</param>
+        /// <param name="attendanceRegistrations">The student's current <see cref="AttendanceRegistration"/></param>
         public Student(int id, string name, string uniLogin, AttendanceRegistration attendanceRegistrations = default):base(id,name)
         {
             Id = id;
@@ -21,6 +34,9 @@ namespace Aspit.StudentReg.Entities
             AttendanceRegistrations = attendanceRegistrations;
         }
 
+        /// <summary>
+        /// Gets or sets the student's unilogin
+        /// </summary>
         public string UniLogin
         {
             get
@@ -49,6 +65,9 @@ namespace Aspit.StudentReg.Entities
             }
         }
 
+        /// <summary>
+        /// Gets or sets the student's current <see cref="AttendanceRegistration"/>
+        /// </summary>
         public AttendanceRegistration AttendanceRegistrations
         {
             get

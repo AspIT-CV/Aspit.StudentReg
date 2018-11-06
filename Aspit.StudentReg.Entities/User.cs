@@ -23,7 +23,7 @@ namespace Aspit.StudentReg.Entities
         string name;
 
         /// <summary>
-        /// Intializes a new <see cref="User"/>
+        /// Intializes a new <see cref="User"/> with the given id and name
         /// </summary>
         /// <param name="id">The user's id</param>
         /// <param name="name">The user's full name</param>

@@ -149,9 +149,13 @@ namespace Aspit.StudentReg.Entities
                 && MeetingTime == registration.MeetingTime);
         }
 
+        /// <summary>
+        /// Returns the hascode for this instance
+        /// </summary>
+        /// <returns>Returns the hascode for this instance</returns>
         public override int GetHashCode()
         {
-            throw new NotImplementedException();
+            return id;
         }
 
         /// <summary>

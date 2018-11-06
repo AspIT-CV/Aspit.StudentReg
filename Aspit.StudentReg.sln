@@ -11,8 +11,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Aspit.StudentReg.DataAccess
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Aspit.StudentReg.Tests", "Aspit.StudentReg.Tests\Aspit.StudentReg.Tests.csproj", "{D1AA461B-D70A-4C77-AFFD-987199B2F75E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Aspit.StudentReg.DataAccess.Tests", "Aspit.StudentReg.DataAccessTests\Aspit.StudentReg.DataAccess.Tests.csproj", "{BFC9A833-0FB7-4CCA-AC06-48E894A72DD4}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -35,10 +33,6 @@ Global
 		{D1AA461B-D70A-4C77-AFFD-987199B2F75E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D1AA461B-D70A-4C77-AFFD-987199B2F75E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D1AA461B-D70A-4C77-AFFD-987199B2F75E}.Release|Any CPU.Build.0 = Release|Any CPU
-		{BFC9A833-0FB7-4CCA-AC06-48E894A72DD4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{BFC9A833-0FB7-4CCA-AC06-48E894A72DD4}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{BFC9A833-0FB7-4CCA-AC06-48E894A72DD4}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{BFC9A833-0FB7-4CCA-AC06-48E894A72DD4}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

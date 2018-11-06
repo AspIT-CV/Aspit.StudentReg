@@ -64,5 +64,20 @@ namespace Aspit.StudentReg.Tests
             };
             Assert.IsFalse(registration1.Equals(registration2));
         }
+
+        [TestMethod()]
+        public void IsDefaultTest()
+        {
+            AttendanceRegistration registration = default;
+            Assert.IsTrue(registration.IsDefault());
+
+            registration = new AttendanceRegistration
+            {
+                Id = 2,
+                LeavingTime = new DateTime(2018, 6, 10, 23, 59, 59),
+                MeetingTime = new DateTime(2018, 6, 10, 9, 0, 0)
+            };
+            Assert.IsFalse(registration.IsDefault());
+        }
     }
 }

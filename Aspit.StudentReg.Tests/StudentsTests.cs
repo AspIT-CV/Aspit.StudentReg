@@ -70,5 +70,14 @@ namespace Aspit.StudentReg.Tests
             student = new Student(id, name, uniLogin);
         }
 
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentOutOfRangeException),
+        "Id cannot be less than 0")]
+        public void StudentIdError()
+        {
+            id = -1;
+            student = new Student(id, name, uniLogin);
+        }
+
     }
 }

@@ -12,26 +12,27 @@ namespace Aspit.StudentReg.Tests
     [TestClass]
     public class StudentsTests
     {
-        Student student;
-        int id = 1;
-        string name = " per Bosen ";
-        string expectedName = "Per Bosen";
-        string uniLogin = "perx234k";
+        readonly int id = 1;
+        readonly string name = " per Bosen ";
+        readonly string expectedName = "Per Bosen";
+        readonly string uniLogin = "perx234k";
 
-        public StudentsTests()
+        public Student GetBasicStudent()
         {
-            student = new Student(id, name, uniLogin);
+            return new Student(id, name, uniLogin);
         }
 
         [TestMethod]
         public void Initialization()
         {
-            Assert.AreNotEqual(null, student);
+            Assert.AreNotEqual(null, GetBasicStudent());
         }
 
         [TestMethod]
         public void StudentValueTest()
         {
+            Student student = GetBasicStudent();
+
             Assert.AreEqual(id, student.Id);
             Assert.AreEqual(expectedName, student.Name);
             Assert.AreEqual(uniLogin, student.UniLogin);
@@ -46,6 +47,7 @@ namespace Aspit.StudentReg.Tests
                 LeavingTime = new DateTime(2018, 6, 11, 23, 59, 59),
                 MeetingTime = new DateTime(2018, 6, 11, 9, 0, 0)
             };
+            Student student = GetBasicStudent();
 
             student.AttendanceRegistrations = registration;
             Assert.AreEqual(registration, student.AttendanceRegistrations);
@@ -56,8 +58,7 @@ namespace Aspit.StudentReg.Tests
         "Unilogin is invalid")]
         public void StudentUniLoginError()
         {
-            uniLogin = "PerBo";
-            student = new Student(id, name, uniLogin);
+            Student student = new Student(id, name, "PerBo");
         }
 
         [TestMethod]
@@ -65,8 +66,7 @@ namespace Aspit.StudentReg.Tests
         "Name is invalid")]
         public void StudentNameError()
         {
-            name = "!Per 0Bo";
-            student = new Student(id, name, uniLogin);
+            Student student = new Student(id, "!Per 0Bo", uniLogin);
         }
 
         [TestMethod]
@@ -74,8 +74,7 @@ namespace Aspit.StudentReg.Tests
         "Id cannot be less than 0")]
         public void StudentIdError()
         {
-            id = -1;
-            student = new Student(id, name, uniLogin);
+            Student student = new Student(-1, name, uniLogin);
         }
     }
 }

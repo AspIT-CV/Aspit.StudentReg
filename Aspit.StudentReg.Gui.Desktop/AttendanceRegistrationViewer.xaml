@@ -21,11 +21,11 @@
         <RowDefinition Height="1*" />
       </Grid.RowDefinitions>
       <Label Content="Dag:" Grid.Column="0" Grid.Row="0" HorizontalAlignment="Right" VerticalAlignment="Center"/>
-      <DatePicker Grid.Column="1" Grid.Row="0" Margin="5" x:Name="CheckInOutDate"/>
+      <DatePicker Grid.Column="1" Grid.Row="0" Margin="5" VerticalContentAlignment="Center" x:Name="CheckInOutDate"/>
       <Label Content="Tjekind tidspunkt:" Grid.Column="0" Grid.Row="1" HorizontalAlignment="Right" VerticalAlignment="Center"/>
-      <local:TimePicker Grid.Row="1" Grid.Column="1"/>
+      <local:TimePicker Grid.Row="1" Grid.Column="1" Height="50"/>
       <Label Content="Tjekud tidspunkt:" Grid.Column="0" Grid.Row="2" HorizontalAlignment="Right" VerticalAlignment="Center"/>
-      <local:TimePicker Grid.Row="2" Grid.Column="1"/>
+      <local:TimePicker Grid.Row="2" Grid.Column="1" Height="50"/>
       <Label Content="Tid i alt: " Grid.Column="1" Grid.Row="3" VerticalAlignment="Center" x:Name="InformationLabel"/>
       <DockPanel Grid.Column="1" Grid.Row="5" LastChildFill="False">
         <Button Content="Gem" DockPanel.Dock="Right" Margin="5" Height="50" Width="100" x:Name="SaveButton" />

@@ -17,58 +17,28 @@ namespace Aspit.StudentReg.DataAccess
         }
 
         /// <summary>
-        /// Takes a <see cref="DataRowCollection"/> and converts all its rows into Students
+        /// Creates the given <see cref="Student"/> in the database
         /// </summary>
-        /// <param name="dataRows">The <see cref="DataRowCollection"/> to convert into Students list</param>
-        /// <returns>A list of all the Students made from the dataRows</returns>
-        private static List<Student> ConvertDateRowsIntoStudents(DataRowCollection dataRows)
+        public Student CreateStudent(Student student)
         {
-            if (dataRows is null)
+            if (student == null)
             {
-                throw new ArgumentNullException("datarows cannot be null.");
+                throw new NullReferenceException("student cannot be null");
             }
 
-            if (dataRows.Count < 0)
+            SqlCommand createCommand = new SqlCommand("INSERT INTO Users (name,username) OUTPUT inserted.Id VALUES (@name,@username)");
+            createCommand.Parameters.AddWithValue("@name", student.Name);
+            createCommand.Parameters.AddWithValue("@username", student.UniLogin);
+
+            DataSet output = Execute(createCommand);
+            if (output.Tables.Count < 1 || output.Tables[0].Rows.Count < 1)
             {
-                return new List<Student>();
+                throw new DataAccessException("Failed to get the new student's id");
             }
             else
             {
-                List<Student> returnList = new List<Student>();
-                foreach (DataRow row in dataRows)
-                {
-                    Student registration;
-                    try
-                    {
-                        int registrationId = row.Field<int>("id");
-                        string registrationName = row.Field<string>("name");
-                        string registrationUniLogin = row.Field<string>("username");
-
-                        Nullable<int> AttendanceRegistrationsKey = row.Field<Nullable<int>>("AttendanceRegistrationsKey");
-
-                        AttendanceRegistration attendanceRegistration;
-
-                        if (AttendanceRegistrationsKey is null)
-                        {
-                            attendanceRegistration = default;
-                        }
-                        else
-                        {
-                            AttendanceRegistrationsRepository ARR = new AttendanceRegistrationsRepository(RepositoryBase.RetrieveConnectionString());
-                            attendanceRegistration = ARR.GetFromId(AttendanceRegistrationsKey.Value);
-                        }
-
-                        registration = new Student(registrationId, registrationName, registrationUniLogin, attendanceRegistration);
-                    }
-                    catch (InvalidCastException)
-                    {
-                        throw new DataAccessException("Failed to convert table row into the needed Student properties");
-                    }
-
-                    returnList.Add(registration);
-                }
-
-                return returnList;
+                student.Id = output.Tables[0].Rows[0].Field<int>("Id");
+                return student;
             }
         }
 
@@ -120,7 +90,61 @@ namespace Aspit.StudentReg.DataAccess
             }
         }
 
+            /// <summary>
+            /// Takes a <see cref="DataRowCollection"/> and converts all its rows into Students
+            /// </summary>
+            /// <param name="dataRows">The <see cref="DataRowCollection"/> to convert into Students list</param>
+            /// <returns>A list of all the Students made from the dataRows</returns>
+            private static List<Student> ConvertDateRowsIntoStudents(DataRowCollection dataRows)
+            {
+                if (dataRows is null)
+                {
+                    throw new ArgumentNullException("datarows cannot be null.");
+                }
 
+                if (dataRows.Count < 0)
+                {
+                    return new List<Student>();
+                }
+                else
+                {
+                    List<Student> returnList = new List<Student>();
+                    foreach (DataRow row in dataRows)
+                    {
+                        Student registration;
+                        try
+                        {
+                            int registrationId = row.Field<int>("id");
+                            string registrationName = row.Field<string>("name");
+                            string registrationUniLogin = row.Field<string>("username");
+
+                            Nullable<int> AttendanceRegistrationsKey = row.Field<Nullable<int>>("AttendanceRegistrationsKey");
+
+                            AttendanceRegistration attendanceRegistration;
+
+                            if (AttendanceRegistrationsKey is null)
+                            {
+                                attendanceRegistration = default;
+                            }
+                            else
+                            {
+                                AttendanceRegistrationsRepository ARR = new AttendanceRegistrationsRepository(RepositoryBase.RetrieveConnectionString());
+                                attendanceRegistration = ARR.GetFromId(AttendanceRegistrationsKey.Value);
+                            }
+
+                            registration = new Student(registrationId, registrationName, registrationUniLogin, attendanceRegistration);
+                        }
+                        catch (InvalidCastException)
+                        {
+                            throw new DataAccessException("Failed to convert table row into the needed Student properties");
+                        }
+
+                        returnList.Add(registration);
+                    }
+
+                    return returnList;
+                }
+            }
 
     }
 

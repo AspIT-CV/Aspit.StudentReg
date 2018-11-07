@@ -19,7 +19,7 @@ namespace Aspit.StudentReg.DataAccess
         /// <summary>
         /// Creates the given <see cref="Student"/> in the database
         /// </summary>
-        public Student CreateStudent(Student student)
+        public void CreateStudent(Student student)
         {
             if (student == null)
             {
@@ -38,7 +38,6 @@ namespace Aspit.StudentReg.DataAccess
             else
             {
                 student.Id = output.Tables[0].Rows[0].Field<int>("Id");
-                return student;
             }
         }
 

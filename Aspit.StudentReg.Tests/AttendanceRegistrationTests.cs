@@ -15,6 +15,7 @@ namespace Aspit.StudentReg.Tests
         [TestMethod()]
         public void DurationTest()
         {
+            //Tests if duration is calculated correct
             AttendanceRegistration registration = new AttendanceRegistration
             {
                 Id = 1,
@@ -24,6 +25,7 @@ namespace Aspit.StudentReg.Tests
             //14:30 - 9:00 = 5:30h = 330m
             Assert.AreEqual(330, registration.Duration.TotalMinutes);
 
+            //Tests if duration throws an error if dates arent on the same date
             registration = new AttendanceRegistration
             {
                 Id = 1,
@@ -36,15 +38,16 @@ namespace Aspit.StudentReg.Tests
         [TestMethod()]
         public void DateTest()
         {
+            //Tests if date is calculated correct
             AttendanceRegistration registration = new AttendanceRegistration
             {
                 Id = 1,
                 LeavingTime = new DateTime(2018, 6, 11, 23, 59, 59),
                 MeetingTime = new DateTime(2018, 6, 11, 9, 0, 0)
             };
-
             Assert.AreEqual(new DateTime(2018,6,11), registration.Date);
 
+            //Tests if date throws an error if dates arent on the same date
             registration = new AttendanceRegistration
             {
                 Id = 1,
@@ -57,6 +60,7 @@ namespace Aspit.StudentReg.Tests
         [TestMethod()]
         public void EqualsTest()
         {
+            //Tests if 2 dates are the same
             AttendanceRegistration registration1 = new AttendanceRegistration
             {
                 Id = 1,
@@ -71,6 +75,7 @@ namespace Aspit.StudentReg.Tests
             };
             Assert.IsTrue(registration1.Equals(registration2));
 
+            //Tests if 2 dates arent the same
             registration2 = new AttendanceRegistration
             {
                 Id = 2,
@@ -78,15 +83,19 @@ namespace Aspit.StudentReg.Tests
                 MeetingTime = new DateTime(2018, 6, 10, 9, 0, 0)
             };
             Assert.IsFalse(registration1.Equals(registration2));
+
+            //Tests if equals throws an error if the given parameter isnt a datetime
             Assert.ThrowsException<ArgumentException>(() => registration1.Equals(5));
         }
 
         [TestMethod()]
         public void IsDefaultTest()
         {
+            //Tests if a date is default
             AttendanceRegistration registration = default;
             Assert.IsTrue(registration.IsDefault());
 
+            //Tests if a date isnt default
             registration = new AttendanceRegistration
             {
                 Id = 2,

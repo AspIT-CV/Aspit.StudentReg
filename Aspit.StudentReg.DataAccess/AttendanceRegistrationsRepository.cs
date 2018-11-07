@@ -51,7 +51,7 @@ namespace Aspit.StudentReg.DataAccess
         {
             if(student == null)
             {
-                throw new NullReferenceException("student cannot be null");
+                throw new ArgumentNullException("student cannot be null");
             }
             else if(student.AttendanceRegistrations.IsDefault())
             {

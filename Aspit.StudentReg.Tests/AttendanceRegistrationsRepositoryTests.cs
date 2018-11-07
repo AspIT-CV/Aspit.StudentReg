@@ -41,6 +41,12 @@ namespace Aspit.StudentReg.Tests
             repository.CreateRegistration(student);
 
             Assert.AreNotEqual(0,student.AttendanceRegistrations.Id);
+
+            student = new Student(0, "bla", "blax2345");
+            Assert.ThrowsException<ArgumentException>(() => repository.CreateRegistration(student));
+
+            student = null;
+            Assert.ThrowsException<ArgumentNullException>(() => repository.CreateRegistration(student));
         }
 
         [TestMethod()]
@@ -50,8 +56,9 @@ namespace Aspit.StudentReg.Tests
             Student student = new Student(0, "bla", "blax2345", new AttendanceRegistration { MeetingTime = DateTime.Now.AddMilliseconds(-1), LeavingTime = DateTime.Now });
 
             repository.CreateRegistration(student);
-
             repository.Update(student.AttendanceRegistrations);
+
+            Assert.ThrowsException<ArgumentException>(() => repository.Update(default));
         }
 
         [TestMethod()]
@@ -79,6 +86,8 @@ namespace Aspit.StudentReg.Tests
 
             List<AttendanceRegistration> registrations = repository.GetUsersRegistrations(student);
             Assert.IsTrue(registrations.Count >= 2);
+
+            Assert.ThrowsException<ArgumentNullException>(() => repository.GetUsersRegistrations(null));
         }
     }
 }

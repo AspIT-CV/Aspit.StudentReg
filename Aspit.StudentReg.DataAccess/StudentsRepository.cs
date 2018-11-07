@@ -42,6 +42,8 @@ namespace Aspit.StudentReg.DataAccess
             }
         }
 
+
+
         /// <summary>
         /// Gets all <see cref="Student"/>s from the database
         /// </summary>

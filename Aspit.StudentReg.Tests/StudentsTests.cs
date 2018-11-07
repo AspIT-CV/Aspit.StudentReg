@@ -14,7 +14,7 @@ namespace Aspit.StudentReg.Tests
     {
         Student student;
         int id = 1;
-        string name = "per Bosen";
+        string name = " per Bosen ";
         string expectedName = "Per Bosen";
         string uniLogin = "perx234k";
 
@@ -31,7 +31,7 @@ namespace Aspit.StudentReg.Tests
         }
 
         [TestMethod]
-        public void ValueTest()
+        public void StudentValueTest()
         {
             Assert.AreEqual(id, student.Id);
             Assert.AreEqual(expectedName, student.Name);
@@ -39,7 +39,7 @@ namespace Aspit.StudentReg.Tests
         }
 
         [TestMethod]
-        public void AttendanceRegistrationsAssignment()
+        public void StudentAttendanceRegistrationsAssignment()
         {
             AttendanceRegistration registration = new AttendanceRegistration
             {
@@ -50,6 +50,24 @@ namespace Aspit.StudentReg.Tests
 
             student.AttendanceRegistrations = registration;
             Assert.AreEqual(registration, student.AttendanceRegistrations);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentException),
+        "Unilogin is invalid")]
+        public void StudentUniLoginError()
+        {
+            uniLogin = "PerBo";
+            student = new Student(id, name, uniLogin);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentException),
+        "Name is invalid")]
+        public void StudentNameError()
+        {
+            name = "!Per0Bo";
+            student = new Student(id, name, uniLogin);
         }
 
     }

@@ -33,11 +33,11 @@ namespace Aspit.StudentReg.Tests
             StudentsRepository repository = CreateRepository();
             Student student = new Student(0, "bla", "blax2345");
 
-            //repository.CreateRegistration(student);
+            repository.CreateStudent(student);
 
-            //AttendanceRegistration registration = repository.GetFromId(student.AttendanceRegistrations.Id);
-            //Assert.AreEqual(new DateTime(2018, 5, 2, 8, 10, 5), registration.MeetingTime);
-            //Assert.AreEqual(new DateTime(2018, 5, 2, 8, 10, 6), registration.LeavingTime);
+            Student databaseStudent = repository.GetFromId(student.Id);
+            Assert.AreEqual(student.Name, databaseStudent.Name);
+            Assert.AreEqual(student.UniLogin, databaseStudent.UniLogin);
         }
     }
 }

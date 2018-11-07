@@ -26,9 +26,10 @@ namespace Aspit.StudentReg.DataAccess
                 throw new NullReferenceException("student cannot be null");
             }
 
-            SqlCommand createCommand = new SqlCommand("INSERT INTO Users (name,username) OUTPUT inserted.Id VALUES (@name,@username)");
+            SqlCommand createCommand = new SqlCommand("INSERT INTO Users (name,username,AttendanceRegistrationsKey) OUTPUT inserted.Id VALUES (@name,@username,@attendanceregistrationskey)");
             createCommand.Parameters.AddWithValue("@name", student.Name);
             createCommand.Parameters.AddWithValue("@username", student.UniLogin);
+            createCommand.Parameters.AddWithValue("@attendanceregistrationskey", student.AttendanceRegistrations.Id);
 
             DataSet output = Execute(createCommand);
             if (output.Tables.Count < 1 || output.Tables[0].Rows.Count < 1)
@@ -51,10 +52,11 @@ namespace Aspit.StudentReg.DataAccess
                 throw new NullReferenceException("student cannot be null");
             }
 
-            SqlCommand updateCommand = new SqlCommand("UPDATE Users SET name = @name, username = @username WHERE id = @id;");
+            SqlCommand updateCommand = new SqlCommand("UPDATE Users SET name = @name, username = @username, AttendanceRegistrationsKey = @attendanceregistrationskey WHERE id = @id;");
             updateCommand.Parameters.AddWithValue("@id", student.Id);
             updateCommand.Parameters.AddWithValue("@name", student.Name);
             updateCommand.Parameters.AddWithValue("@username", student.UniLogin);
+            updateCommand.Parameters.AddWithValue("@attendanceregistrationskey", student.AttendanceRegistrations.Id);
 
             DataSet output = Execute(updateCommand);
         }

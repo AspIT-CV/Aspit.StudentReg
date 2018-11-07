@@ -21,9 +21,16 @@ namespace Aspit.StudentReg.Tests
                 LeavingTime = new DateTime(9, 9, 9, 14, 30, 0),
                 MeetingTime = new DateTime(9, 9, 9, 9, 0, 0)
             };
-
             //14:30 - 9:00 = 5:30h = 330m
             Assert.AreEqual(330, registration.Duration.TotalMinutes);
+
+            registration = new AttendanceRegistration
+            {
+                Id = 1,
+                LeavingTime = new DateTime(2, 2, 2, 2, 0, 0),
+                MeetingTime = new DateTime(9, 9, 9, 9, 0, 0)
+            };
+            Assert.ThrowsException<InvalidOperationException>(() => registration.Duration);
         }
 
         [TestMethod()]
@@ -37,6 +44,14 @@ namespace Aspit.StudentReg.Tests
             };
 
             Assert.AreEqual(new DateTime(2018,6,11), registration.Date);
+
+            registration = new AttendanceRegistration
+            {
+                Id = 1,
+                LeavingTime = new DateTime(2, 2, 2, 2, 0, 0),
+                MeetingTime = new DateTime(9, 9, 9, 9, 0, 0)
+            };
+            Assert.ThrowsException<InvalidOperationException>(() => registration.Date);
         }
 
         [TestMethod()]
@@ -63,6 +78,7 @@ namespace Aspit.StudentReg.Tests
                 MeetingTime = new DateTime(2018, 6, 10, 9, 0, 0)
             };
             Assert.IsFalse(registration1.Equals(registration2));
+            Assert.ThrowsException<ArgumentException>(() => registration1.Equals(5));
         }
 
         [TestMethod()]

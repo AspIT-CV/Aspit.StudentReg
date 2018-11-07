@@ -58,7 +58,11 @@ namespace Aspit.StudentReg.Entities
 
             set
             {
-                if(DateTime.Equals(value, default) || value > DateTime.Now)
+                if(DateTime.Equals(value, default))
+                {
+                    throw new ArgumentNullException("MeetingTime cannot be default");
+                }
+                if(value > DateTime.Now)
                 {
                     throw new ArgumentException("MeetingTime cannot be in the future.");
                 }
@@ -78,7 +82,11 @@ namespace Aspit.StudentReg.Entities
 
             set
             {
-                if(DateTime.Equals(value, default) || value > DateTime.Now)
+                if(DateTime.Equals(value, default))
+                {
+                    throw new ArgumentNullException("LeavingTime cannot be default");
+                }
+                if(value > DateTime.Now)
                 {
                     throw new ArgumentException("LeavingTime cannot be in the future.");
                 }
@@ -113,6 +121,7 @@ namespace Aspit.StudentReg.Entities
         {
             get
             {
+                DateTime canCalculateDate = Date;
                 if(DateTime.Equals(leavingTime, default) || DateTime.Equals(meetingTime, default))
                 {
                     throw new InvalidOperationException("Couldn't calculate Duration from LeavingTime and MeetingTime.");

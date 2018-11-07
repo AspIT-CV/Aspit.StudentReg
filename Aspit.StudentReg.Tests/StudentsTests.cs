@@ -6,8 +6,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Aspit.StudentReg.Entities;
-
 namespace Aspit.StudentReg.Tests
+
 {
     [TestClass]
     public class StudentsTests
@@ -22,7 +22,6 @@ namespace Aspit.StudentReg.Tests
         {
             student = new Student(id, name, uniLogin);
         }
-
 
         [TestMethod]
         public void Initialization()
@@ -78,6 +77,5 @@ namespace Aspit.StudentReg.Tests
             id = -1;
             student = new Student(id, name, uniLogin);
         }
-
     }
 }

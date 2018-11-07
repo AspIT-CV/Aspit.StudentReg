@@ -24,15 +24,5 @@ namespace Aspit.StudentReg.Gui.Desktop
         {
             InitializeComponent();
         }
-
-        /// <summary>
-        /// When the user wants to manually update
-        /// </summary>
-        /// <param name="sender">dfgdfg</param>
-        /// <param name="e"></param>
-        private void button_Click(object sender, RoutedEventArgs e) 
-        {
-            //
-        }
     }
 }

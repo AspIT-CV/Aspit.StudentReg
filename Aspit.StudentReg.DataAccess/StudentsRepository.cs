@@ -29,7 +29,16 @@ namespace Aspit.StudentReg.DataAccess
             SqlCommand createCommand = new SqlCommand("INSERT INTO Users (name,username,AttendanceRegistrationsKey) OUTPUT inserted.Id VALUES (@name,@username,@attendanceregistrationskey)");
             createCommand.Parameters.AddWithValue("@name", student.Name);
             createCommand.Parameters.AddWithValue("@username", student.UniLogin);
-            createCommand.Parameters.AddWithValue("@attendanceregistrationskey", student.AttendanceRegistrations.Id);
+
+            if (student.AttendanceRegistrations.IsDefault())
+            {
+                createCommand.Parameters.AddWithValue("@attendanceregistrationskey", DBNull.Value);
+            } else
+            {
+                createCommand.Parameters.AddWithValue("@attendanceregistrationskey", student.AttendanceRegistrations.Id);
+            }
+
+            
 
             DataSet output = Execute(createCommand);
             if (output.Tables.Count < 1 || output.Tables[0].Rows.Count < 1)
@@ -56,7 +65,14 @@ namespace Aspit.StudentReg.DataAccess
             updateCommand.Parameters.AddWithValue("@id", student.Id);
             updateCommand.Parameters.AddWithValue("@name", student.Name);
             updateCommand.Parameters.AddWithValue("@username", student.UniLogin);
-            updateCommand.Parameters.AddWithValue("@attendanceregistrationskey", student.AttendanceRegistrations.Id);
+            if (student.AttendanceRegistrations.IsDefault())
+            {
+                updateCommand.Parameters.AddWithValue("@attendanceregistrationskey", DBNull.Value);
+            }
+            else
+            {
+                updateCommand.Parameters.AddWithValue("@attendanceregistrationskey", student.AttendanceRegistrations.Id);
+            }
 
             DataSet output = Execute(updateCommand);
         }

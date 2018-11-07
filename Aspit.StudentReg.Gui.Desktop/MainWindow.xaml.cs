@@ -23,6 +23,7 @@ namespace Aspit.StudentReg.Gui.Desktop
         public MainWindow()
         {
             InitializeComponent();
+
         }
     }
 }

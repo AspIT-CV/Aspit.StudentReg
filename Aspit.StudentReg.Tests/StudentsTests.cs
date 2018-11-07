@@ -17,6 +17,10 @@ namespace Aspit.StudentReg.Tests
         readonly string expectedName = "Per Bosen";
         readonly string uniLogin = "perx234k";
 
+        /// <summary>
+        /// Creates a basic student object using the readonly fields: id,name,expectedName,uniLogin
+        /// </summary>
+        /// <returns>A basic student</returns>
         public Student GetBasicStudent()
         {
             return new Student(id, name, uniLogin);

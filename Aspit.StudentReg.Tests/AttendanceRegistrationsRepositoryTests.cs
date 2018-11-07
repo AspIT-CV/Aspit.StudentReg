@@ -43,14 +43,14 @@ namespace Aspit.StudentReg.Tests
         {
             //Tests if newly created AttendanceRegistration gets an id on creation
             AttendanceRegistrationsRepository repository = CreateRepository();
-            Student student = new Student(0,"bla","blax2345",new AttendanceRegistration {MeetingTime = DateTime.Now.AddMilliseconds(-1), LeavingTime = DateTime.Now });
+            Student student = new Student(1,"bla","blax2345",new AttendanceRegistration {MeetingTime = DateTime.Now.AddMilliseconds(-1), LeavingTime = DateTime.Now });
 
             repository.CreateRegistration(student);
 
             Assert.AreNotEqual(0,student.AttendanceRegistrations.Id);
 
             //Tests if a student without an AttendanceRegistration throws an error
-            student = new Student(0, "bla", "blax2345");
+            student = new Student(1, "bla", "blax2345");
             Assert.ThrowsException<ArgumentException>(() => repository.CreateRegistration(student));
 
             //Tests if a student which is null throws an error
@@ -63,7 +63,7 @@ namespace Aspit.StudentReg.Tests
         {
             //Tests if update doesnt throw any error
             AttendanceRegistrationsRepository repository = CreateRepository();
-            Student student = new Student(0, "bla", "blax2345", new AttendanceRegistration { MeetingTime = DateTime.Now.AddMilliseconds(-1), LeavingTime = DateTime.Now });
+            Student student = new Student(1, "bla", "blax2345", new AttendanceRegistration { MeetingTime = DateTime.Now.AddMilliseconds(-1), LeavingTime = DateTime.Now });
 
             repository.CreateRegistration(student);
             repository.Update(student.AttendanceRegistrations);
@@ -77,7 +77,7 @@ namespace Aspit.StudentReg.Tests
         {
             //Tests if GetFromId works
             AttendanceRegistrationsRepository repository = CreateRepository();
-            Student student = new Student(0, "bla", "blax2345", new AttendanceRegistration { MeetingTime = new DateTime(2018, 5, 2, 8, 10, 5), LeavingTime = new DateTime(2018, 5, 2, 8, 10, 6) });
+            Student student = new Student(1, "bla", "blax2345", new AttendanceRegistration { MeetingTime = new DateTime(2018, 5, 2, 8, 10, 5), LeavingTime = new DateTime(2018, 5, 2, 8, 10, 6) });
 
             repository.CreateRegistration(student);
 
@@ -91,7 +91,7 @@ namespace Aspit.StudentReg.Tests
         {
             //Tests if GetUsersRegistrations output the correct amount of AttendanceRegistrations
             AttendanceRegistrationsRepository repository = CreateRepository();
-            Student student = new Student(0, "bla", "blax2345", new AttendanceRegistration { MeetingTime = DateTime.Now.AddMilliseconds(-1), LeavingTime = DateTime.Now });
+            Student student = new Student(1, "bla", "blax2345", new AttendanceRegistration { MeetingTime = DateTime.Now.AddMilliseconds(-1), LeavingTime = DateTime.Now });
 
             repository.CreateRegistration(student);
             student.AttendanceRegistrations = new AttendanceRegistration { MeetingTime = new DateTime(2018, 5, 2, 8, 10, 5), LeavingTime = new DateTime(2018, 5, 2, 8, 10, 6) };

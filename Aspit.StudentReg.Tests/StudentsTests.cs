@@ -65,7 +65,7 @@ namespace Aspit.StudentReg.Tests
         "Name is invalid")]
         public void StudentNameError()
         {
-            name = "!Per0Bo";
+            name = "!Per 0Bo";
             student = new Student(id, name, uniLogin);
         }
 

@@ -39,5 +39,24 @@ namespace Aspit.StudentReg.Tests
             Assert.AreEqual(student.Name, databaseStudent.Name);
             Assert.AreEqual(student.UniLogin, databaseStudent.UniLogin);
         }
+
+        [TestMethod()]
+        public void UpdateTest()
+        {
+            StudentsRepository repository = CreateRepository();
+            Student student = new Student(0, "bla", "blax2345");
+
+            repository.CreateStudent(student);
+
+            student.Name = "bla blas";
+            student.UniLogin = "blas1346";
+
+            repository.UpdateStudent(student);
+
+            Student databaseStudent = repository.GetFromId(student.Id);
+
+            Assert.AreEqual(student.Name, databaseStudent.Name);
+            Assert.AreEqual(student.UniLogin, databaseStudent.UniLogin);
+        }
     }
 }

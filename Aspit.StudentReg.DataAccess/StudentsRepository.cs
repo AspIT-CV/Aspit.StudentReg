@@ -42,7 +42,23 @@ namespace Aspit.StudentReg.DataAccess
             }
         }
 
+        /// <summary>
+        /// Update the given <see cref="Student"/> in the database
+        /// </summary>
+        public void UpdateStudent(Student student)
+        {
+            if (student == null)
+            {
+                throw new NullReferenceException("student cannot be null");
+            }
 
+            SqlCommand updateCommand = new SqlCommand("UPDATE Users SET name = @name, username = @username WHERE id = @id;");
+            updateCommand.Parameters.AddWithValue("@id", student.Id);
+            updateCommand.Parameters.AddWithValue("@name", student.Name);
+            updateCommand.Parameters.AddWithValue("@username", student.UniLogin);
+
+            DataSet output = Execute(updateCommand);
+        }
 
         /// <summary>
         /// Gets all <see cref="Student"/>s from the database

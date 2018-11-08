@@ -29,8 +29,10 @@
       <Label Content="Tid i alt: " Grid.Column="1" Grid.Row="3" VerticalAlignment="Center" x:Name="InformationLabel"/>
       <Label Foreground="Red" Grid.Column="1" Grid.Row="4" VerticalContentAlignment="Center" x:Name="ErrorLabel"/>
       <DockPanel Grid.Column="1" Grid.Row="5" LastChildFill="False">
-        <Button Content="Gem" DockPanel.Dock="Right" Margin="5" Height="50" Width="100" x:Name="SaveButton" />
-        <Button Content="Ny" DockPanel.Dock="Right" Margin="5" Height="50" Width="100" x:Name="NewButton" />
+        <Button Content="Gem" DockPanel.Dock="Right" Margin="5" Height="50" Width="100" x:Name="SaveButton"
+                Click="SaveButton_Clicked" />
+        <Button Content="Ny" DockPanel.Dock="Right" Margin="5" Height="50" Width="100" x:Name="NewButton"
+                Click="NewButton_Clicked" />
       </DockPanel>
     </Grid>
   </GroupBox>

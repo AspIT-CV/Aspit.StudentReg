@@ -72,9 +72,18 @@ namespace Aspit.StudentReg.Gui.Desktop
             }
             set
             {
-                HoursTextBox.Text = value.Hours.ToString();
-                MinutesTextBox.Text = value.Minutes.ToString();
-                SecondsTextBox.Text = value.Seconds.ToString();
+                if(value == default)
+                {
+                    HoursTextBox.Text = "";
+                    MinutesTextBox.Text = "";
+                    SecondsTextBox.Text = "";
+                }
+                else
+                {
+                    HoursTextBox.Text = value.Hours.ToString();
+                    MinutesTextBox.Text = value.Minutes.ToString();
+                    SecondsTextBox.Text = value.Seconds.ToString();
+                }
             }
         }
 

@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Aspit.StudentReg.Entities;
 
 namespace Aspit.StudentReg.Gui.Desktop
 {
@@ -20,6 +21,8 @@ namespace Aspit.StudentReg.Gui.Desktop
     /// </summary>
     public partial class AttendanceRegistrationViewer: UserControl
     {
+        private AttendanceRegistration attendanceRegistration;
+
         /// <summary>
         /// Intializes a new <see cref="AttendanceRegistrationViewer"/>
         /// </summary>
@@ -27,7 +30,57 @@ namespace Aspit.StudentReg.Gui.Desktop
         {
             InitializeComponent();
             CheckInOutDate.DisplayDateEnd = DateTime.Now;
+            ValidateInformation();
         }
+
+        /// <summary>
+        /// The AttendanceRegistration to change
+        /// </summary>
+        public AttendanceRegistration AttendanceRegistration
+        {
+            get
+            {
+                return attendanceRegistration;
+            }
+            set
+            {
+                attendanceRegistration = value;
+                if(attendanceRegistration.IsDefault())
+                {
+                    MeetingTimePicker.Time = default;
+                    LeavingTimePicker.Time = default;
+                    CheckInOutDate.SelectedDate = null;
+                }
+                else
+                {
+                    MeetingTimePicker.Time = attendanceRegistration.MeetingTime.TimeOfDay;
+                    LeavingTimePicker.Time = attendanceRegistration.LeavingTime.TimeOfDay;
+                    CheckInOutDate.SelectedDate = attendanceRegistration.Date;
+                }
+                ValidateInformation();
+            }
+        }
+
+        /// <summary>
+        /// Enables or disables this user control
+        /// </summary>
+        public new bool IsEnabled
+        {
+            get
+            {
+                return base.IsEnabled;
+            }
+            set
+            {
+                base.IsEnabled = value;
+                AttendanceRegistration = default;
+            }
+        }
+
+        /// <summary>
+        /// Invoked when the save button is clicked
+        /// </summary>
+        public RoutedEventHandler SaveButtonClicked{ get; set; }
 
         /// <summary>
         /// Invoked when the day datepicker's date selection has changed
@@ -51,6 +104,7 @@ namespace Aspit.StudentReg.Gui.Desktop
         private void ValidateInformation()
         {
             SaveButton.IsEnabled = false;
+            InformationLabel.Content = "";
 
             if(CheckInOutDate.SelectedDate is null)
             {
@@ -76,6 +130,28 @@ namespace Aspit.StudentReg.Gui.Desktop
             InformationLabel.Content = "Tid i alt: " + (LeavingTimePicker.Time - MeetingTimePicker.Time);
             ErrorLabel.Content = "";
             SaveButton.IsEnabled = true;
+        }
+
+        /// <summary>
+        /// Invoked when the save button is clicked
+        /// </summary>
+        private void SaveButton_Clicked(object sender, RoutedEventArgs e)
+        {
+            attendanceRegistration = new AttendanceRegistration
+            {
+                Id = AttendanceRegistration.Id,
+                MeetingTime = CheckInOutDate.SelectedDate.Value + MeetingTimePicker.Time,
+                LeavingTime = CheckInOutDate.SelectedDate.Value + LeavingTimePicker.Time
+            };
+            SaveButtonClicked?.Invoke(sender, e);
+        }
+
+        /// <summary>
+        /// Invoked when the New button is clicked
+        /// </summary>
+        private void NewButton_Clicked(object sender, RoutedEventArgs e)
+        {
+            AttendanceRegistration = default;
         }
     }
 }

@@ -16,14 +16,13 @@ using System.Windows.Shapes;
 namespace Aspit.StudentReg.GUI.Terminal
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    /// Interaction logic for CheckedInUserControl.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class CheckedInUserControl : UserControl
     {
-        public MainWindow()
+        public CheckedInUserControl()
         {
             InitializeComponent();
-            contentUserControl.Content = new CheckedInUserControl();
         }
     }
 }

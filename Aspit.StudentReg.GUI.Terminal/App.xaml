@@ -4,6 +4,6 @@
              xmlns:local="clr-namespace:Aspit.StudentReg.GUI.Terminal"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
-         
+        <FontFamily x:Key="FontAwesome">/Fonts/FontAwesomeRegular.oft#Font Awesome 5 Pro Regular</FontFamily>
     </Application.Resources>
 </Application>

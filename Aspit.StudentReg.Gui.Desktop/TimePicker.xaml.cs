@@ -70,6 +70,12 @@ namespace Aspit.StudentReg.Gui.Desktop
                     throw new InvalidOperationException("TimePicker doesnt contain a valid time");
                 }
             }
+            set
+            {
+                HoursTextBox.Text = value.Hours.ToString();
+                MinutesTextBox.Text = value.Minutes.ToString();
+                SecondsTextBox.Text = value.Seconds.ToString();
+            }
         }
 
         /// <summary>

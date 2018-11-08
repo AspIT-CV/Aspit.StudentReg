@@ -20,9 +20,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		connectionsTest.config = connectionsTest.config
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Aspit.StudentReg.GUI.App.Android", "Aspit.StudentReg.GUI.App\Aspit.StudentReg.GUI.App.Android\Aspit.StudentReg.GUI.App.Android.csproj", "{FDFEC366-1CDC-46D6-ADF9-68390FDE5A30}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Aspit.StudentReg.GUI.App", "Aspit.StudentReg.GUI.App\Aspit.StudentReg.GUI.App\Aspit.StudentReg.GUI.App.csproj", "{E6EEBE4E-62F0-4ADC-83C8-A69D9C538182}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Aspit.StudentReg.GUI.Terminal", "Aspit.StudentReg.GUI.Terminal\Aspit.StudentReg.GUI.Terminal.csproj", "{2027AB0F-7BC4-418D-9AB3-D4762BF31794}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -46,16 +44,10 @@ Global
 		{D1AA461B-D70A-4C77-AFFD-987199B2F75E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D1AA461B-D70A-4C77-AFFD-987199B2F75E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D1AA461B-D70A-4C77-AFFD-987199B2F75E}.Release|Any CPU.Build.0 = Release|Any CPU
-		{FDFEC366-1CDC-46D6-ADF9-68390FDE5A30}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{FDFEC366-1CDC-46D6-ADF9-68390FDE5A30}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{FDFEC366-1CDC-46D6-ADF9-68390FDE5A30}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
-		{FDFEC366-1CDC-46D6-ADF9-68390FDE5A30}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{FDFEC366-1CDC-46D6-ADF9-68390FDE5A30}.Release|Any CPU.Build.0 = Release|Any CPU
-		{FDFEC366-1CDC-46D6-ADF9-68390FDE5A30}.Release|Any CPU.Deploy.0 = Release|Any CPU
-		{E6EEBE4E-62F0-4ADC-83C8-A69D9C538182}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{E6EEBE4E-62F0-4ADC-83C8-A69D9C538182}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{E6EEBE4E-62F0-4ADC-83C8-A69D9C538182}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{E6EEBE4E-62F0-4ADC-83C8-A69D9C538182}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2027AB0F-7BC4-418D-9AB3-D4762BF31794}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2027AB0F-7BC4-418D-9AB3-D4762BF31794}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2027AB0F-7BC4-418D-9AB3-D4762BF31794}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2027AB0F-7BC4-418D-9AB3-D4762BF31794}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

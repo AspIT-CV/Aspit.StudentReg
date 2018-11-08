@@ -105,11 +105,11 @@ namespace Aspit.StudentReg.Entities
                 {
                     throw new InvalidOperationException("Couldn't calculate Date from LeavingTime and MeetingTime because they are both default.");
                 }
-                if(leavingTime == default)
+                if(leavingTime != default && meetingTime == default)
                 {
                     return leavingTime.Date;
                 }
-                else if(meetingTime == default)
+                else if(meetingTime != default && leavingTime == default)
                 {
                     return meetingTime.Date;
                 }

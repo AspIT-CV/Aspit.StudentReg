@@ -20,6 +20,14 @@ namespace Aspit.StudentReg.Gui.Desktop
     /// </summary>
     public partial class TimePicker: UserControl
     {
+        /// <summary>
+        /// Stops events from being invoked if true
+        /// </summary>
+        private bool eventLock;
+
+        /// <summary>
+        /// Intializes a new <see cref="TimePicker"/>
+        /// </summary>
         public TimePicker()
         {
             InitializeComponent();
@@ -69,8 +77,11 @@ namespace Aspit.StudentReg.Gui.Desktop
         /// </summary>
         private void HoursTextBox_Changed(object sender, TextChangedEventArgs e)
         {
-            OnlyAcceptNumberBox(HoursTextBox,23);
-            TimeChanged?.Invoke(this, null);
+            if(!eventLock)
+            {
+                OnlyAcceptNumberBox(HoursTextBox, 23);
+                TimeChanged?.Invoke(this, null);
+            }
         }
 
         /// <summary>
@@ -78,8 +89,11 @@ namespace Aspit.StudentReg.Gui.Desktop
         /// </summary>
         private void MinutesTextBox_Changed(object sender, TextChangedEventArgs e)
         {
-            OnlyAcceptNumberBox(MinutesTextBox, 59);
-            TimeChanged?.Invoke(this, null);
+            if(!eventLock)
+            {
+                OnlyAcceptNumberBox(MinutesTextBox, 59);
+                TimeChanged?.Invoke(this, null);
+            }
         }
 
         /// <summary>
@@ -87,8 +101,11 @@ namespace Aspit.StudentReg.Gui.Desktop
         /// </summary>
         private void SecondsTextBox_Changed(object sender, TextChangedEventArgs e)
         {
-            OnlyAcceptNumberBox(SecondsTextBox, 59);
-            TimeChanged?.Invoke(this, null);
+            if(!eventLock)
+            {
+                OnlyAcceptNumberBox(SecondsTextBox, 59);
+                TimeChanged?.Invoke(this, null);
+            }
         }
 
         /// <summary>
@@ -96,8 +113,9 @@ namespace Aspit.StudentReg.Gui.Desktop
         /// </summary>
         /// <param name="textBox">The textbox to change</param>
         /// <param name="maximumValue">The maximum number the textbox can contain</param>
-        private static void OnlyAcceptNumberBox(TextBox textBox, int maximumValue)
+        private void OnlyAcceptNumberBox(TextBox textBox, int maximumValue)
         {
+            eventLock = true;
             List<char> numbers = textBox.Text.ToCharArray().ToList();
             numbers.RemoveAll((letter) => !char.IsNumber(letter));
             if(numbers.Count >= 1)
@@ -110,6 +128,7 @@ namespace Aspit.StudentReg.Gui.Desktop
             {
                 textBox.Text = "";
             }
+            eventLock = false;
         }
     }
 }

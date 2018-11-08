@@ -12,6 +12,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Aspit.StudentReg.Entities;
+using Aspit.StudentReg.DataAccess;
 
 namespace Aspit.StudentReg.GUI.Terminal
 {
@@ -20,9 +22,20 @@ namespace Aspit.StudentReg.GUI.Terminal
     /// </summary>
     public partial class CheckedInUserControl : UserControl
     {
-        public CheckedInUserControl()
+        private MainWindow parent;
+        public CheckedInUserControl(Student student, MainWindow parentArg)
         {
+            parent = parentArg;
             InitializeComponent();
+            mainTextBlock.Text = "Du blev checket ind " + student.Name;
+
+            goBackToStart(); 
+        }
+
+        private async Task goBackToStart()
+        {
+            await Task.Delay(3000);
+            parent.Content = new StartScreenUserControl(parent);
         }
     }
 }

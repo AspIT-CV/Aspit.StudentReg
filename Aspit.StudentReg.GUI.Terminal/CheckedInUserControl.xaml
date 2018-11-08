@@ -7,6 +7,6 @@
              mc:Ignorable="d" 
              d:DesignHeight="1080" d:DesignWidth="1920" Background="#27ae60">
     <Grid>
-        <TextBlock Text="Du blev checket ind!" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="50" Foreground="White" ></TextBlock>
+        <TextBlock x:Name="mainTextBlock" Text="Du blev checket ind!" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="50" Foreground="White" ></TextBlock>
     </Grid>
 </UserControl>

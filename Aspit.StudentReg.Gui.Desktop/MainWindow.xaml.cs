@@ -23,19 +23,14 @@ namespace Aspit.StudentReg.Gui.Desktop
     public partial class MainWindow: Window
     {
         /// <summary>
-        /// Repository for AttendanceRegistrations
-        /// </summary>
-        private AttendanceRegistrationsRepository registrationsRepository;
-
-        /// <summary>
         /// Repository for students
         /// </summary>
         private StudentsRepository studentsRepository;
 
         /// <summary>
-        /// A list of all students
+        /// Repository for students
         /// </summary>
-        private List<Student> students;
+        private AttendanceRegistrationsRepository registrationsRepository;
 
         /// <summary>
         /// Intializes a new <see cref="MainWindow"/>
@@ -52,39 +47,23 @@ namespace Aspit.StudentReg.Gui.Desktop
         {
             try
             {
-                registrationsRepository = new AttendanceRegistrationsRepository(RepositoryBase.RetrieveConnectionString());
                 studentsRepository = new StudentsRepository(RepositoryBase.RetrieveConnectionString());
+                registrationsRepository = new AttendanceRegistrationsRepository(RepositoryBase.RetrieveConnectionString());
+                StudentView.Intialize(studentsRepository);
             }
             catch
             {
-                MessageBox.Show("Kunne ikke forbinde til databasen.");
-                Close();
-                return;
+                if(MessageBox.Show("Kunne ikke forbinde til databasen.\n\nVil du prøve at forbinde igen?", "Ingen forbindelse", MessageBoxButton.YesNo, MessageBoxImage.Warning) == MessageBoxResult.Yes)
+                {
+                    Window_Loaded(null, null);
+                    return;
+                }
+                else
+                {
+                    Close();
+                    return;
+                }
             }
-            UpdateStudentList();
-        }
-
-        /// <summary>
-        /// Updates the list of students
-        /// </summary>
-        private void UpdateStudentList()
-        {
-            students = studentsRepository.GetAll();
-            StudentDataGrid.ItemsSource = (from student in students
-                                           let Id = student.Id
-                                           let Navn = student.Name
-                                           let UniLogin = student.UniLogin
-                                           let Status = (student.AttendanceRegistrations.IsDefault()) ? "Væk" : "Her" 
-                                           select new {Id, Status, Navn, UniLogin});
-            StudentDataGrid.Columns[0].Visibility = Visibility.Collapsed;
-        }
-
-        /// <summary>
-        /// Invoked when StudentDataGrid selection has changed
-        /// </summary>
-        private void StudentDateGrid_Changed(object sender, SelectionChangedEventArgs e)
-        {
-
         }
     }
 }

@@ -50,15 +50,26 @@ namespace Aspit.StudentReg.Gui.Desktop
                     MeetingTimePicker.Time = default;
                     LeavingTimePicker.Time = default;
                     CheckInOutDate.SelectedDate = null;
+                    IsNew = true;
                 }
                 else
                 {
                     MeetingTimePicker.Time = attendanceRegistration.MeetingTime.TimeOfDay;
                     LeavingTimePicker.Time = attendanceRegistration.LeavingTime.TimeOfDay;
                     CheckInOutDate.SelectedDate = attendanceRegistration.Date;
+                    IsNew = false;
                 }
                 ValidateInformation();
             }
+        }
+
+        /// <summary>
+        /// Tells if the <see cref="Entities.AttendanceRegistration"/> is new
+        /// </summary>
+        public bool IsNew
+        {
+            get;
+            private set;
         }
 
         /// <summary>
@@ -74,6 +85,22 @@ namespace Aspit.StudentReg.Gui.Desktop
             {
                 base.IsEnabled = value;
                 AttendanceRegistration = default;
+                ErrorLabel.Content = "";
+            }
+        }
+
+        /// <summary>
+        /// Makes new button visible or invisible
+        /// </summary>
+        public bool NewButtonVisible
+        {
+            get
+            {
+                return !(NewButton.Visibility == Visibility.Collapsed);
+            }
+            set
+            {
+                NewButton.Visibility = value ? Visibility.Visible : Visibility.Collapsed;
             }
         }
 

@@ -78,5 +78,13 @@ namespace Aspit.StudentReg.Gui.Desktop
                                            select new {Id, Status, Navn, UniLogin});
             StudentDataGrid.Columns[0].Visibility = Visibility.Collapsed;
         }
+
+        /// <summary>
+        /// Invoked when StudentDataGrid selection has changed
+        /// </summary>
+        private void StudentDateGrid_Changed(object sender, SelectionChangedEventArgs e)
+        {
+
+        }
     }
 }

@@ -5,8 +5,10 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Aspit.StudentReg.GUI.Terminal"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="MainWindow" Height="350" Width="525"
+        WindowStyle="None" ResizeMode="NoResize"  
+        WindowStartupLocation="CenterScreen" WindowState="Maximized">
     <Grid>
-        
+        <UserControl x:Name="contentUserControl"/>
     </Grid>
 </Window>

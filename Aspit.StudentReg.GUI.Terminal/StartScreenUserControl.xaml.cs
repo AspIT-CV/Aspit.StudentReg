@@ -16,14 +16,13 @@ using System.Windows.Shapes;
 namespace Aspit.StudentReg.GUI.Terminal
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    /// Interaction logic for StartScreenUserControl.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class StartScreenUserControl : UserControl
     {
-        public MainWindow()
+        public StartScreenUserControl()
         {
             InitializeComponent();
-            contentUserControl.Content = new StartScreenUserControl();
         }
     }
 }

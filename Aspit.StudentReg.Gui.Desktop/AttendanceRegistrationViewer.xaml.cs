@@ -23,6 +23,7 @@ namespace Aspit.StudentReg.Gui.Desktop
         public AttendanceRegistrationViewer()
         {
             InitializeComponent();
+            CheckInOutDate.DisplayDateEnd = DateTime.Now;
         }
 
         private void RegistrationDate_Changed(object sender, SelectionChangedEventArgs e)
@@ -42,6 +43,7 @@ namespace Aspit.StudentReg.Gui.Desktop
             if(CheckInOutDate.SelectedDate is null)
             {
                 ErrorLabel.Content = "Dagen er ikke valgt";
+                return;
             }
             if(!MeetingTimePicker.IsValidTime)
             {

@@ -17,6 +17,9 @@
     <StatusBar DockPanel.Dock="Bottom">
       <StatusBarItem Content="" />
     </StatusBar>
-    <local:StudentViewer x:Name="StudentView"/>
+    <Grid>
+      <local:StudentViewer x:Name="StudentViewerControl"/>
+      <local:StudentRegistrationsViewer x:Name="RegistrationsViewerControl" Visibility="Collapsed"/>
+    </Grid>
   </DockPanel>
 </Window>

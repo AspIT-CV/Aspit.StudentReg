@@ -23,12 +23,12 @@ namespace Aspit.StudentReg.Gui.Desktop
     public partial class MainWindow: Window
     {
         /// <summary>
-        /// Repository for students
+        /// Repository for <see cref="Student"/>s
         /// </summary>
         private StudentsRepository studentsRepository;
 
         /// <summary>
-        /// Repository for students
+        /// Repository for <see cref="AttendanceRegistration"/>s
         /// </summary>
         private AttendanceRegistrationsRepository registrationsRepository;
 
@@ -49,7 +49,7 @@ namespace Aspit.StudentReg.Gui.Desktop
             {
                 studentsRepository = new StudentsRepository(RepositoryBase.RetrieveConnectionString());
                 registrationsRepository = new AttendanceRegistrationsRepository(RepositoryBase.RetrieveConnectionString());
-                StudentView.Intialize(studentsRepository);
+                StudentViewerControl.Intialize(studentsRepository);
             }
             catch
             {

@@ -1,4 +1,4 @@
-﻿<UserControl x:Class="Aspit.StudentReg.Gui.Desktop.StudentRegistrationViewer"
+﻿<UserControl x:Class="Aspit.StudentReg.Gui.Desktop.StudentRegistrationsViewer"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
@@ -10,7 +10,7 @@
   <DockPanel>
     <DockPanel DockPanel.Dock="Top">
       <Button Content="&lt;-- Tilbage" Margin="5" />
-      <Label Content="[NAVN]s tidsregistreringer:" FontSize="25" HorizontalContentAlignment="Center"/>
+      <Label Content="[NAVN]s tidsregistreringer:" FontSize="25" HorizontalContentAlignment="Center" x:Name="StudentsNameLabel"/>
     </DockPanel>
     <Grid DockPanel.Dock="Top">
       <Grid.ColumnDefinitions>
@@ -18,7 +18,7 @@
         <ColumnDefinition Width="2*" />
       </Grid.ColumnDefinitions>
       <GroupBox Grid.Column="0" Header="Tidsregistreringer" Margin="5">
-        <DataGrid Margin="5"/>
+        <DataGrid Margin="5" x:Name="RegistrationDataGrid"/>
       </GroupBox>
       <local:AttendanceRegistrationViewer Grid.Column="1"/>
     </Grid>

@@ -43,10 +43,12 @@ namespace Aspit.StudentReg.Gui.Desktop
         /// <summary>
         /// Intializes this StudentViewer's items
         /// </summary>
-        public void Intialize(StudentsRepository repository)
+        public StudentViewer Intialize(StudentsRepository repository)
         {
             studentsRepository = repository;
             UpdateStudentList();
+
+            return this;
         }
 
         /// <summary>
@@ -67,7 +69,11 @@ namespace Aspit.StudentReg.Gui.Desktop
                                                Navn,
                                                UniLogin
                                            });
-            StudentDataGrid.Columns[0].Visibility = Visibility.Collapsed;
+
+            if(StudentDataGrid.Columns.Count != 0)
+            {
+                StudentDataGrid.Columns[0].Visibility = Visibility.Collapsed;
+            }
         }
 
         /// <summary>

@@ -95,7 +95,7 @@ namespace Aspit.StudentReg.DataAccess
             }
             else
             {
-                return DateRowsIntoRegistrations(getOutput.Tables[0].Rows);
+                return DataRowsIntoRegistrations(getOutput.Tables[0].Rows);
             }
         }
 
@@ -116,7 +116,7 @@ namespace Aspit.StudentReg.DataAccess
             }
             else
             {
-                List<AttendanceRegistration> registrations = DateRowsIntoRegistrations(getOutput.Tables[0].Rows);
+                List<AttendanceRegistration> registrations = DataRowsIntoRegistrations(getOutput.Tables[0].Rows);
                 if(registrations.Count != 1)
                 {
                     throw new DataAccessException("Failed to get an AttendanceRegistration with the given id");
@@ -150,7 +150,7 @@ namespace Aspit.StudentReg.DataAccess
             }
             else
             {
-                return DateRowsIntoRegistrations(getOutput.Tables[0].Rows);
+                return DataRowsIntoRegistrations(getOutput.Tables[0].Rows);
             }
         }
 
@@ -159,7 +159,7 @@ namespace Aspit.StudentReg.DataAccess
         /// </summary>
         /// <param name="dataRows">The <see cref="DataRowCollection"/> to convert into AttendanceRegistration list</param>
         /// <returns>A list of all the AttendanceRegistrations made from the dataRows</returns>
-        private static List<AttendanceRegistration> DateRowsIntoRegistrations(DataRowCollection dataRows)
+        private static List<AttendanceRegistration> DataRowsIntoRegistrations(DataRowCollection dataRows)
         {
             if(dataRows is null)
             {
@@ -183,7 +183,7 @@ namespace Aspit.StudentReg.DataAccess
                         registration.MeetingTime = row.Field<DateTime>("MeetingTime");
                         registration.LeavingTime = row.Field<DateTime>("LeavingTime");
                     }
-                    catch(InvalidCastException e)
+                    catch(Exception e)
                     {
                         throw new DataAccessException("Failed to convert table row into the needed AttendanceRegistration properties", e);
                     }

@@ -40,13 +40,13 @@
               <RowDefinition Height="1*" />
             </Grid.RowDefinitions>
             <Label Content="Navn:" Grid.Column="0" Grid.Row="0" HorizontalAlignment="Right" VerticalAlignment="Center" />
-            <TextBox Grid.Column="1" Grid.Row="0" MaxHeight="50" VerticalContentAlignment="Center" Margin="5"/>
-            <Label Content="UniLogin:" Grid.Column="0" Grid.Row="1" HorizontalAlignment="Right" VerticalAlignment="Center" />
+            <TextBox Grid.Column="1" Grid.Row="0" MaxHeight="50" VerticalContentAlignment="Center" Margin="5" x:Name="NameTextBox"/>
+            <Label Content="UniLogin:" Grid.Column="0" Grid.Row="1" HorizontalAlignment="Right" VerticalAlignment="Center" x:Name="UniLoginTextBox"/>
             <TextBox Grid.Column="1" Grid.Row="1" MaxHeight="50" VerticalContentAlignment="Center" Margin="5"/>
-            <Label Content="Tidsregistreringer:" Grid.Column="0" Grid.Row="2" HorizontalAlignment="Right" VerticalAlignment="Center" />
+            <Label Content="Tidsregistreringer:" Grid.Column="0" Grid.Row="2" HorizontalAlignment="Right" VerticalAlignment="Center" x:Name="ShowRegistrationsButton" />
             <Button Content="Se tidsregistreringer" Grid.Column="1" Grid.Row="2" MaxHeight="50" Margin="5" />
             <DockPanel Grid.Column="1" Grid.Row="4" LastChildFill="False">
-              <Button Content="Gem" DockPanel.Dock="Right" MaxHeight="50" Margin="5" Width="100" />
+              <Button Content="Gem" DockPanel.Dock="Right" MaxHeight="50" Margin="5" Width="100" x:Name="SaveButton"/>
               <Button Content="Tilføj ny elev" DockPanel.Dock="Right" MaxHeight="50" Margin="5" Width="150" />
             </DockPanel>
           </Grid>

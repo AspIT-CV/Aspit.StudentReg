@@ -101,16 +101,27 @@ namespace Aspit.StudentReg.Entities
         {
             get
             {
-                if(DateTime.Equals(leavingTime, default) || DateTime.Equals(meetingTime, default))
+                if(DateTime.Equals(leavingTime, default) && DateTime.Equals(meetingTime, default))
                 {
-                    throw new InvalidOperationException("Couldn't calculate Date from LeavingTime and MeetingTime.");
+                    throw new InvalidOperationException("Couldn't calculate Date from LeavingTime and MeetingTime because they are both default.");
+                }
+                if(leavingTime == default)
+                {
+                    return leavingTime.Date;
+                }
+                else if(meetingTime == default)
+                {
+                    return meetingTime.Date;
                 }
                 if(LeavingTime.Date != meetingTime.Date)
                 {
                     throw new InvalidOperationException("Couldn't get date from LeavingTime and MeetingTime since they are 2 different dates.");
                 }
+                else
+                {
+                    return meetingTime.Date;
+                }
 
-                return meetingTime.Date;
             }
         }
 

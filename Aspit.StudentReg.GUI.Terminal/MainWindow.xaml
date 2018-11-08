@@ -5,9 +5,20 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Aspit.StudentReg.GUI.Terminal"
         mc:Ignorable="d"
-        Title="MainWindow" Height="350" Width="525"
-        WindowStyle="None" ResizeMode="NoResize"  
+        Title="MainWindow"
+         
         WindowStartupLocation="CenterScreen" WindowState="Maximized">
+    <Window.Resources>
+
+        <Style TargetType="{x:Type Control}" x:Key="baseStyle">
+            <Setter Property="FontSize" Value="25" />
+        </Style>
+        <Style TargetType="{x:Type Button}" BasedOn="{StaticResource baseStyle}"></Style>
+        <Style TargetType="{x:Type Label}" BasedOn="{StaticResource baseStyle}"></Style>
+        <Style TargetType="{x:Type TextBox}" BasedOn="{StaticResource baseStyle}"></Style>
+        <Style TargetType="{x:Type ListBox}" BasedOn="{StaticResource baseStyle}"></Style>
+    </Window.Resources>
+    
     <Grid>
         <UserControl x:Name="contentUserControl"/>
     </Grid>

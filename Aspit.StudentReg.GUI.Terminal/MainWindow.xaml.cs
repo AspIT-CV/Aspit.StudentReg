@@ -23,7 +23,7 @@ namespace Aspit.StudentReg.GUI.Terminal
         public MainWindow()
         {
             InitializeComponent();
-            contentUserControl.Content = new CheckedInUserControl();
+            contentUserControl.Content = new StartScreenUserControl(this);
         }
     }
 }

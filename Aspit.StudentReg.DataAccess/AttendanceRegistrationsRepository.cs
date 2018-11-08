@@ -166,7 +166,7 @@ namespace Aspit.StudentReg.DataAccess
                 throw new ArgumentNullException("datarows cannot be null.");
             }
 
-            if(dataRows.Count < 0)
+            if(dataRows.Count < 1)
             {
                 return new List<AttendanceRegistration>();
             }

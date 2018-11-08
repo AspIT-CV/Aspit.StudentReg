@@ -20,22 +20,34 @@ namespace Aspit.StudentReg.Gui.Desktop
     /// </summary>
     public partial class AttendanceRegistrationViewer: UserControl
     {
+        /// <summary>
+        /// Intializes a new <see cref="AttendanceRegistrationViewer"/>
+        /// </summary>
         public AttendanceRegistrationViewer()
         {
             InitializeComponent();
             CheckInOutDate.DisplayDateEnd = DateTime.Now;
         }
 
+        /// <summary>
+        /// Invoked when the day datepicker's date selection has changed
+        /// </summary>
         private void RegistrationDate_Changed(object sender, SelectionChangedEventArgs e)
         {
             ValidateInformation();
         }
 
+        /// <summary>
+        /// Invoked when any one of the timepicker's time has changed
+        /// </summary>
         private void RegistrationInformation_Changed(object sender, TextChangedEventArgs e)
         {
             ValidateInformation();
         }
 
+        /// <summary>
+        /// Validates the information in this AttendanceRegistrationViewer
+        /// </summary>
         private void ValidateInformation()
         {
             SaveButton.IsEnabled = false;

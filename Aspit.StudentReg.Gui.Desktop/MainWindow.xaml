@@ -8,15 +8,15 @@
         Title="Elever og tidsregistrering"
         Height="900"
         WindowState="Maximized"
-        Width="1600">
+        Width="1600"
+        Loaded="Window_Loaded">
   <Grid>
     <Grid.ColumnDefinitions>
       <ColumnDefinition Width="1*"/>
       <ColumnDefinition Width="2*" />
     </Grid.ColumnDefinitions>
     <GroupBox Grid.Column="0" Header="Elever" Margin="5" >
-      <DataGrid Margin="5" />
+      <DataGrid AlternatingRowBackground="Silver" RowHeight="20" Margin="5" x:Name="StudentDataGrid"/>
     </GroupBox>
-    <local:AttendanceRegistrationViewer Grid.Column="1"/>
   </Grid>
 </Window>

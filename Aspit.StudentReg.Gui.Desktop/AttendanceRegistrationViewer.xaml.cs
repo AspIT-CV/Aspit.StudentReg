@@ -135,7 +135,7 @@ namespace Aspit.StudentReg.Gui.Desktop
 
             if(CheckInOutDate.SelectedDate is null)
             {
-                ErrorLabel.Content = "Dagen er ikke valgt";
+                ErrorLabel.Content = "Der er ikke valgt nogen dag.";
                 return;
             }
             if(!MeetingTimePicker.IsValidTime)

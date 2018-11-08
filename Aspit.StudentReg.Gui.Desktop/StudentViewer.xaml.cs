@@ -47,6 +47,7 @@ namespace Aspit.StudentReg.Gui.Desktop
         {
             studentsRepository = repository;
             UpdateStudentList();
+            EnableEditing(false);
 
             return this;
         }
@@ -81,7 +82,33 @@ namespace Aspit.StudentReg.Gui.Desktop
         /// </summary>
         private void StudentDateGrid_Changed(object sender, SelectionChangedEventArgs e)
         {
+            if(StudentDataGrid.SelectedIndex != -1)
+            {
+                EnableEditing(true);
+                //Student selectedStudent = StudentDataGrid.ItemsSource
+            }
+            else
+            {
+                EnableEditing(false);
+            }
+        }
 
+        /// <summary>
+        /// Enables all text boxes and such so you can change information for the student
+        /// </summary>
+        /// <param name="enable">If the UI should be enabled or disabled</param>
+        /// <param name="enableForNew">If the UI for time registrations should be changed too</param>
+        private void EnableEditing(bool enable, bool enableForNew = false)
+        {
+            NameTextBox.IsEnabled = enable;
+            UniLoginTextBox.IsEnabled = enable;
+            SaveButton.IsEnabled = false;
+
+            if(!enableForNew || !enable)
+            {
+                ShowRegistrationsButton.IsEnabled = enable;
+                RegistrationInformationViewer.IsEnabled = enable;
+            }
         }
     }
 }

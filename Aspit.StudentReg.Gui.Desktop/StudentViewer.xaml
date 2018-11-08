@@ -51,7 +51,7 @@
             </DockPanel>
           </Grid>
         </GroupBox>
-        <local:AttendanceRegistrationViewer Grid.Column="1" Grid.Row="1" IsEnabled="False" />
+        <local:AttendanceRegistrationViewer Grid.Column="1" Grid.Row="1" IsEnabled="False" x:Name="RegistrationInformationViewer"/>
       </Grid>
     </GroupBox>
   </Grid>

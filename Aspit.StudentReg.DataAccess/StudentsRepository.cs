@@ -124,10 +124,10 @@ namespace Aspit.StudentReg.DataAccess
                 }
             }
         }
-        private void CheckIn(Student student)
+        public void CheckIn(Student student)
         {
             AttendanceRegistrationsRepository attendanceRegistrationsRepository = new AttendanceRegistrationsRepository(RepositoryBase.RetrieveConnectionString());
-            StudentsRepository studentsRepository = new StudentsRepository(RepositoryBase.RetrieveConnectionString());
+            
 
             AttendanceRegistration registration = new AttendanceRegistration
             {
@@ -136,7 +136,7 @@ namespace Aspit.StudentReg.DataAccess
 
             student.AttendanceRegistrations = registration;
             attendanceRegistrationsRepository.CreateRegistration(student);
-            studentsRepository.UpdateStudent(student);
+            UpdateStudent(student);
         }
 
 

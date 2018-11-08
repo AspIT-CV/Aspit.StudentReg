@@ -28,7 +28,8 @@ namespace Aspit.StudentReg.GUI.Terminal
             parent = parentArg;
             InitializeComponent();
             mainTextBlock.Text = "Du blev checket ind " + student.Name;
-
+            StudentsRepository studentsRepository = new StudentsRepository(RepositoryBase.RetrieveConnectionString());
+            studentsRepository.CheckIn(student);
             goBackToStart(); 
         }
 

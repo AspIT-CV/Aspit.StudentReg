@@ -29,6 +29,7 @@ namespace Aspit.StudentReg.GUI.Terminal
             parent = parentArg;
             InitializeComponent();
             StudentsRepository studentsRepository = new StudentsRepository(RepositoryBase.RetrieveConnectionString());
+            StudentListbox.DisplayMemberPath = Name;
             StudentListbox.ItemsSource = studentsRepository.GetAll();
         }
 

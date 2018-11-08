@@ -124,13 +124,28 @@ namespace Aspit.StudentReg.DataAccess
                 }
             }
         }
+        private void CheckIn(Student student)
+        {
+            AttendanceRegistrationsRepository attendanceRegistrationsRepository = new AttendanceRegistrationsRepository(RepositoryBase.RetrieveConnectionString());
+            StudentsRepository studentsRepository = new StudentsRepository(RepositoryBase.RetrieveConnectionString());
 
-            /// <summary>
-            /// Takes a <see cref="DataRowCollection"/> and converts all its rows into Students
-            /// </summary>
-            /// <param name="dataRows">The <see cref="DataRowCollection"/> to convert into Students list</param>
-            /// <returns>A list of all the Students made from the dataRows</returns>
-            private static List<Student> ConvertDateRowsIntoStudents(DataRowCollection dataRows)
+            AttendanceRegistration registration = new AttendanceRegistration
+            {
+                MeetingTime = DateTime.Now
+            };
+
+            student.AttendanceRegistrations = registration;
+            attendanceRegistrationsRepository.CreateRegistration(student);
+            studentsRepository.UpdateStudent(student);
+        }
+
+
+        /// <summary>
+        /// Takes a <see cref="DataRowCollection"/> and converts all its rows into Students
+        /// </summary>
+        /// <param name="dataRows">The <see cref="DataRowCollection"/> to convert into Students list</param>
+        /// <returns>A list of all the Students made from the dataRows</returns>
+        private static List<Student> ConvertDateRowsIntoStudents(DataRowCollection dataRows)
             {
                 if (dataRows is null)
                 {

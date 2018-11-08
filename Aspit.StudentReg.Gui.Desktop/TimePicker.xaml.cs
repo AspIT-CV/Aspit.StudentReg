@@ -16,13 +16,100 @@ using System.Windows.Shapes;
 namespace Aspit.StudentReg.Gui.Desktop
 {
     /// <summary>
-    /// Interaction logic for UserControl1.xaml
+    /// Interaction logic for TimePicker.xaml
     /// </summary>
     public partial class TimePicker: UserControl
     {
         public TimePicker()
         {
             InitializeComponent();
+        }
+
+        /// <summary>
+        /// Gets invoked everytime a textbox in this TimePicker changes
+        /// </summary>
+        public TextChangedEventHandler TimeChanged { get; set; }
+
+        /// <summary>
+        /// This TimePicker contains a valid time if true
+        /// </summary>
+        public bool IsRealTime
+        {
+            get
+            {
+                return (!string.IsNullOrEmpty(HoursTextBox.Text)
+                    && !string.IsNullOrEmpty(MinutesTextBox.Text)
+                    && !string.IsNullOrEmpty(SecondsTextBox.Text));
+            }
+        }
+
+        /// <summary>
+        /// Returns the time chosen in this TimePicker
+        /// </summary>
+        public TimeSpan Time
+        {
+            get
+            {
+                if(IsRealTime)
+                {
+                    return new TimeSpan(
+                        Convert.ToInt32(HoursTextBox.Text), 
+                        Convert.ToInt32(MinutesTextBox.Text), 
+                        Convert.ToInt32(SecondsTextBox.Text));
+                }
+                else
+                {
+                    throw new InvalidOperationException("TimePicker doesnt contain a valid time");
+                }
+            }
+        }
+
+        /// <summary>
+        /// Gets invoked when HoursTextBox text changed
+        /// </summary>
+        private void HoursTextBox_Changed(object sender, TextChangedEventArgs e)
+        {
+            OnlyAcceptNumberBox(HoursTextBox,23);
+            TimeChanged?.Invoke(this, null);
+        }
+
+        /// <summary>
+        /// Gets invoked when MinutesTextBox text changed
+        /// </summary>
+        private void MinutesTextBox_Changed(object sender, TextChangedEventArgs e)
+        {
+            OnlyAcceptNumberBox(MinutesTextBox, 59);
+            TimeChanged?.Invoke(this, null);
+        }
+
+        /// <summary>
+        /// Gets invoked when SecondsTextBox text changed
+        /// </summary>
+        private void SecondsTextBox_Changed(object sender, TextChangedEventArgs e)
+        {
+            OnlyAcceptNumberBox(SecondsTextBox, 59);
+            TimeChanged?.Invoke(this, null);
+        }
+
+        /// <summary>
+        /// Removes all none numbers from a textbox and makes sure the number isnt too high
+        /// </summary>
+        /// <param name="textBox">The textbox to change</param>
+        /// <param name="maximumValue">The maximum number the textbox can contain</param>
+        private static void OnlyAcceptNumberBox(TextBox textBox, int maximumValue)
+        {
+            List<char> numbers = textBox.Text.ToCharArray().ToList();
+            numbers.RemoveAll((letter) => !char.IsNumber(letter));
+            if(numbers.Count >= 1)
+            {
+                int Number = Convert.ToInt32(string.Concat(numbers));
+                textBox.Text = Math.Min(Number, maximumValue).ToString();
+                textBox.CaretIndex = textBox.Text.Length;
+            }
+            else
+            {
+                textBox.Text = "";
+            }
         }
     }
 }

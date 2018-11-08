@@ -41,7 +41,7 @@ namespace Aspit.StudentReg.Gui.Desktop
         /// <summary>
         /// This TimePicker contains a valid time if true
         /// </summary>
-        public bool IsRealTime
+        public bool IsValidTime
         {
             get
             {
@@ -58,7 +58,7 @@ namespace Aspit.StudentReg.Gui.Desktop
         {
             get
             {
-                if(IsRealTime)
+                if(IsValidTime)
                 {
                     return new TimeSpan(
                         Convert.ToInt32(HoursTextBox.Text), 

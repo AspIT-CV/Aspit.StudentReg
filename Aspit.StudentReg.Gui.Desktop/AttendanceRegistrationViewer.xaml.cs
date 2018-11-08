@@ -24,5 +24,44 @@ namespace Aspit.StudentReg.Gui.Desktop
         {
             InitializeComponent();
         }
+
+        private void RegistrationDate_Changed(object sender, SelectionChangedEventArgs e)
+        {
+            ValidateInformation();
+        }
+
+        private void RegistrationInformation_Changed(object sender, TextChangedEventArgs e)
+        {
+            ValidateInformation();
+        }
+
+        private void ValidateInformation()
+        {
+            SaveButton.IsEnabled = false;
+
+            if(CheckInOutDate.SelectedDate is null)
+            {
+                ErrorLabel.Content = "Dagen er ikke valgt";
+            }
+            if(!MeetingTimePicker.IsValidTime)
+            {
+                ErrorLabel.Content = "Tjekind tidspunktet er tomt.";
+                return;
+            }
+            if (!LeavingTimePicker.IsValidTime)
+            {
+                ErrorLabel.Content = "Tjekud tidspunktet er tomt.";
+                return;
+            }
+            if(MeetingTimePicker.Time >= LeavingTimePicker.Time)
+            {
+                ErrorLabel.Content = "Tjekind tidspunktet kan ikke være efter tjekud";
+                return;
+            }
+
+            InformationLabel.Content = "Tid i alt: " + (LeavingTimePicker.Time - MeetingTimePicker.Time);
+            ErrorLabel.Content = "";
+            SaveButton.IsEnabled = true;
+        }
     }
 }

@@ -22,7 +22,7 @@
 
   <ItemGroup>
     <Reference Include="System.Configuration">
-      <HintPath>..\..\System.Configuration.dll</HintPath>
+      <HintPath>bin\Debug\System.Configuration.dll</HintPath>
     </Reference>
   </ItemGroup>
 

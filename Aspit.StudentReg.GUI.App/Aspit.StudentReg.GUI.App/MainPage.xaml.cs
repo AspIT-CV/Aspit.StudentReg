@@ -14,16 +14,10 @@ namespace Aspit.StudentReg.GUI.App
         public MainPage()
         {
             InitializeComponent();
-            this.Title = "Hej, hvem er du?";
 
-            StudentsRepository StudentsRepository = new StudentsRepository(RepositoryBase.RetrieveConnectionString());
-            
-            StudentView.ItemsSource = StudentsRepository.GetAll();
-        }
+            DisplayAlert("Alert1", "You have been alerted", "OK");
 
-        private async void Button_Clicked(object sender, EventArgs e)
-        {
-            await Navigation.PushAsync(new User());
+            /*StudentView.ItemsSource = StudentsRepository.GetAll();*/
         }
     }
 }

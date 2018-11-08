@@ -96,6 +96,11 @@ namespace Aspit.StudentReg.DataAccess
             }
         }
 
+        public string test()
+        {
+            return "Dette er en data test";
+        }
+
         /// <summary>
         /// Gets the AttendanceRegistration with the given id
         /// </summary>

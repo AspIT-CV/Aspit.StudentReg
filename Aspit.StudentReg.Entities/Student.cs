@@ -92,5 +92,10 @@ namespace Aspit.StudentReg.Entities
 
             return true;
         }
+
+        public override string ToString()
+        {
+            return Name;
+        }
     }
 }

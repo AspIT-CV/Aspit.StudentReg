@@ -58,10 +58,6 @@ namespace Aspit.StudentReg.Entities
 
             set
             {
-                if(DateTime.Equals(value, default))
-                {
-                    throw new ArgumentNullException("MeetingTime cannot be default");
-                }
                 if(value > DateTime.Now)
                 {
                     throw new ArgumentException("MeetingTime cannot be in the future.");
@@ -82,10 +78,6 @@ namespace Aspit.StudentReg.Entities
 
             set
             {
-                if(DateTime.Equals(value, default))
-                {
-                    throw new ArgumentNullException("LeavingTime cannot be default");
-                }
                 if(value > DateTime.Now)
                 {
                     throw new ArgumentException("LeavingTime cannot be in the future.");

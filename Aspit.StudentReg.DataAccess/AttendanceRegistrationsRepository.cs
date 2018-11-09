@@ -36,9 +36,10 @@ namespace Aspit.StudentReg.DataAccess
             }
 
             SqlCommand updateCommand = new SqlCommand("UPDATE AttendanceRegistrations SET MeetingTime=@MeetingTime,LeavingTime=@LeavingTime,Date=@Date");
-            updateCommand.Parameters.AddWithValue("@MeetingTime", attendanceRegistration.MeetingTime);
-            updateCommand.Parameters.AddWithValue("@LeavingTime", attendanceRegistration.LeavingTime);
-            updateCommand.Parameters.AddWithValue("@Date", attendanceRegistration.Date);
+            updateCommand.Parameters.Add("@MeetingTime", SqlDbType.DateTime2).Value = attendanceRegistration.MeetingTime;
+            updateCommand.Parameters.Add("@LeavingTime", SqlDbType.DateTime2).Value = attendanceRegistration.LeavingTime;
+            updateCommand.Parameters.Add("@Date", SqlDbType.DateTime2).Value = attendanceRegistration.Date;
+
 
             Execute(updateCommand);
         }
@@ -60,9 +61,9 @@ namespace Aspit.StudentReg.DataAccess
 
             SqlCommand createCommand = new SqlCommand("INSERT INTO AttendanceRegistrations (UsersKey,MeetingTime,LeavingTime,Date) OUTPUT inserted.Id VALUES (@UsersKey,@MeetingTime,@LeavingTime,@Date)");
             createCommand.Parameters.AddWithValue("@UsersKey", student.Id);
-            createCommand.Parameters.AddWithValue("@MeetingTime", student.AttendanceRegistrations.MeetingTime);
-            createCommand.Parameters.AddWithValue("@LeavingTime", student.AttendanceRegistrations.LeavingTime);
-            createCommand.Parameters.AddWithValue("@Date", student.AttendanceRegistrations.Date);
+            createCommand.Parameters.Add("@MeetingTime", SqlDbType.DateTime2).Value = student.AttendanceRegistrations.MeetingTime;
+            createCommand.Parameters.Add("@LeavingTime", SqlDbType.DateTime2).Value = student.AttendanceRegistrations.LeavingTime;
+            createCommand.Parameters.Add("@Date", SqlDbType.DateTime2).Value = student.AttendanceRegistrations.Date;
 
             DataSet output = Execute(createCommand);
             if(output.Tables.Count < 1 || output.Tables[0].Rows.Count < 1)

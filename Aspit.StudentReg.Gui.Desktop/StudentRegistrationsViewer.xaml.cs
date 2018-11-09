@@ -23,6 +23,11 @@ namespace Aspit.StudentReg.Gui.Desktop
     public partial class StudentRegistrationsViewer: UserControl
     {
         /// <summary>
+        /// Repository for <see cref="Student"/>s
+        /// </summary>
+        private StudentsRepository studentsRepository;
+
+        /// <summary>
         /// Repository for <see cref="AttendanceRegistration"/>s
         /// </summary>
         AttendanceRegistrationsRepository registrationsRepository;
@@ -37,8 +42,6 @@ namespace Aspit.StudentReg.Gui.Desktop
         /// </summary>
         private Student showingStudent;
 
-        public RoutedEventHandler GoBack{get; set; }
-
         /// <summary>
         /// Intializes a new <see cref="StudentRegistrationsViewer"/>
         /// </summary>
@@ -48,12 +51,18 @@ namespace Aspit.StudentReg.Gui.Desktop
         }
 
         /// <summary>
+        /// Invoke when the page should change to the StudentViewer
+        /// </summary>
+        public RoutedEventHandler GoBack{get; set; }
+
+        /// <summary>
         /// Intializes this StudentRegistrationsViewer with the given parameters
         /// </summary>
         /// <param name="repository">The repository used to get data</param>
         /// <param name="student">The student to get <see cref="AttendanceRegistration"/>s from</param>
-        public StudentRegistrationsViewer Intialize(AttendanceRegistrationsRepository repository, Student student)
+        public StudentRegistrationsViewer Intialize(AttendanceRegistrationsRepository repository, StudentsRepository studentsRepository, Student student)
         {
+            this.studentsRepository = studentsRepository;
             registrationsRepository = repository;
             showingStudent = student;
             UpdateRegistrationDataGrid();
@@ -71,8 +80,8 @@ namespace Aspit.StudentReg.Gui.Desktop
             RegistrationDataGrid.ItemsSource = (from registration in registrations
                                                 let Id = registration.Id
                                                 let Dato = $"{registration.Date.Day}/{registration.Date.Month}/{registration.Date.Year}"
-                                                let Tjekind = registration.MeetingTime == default ? "-" : registration.MeetingTime.TimeOfDay.ToString()
-                                                let Tjekud = registration.LeavingTime == default ? "-" : registration.LeavingTime.TimeOfDay.ToString()
+                                                let Tjekind = DateTime.Equals(registration.MeetingTime, default) ? "-" : registration.MeetingTime.TimeOfDay.ToString()
+                                                let Tjekud = DateTime.Equals(registration.MeetingTime, default) ? "-" : registration.LeavingTime.TimeOfDay.ToString()
                                                 select new
                                                 {
                                                     Id,
@@ -87,9 +96,44 @@ namespace Aspit.StudentReg.Gui.Desktop
             }
         }
 
+        /// <summary>
+        /// Invoked when the back button is clicked
+        /// </summary>
         private void BackButton_Clicked(object sender, RoutedEventArgs e)
         {
             GoBack?.Invoke(sender, e);
+        }
+
+        /// <summary>
+        /// Invoked when the RegistrationsDataGrid selection changed
+        /// </summary>
+        private void RegistrationDataGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if(RegistrationDataGrid.SelectedIndex != -1)
+            {
+                RegistrationViewerControl.IsEnabled = true;
+                RegistrationViewerControl.AttendanceRegistration = registrations[RegistrationDataGrid.SelectedIndex];
+            }
+            else
+            {
+                RegistrationViewerControl.IsEnabled = false;
+            }
+        }
+
+        private void SaveButton_Clicked(object sender, RoutedEventArgs e)
+        {
+            if(!showingStudent.AttendanceRegistrations.IsDefault() && showingStudent.AttendanceRegistrations.Id == RegistrationViewerControl.AttendanceRegistration.Id)
+            {
+                if(RegistrationViewerControl.AttendanceRegistration.LeavingTime != default)
+                {
+                    showingStudent.AttendanceRegistrations = default;
+                    studentsRepository.UpdateStudent(showingStudent);
+                }
+            }
+
+            registrationsRepository.Update(RegistrationViewerControl.AttendanceRegistration);
+            UpdateRegistrationDataGrid();
+            RegistrationDataGrid.SelectedIndex = -1;
         }
     }
 }

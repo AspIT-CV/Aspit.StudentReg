@@ -74,9 +74,12 @@ namespace Aspit.StudentReg.Gui.Desktop
         {
             StudentViewerControl.Visibility = Visibility.Collapsed;
             RegistrationsViewerControl.Visibility = Visibility.Visible;
-            RegistrationsViewerControl.Intialize(registrationsRepository, sender as Student);
+            RegistrationsViewerControl.Intialize(registrationsRepository, studentsRepository, sender as Student);
         }
 
+        /// <summary>
+        /// Gets invoked when RegistrationsViewer wants to change the page to the StudentViewer
+        /// </summary>
         private void GoToStudentScreen_Clicked(object sender, RoutedEventArgs e)
         {
             StudentViewerControl.Visibility = Visibility.Visible;

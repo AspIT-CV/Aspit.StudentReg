@@ -18,9 +18,9 @@
         <ColumnDefinition Width="2*" />
       </Grid.ColumnDefinitions>
       <GroupBox Grid.Column="0" Header="Tidsregistreringer" Margin="5">
-        <DataGrid Margin="5" x:Name="RegistrationDataGrid"/>
+        <DataGrid Margin="5" x:Name="RegistrationDataGrid" SelectionChanged="RegistrationDataGrid_SelectionChanged"/>
       </GroupBox>
-      <local:AttendanceRegistrationViewer Grid.Column="1" IsEnabled="False" NewButtonVisible="False"/>
+      <local:AttendanceRegistrationViewer Grid.Column="1" IsEnabled="False" NewButtonVisible="False" SaveButtonClicked="SaveButton_Clicked" x:Name="RegistrationViewerControl"/>
     </Grid>
   </DockPanel>
 </UserControl>

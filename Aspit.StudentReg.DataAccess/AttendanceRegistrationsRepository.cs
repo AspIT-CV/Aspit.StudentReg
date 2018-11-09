@@ -35,11 +35,11 @@ namespace Aspit.StudentReg.DataAccess
                 throw new ArgumentException("attendanceRegistration cannot be default value");
             }
 
-            SqlCommand updateCommand = new SqlCommand("UPDATE AttendanceRegistrations SET MeetingTime=@MeetingTime,LeavingTime=@LeavingTime,Date=@Date");
+            SqlCommand updateCommand = new SqlCommand("UPDATE AttendanceRegistrations SET MeetingTime=@MeetingTime,LeavingTime=@LeavingTime,Date=@Date WHERE Id=@Id");
             updateCommand.Parameters.Add("@MeetingTime", SqlDbType.DateTime2).Value = attendanceRegistration.MeetingTime;
             updateCommand.Parameters.Add("@LeavingTime", SqlDbType.DateTime2).Value = attendanceRegistration.LeavingTime;
             updateCommand.Parameters.Add("@Date", SqlDbType.DateTime2).Value = attendanceRegistration.Date;
-
+            updateCommand.Parameters.AddWithValue("@Id", attendanceRegistration.Id);
 
             Execute(updateCommand);
         }

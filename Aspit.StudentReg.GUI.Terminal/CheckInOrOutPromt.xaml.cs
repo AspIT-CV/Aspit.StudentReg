@@ -23,14 +23,18 @@ namespace Aspit.StudentReg.GUI.Terminal
     public partial class CheckInOrOutPromt : UserControl
     {
         private MainWindow parent;
-        public CheckInOrOutPromt(Student student, MainWindow parentArg)
+        StudentsRepository studentsRepository;
+        Student student;
+        public CheckInOrOutPromt(Student studentarg, MainWindow parentArg)
         {
             parent = parentArg;
+            student = studentarg;
             InitializeComponent();
-            StudentsRepository studentsRepository = new StudentsRepository(RepositoryBase.RetrieveConnectionString());
+            studentsRepository = new StudentsRepository(RepositoryBase.RetrieveConnectionString());
             
 
             TopLine.Text = "Hej " + student.Name + "!";
+            
 
             if (studentsRepository.IsCheckedIn(student))
             {
@@ -39,16 +43,19 @@ namespace Aspit.StudentReg.GUI.Terminal
                 {
                     //Student has checked in today
                     OnlyShowCheckOut();
+                    UnderTopLine.Text = "Vi ses!";
 
                 } else
                 {
                     //Student has not checked in today
                     OnlyShowCheckIn();
+                    UnderTopLine.Text = "Du glemte at checke ud sidste gang!";
                 }
             } else
             {
                 //Student is currently checked out
                 OnlyShowCheckIn();
+                UnderTopLine.Text = "Velkommen tilbage!";
             }
         }
 
@@ -59,12 +66,14 @@ namespace Aspit.StudentReg.GUI.Terminal
 
         private void CheckOut_Click(object sender, RoutedEventArgs e)
         {
-            
+            studentsRepository.CheckIn(student, DateTime.Now);
+            parent.Content = new CheckedInUserControl(student, parent, true);
         }
 
         private void CheckIn_Click(object sender, RoutedEventArgs e)
         {
-
+            studentsRepository.CheckOut(student, DateTime.Now);
+            parent.Content = new CheckedInUserControl(student, parent, false);
         }
 
         private void OnlyShowCheckOut()

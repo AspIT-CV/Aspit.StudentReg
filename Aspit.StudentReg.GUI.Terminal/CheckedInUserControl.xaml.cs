@@ -23,13 +23,20 @@ namespace Aspit.StudentReg.GUI.Terminal
     public partial class CheckedInUserControl : UserControl
     {
         private MainWindow parent;
-        public CheckedInUserControl(Student student, MainWindow parentArg)
+        public CheckedInUserControl(Student student, MainWindow parentArg, bool checkIn)
         {
             parent = parentArg;
             InitializeComponent();
-            mainTextBlock.Text = "Du blev checket ind " + student.Name;
-            StudentsRepository studentsRepository = new StudentsRepository(RepositoryBase.RetrieveConnectionString());
-            studentsRepository.CheckIn(student, DateTime.Now);
+
+            if (checkIn)
+            {
+                mainTextBlock.Text = "Du blev checket ind " + student.Name;
+                this.Background = new BrushConverter().ConvertFromString("#27ae60") as SolidColorBrush;
+            } else
+            {
+                mainTextBlock.Text = "Du blev checket ud " + student.Name;
+                this.Background = new BrushConverter().ConvertFromString("#c0392b") as SolidColorBrush;
+            }           
             goBackToStart(); 
         }
 

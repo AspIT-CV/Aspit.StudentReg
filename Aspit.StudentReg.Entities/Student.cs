@@ -46,21 +46,8 @@ namespace Aspit.StudentReg.Entities
 
             set
             {
-                //Check if value is null
-                if (value is null)
-                {
-                    throw new ArgumentNullException("Unilogin cannot be null");
-                }
-
-                //Trim whitespace
+                ValidateUniLogin(value);
                 value = value.Trim();
-
-                //Check if value is a correct unilogin format
-                Regex reg = new Regex(@"^[a-x]{4}[a-x0-9]{4}$");
-                if (!reg.IsMatch(value))
-                {
-                    throw new ArgumentException("Unilogin is invalid");
-                }
                 uniLogin = value;
             }
         }
@@ -81,5 +68,29 @@ namespace Aspit.StudentReg.Entities
             }
         }
 
+        /// <summary>
+        /// Tests if a uniLogin string is valid
+        /// </summary>
+        /// <param name="uniLogin">The uniLogin in test</param>
+        /// <returns>true if the uniLogin is valid, throws error if false</returns>
+        public static bool ValidateUniLogin(string uniLogin)
+        {
+            if(uniLogin is null)
+            {
+                throw new ArgumentNullException("Unilogin cannot be null");
+            }
+
+            //Trim whitespace
+            uniLogin = uniLogin.Trim();
+
+            //Check if value is a correct unilogin format
+            Regex reg = new Regex(@"^[a-x]{4}[a-x0-9]{4}$");
+            if(!reg.IsMatch(uniLogin))
+            {
+                throw new ArgumentException("Unilogin is invalid");
+            }
+
+            return true;
+        }
     }
 }

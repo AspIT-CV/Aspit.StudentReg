@@ -153,6 +153,33 @@ namespace Aspit.StudentReg.DataAccess
             UpdateStudent(student);
         }
 
+        public void CheckOut(Student student, DateTime time)
+        {
+            AttendanceRegistrationsRepository attendanceRegistrationsRepository = new AttendanceRegistrationsRepository(RepositoryBase.RetrieveConnectionString());
+
+
+            if (IsCheckedIn(student))
+            {
+                AttendanceRegistration registration = new AttendanceRegistration
+                {
+                    Id = student.AttendanceRegistrations.Id,
+                    MeetingTime = student.AttendanceRegistrations.MeetingTime,
+                    LeavingTime = time,
+                };
+                attendanceRegistrationsRepository.Update(registration);
+            } else
+            {
+                AttendanceRegistration registration = new AttendanceRegistration
+                {
+                    LeavingTime = time,
+                };
+                student.AttendanceRegistrations = registration;
+                attendanceRegistrationsRepository.CreateRegistration(student);
+            }
+
+            student.AttendanceRegistrations = default;
+            UpdateStudent(student);
+        }
 
         /// <summary>
         /// Takes a <see cref="DataRowCollection"/> and converts all its rows into Students

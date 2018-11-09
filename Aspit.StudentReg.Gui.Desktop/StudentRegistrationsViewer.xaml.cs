@@ -120,6 +120,9 @@ namespace Aspit.StudentReg.Gui.Desktop
             }
         }
 
+        /// <summary>
+        /// Invoked when the save button is clicked
+        /// </summary>
         private void SaveButton_Clicked(object sender, RoutedEventArgs e)
         {
             if(!showingStudent.AttendanceRegistrations.IsDefault() && showingStudent.AttendanceRegistrations.Id == RegistrationViewerControl.AttendanceRegistration.Id)

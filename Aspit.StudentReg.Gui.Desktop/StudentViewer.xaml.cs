@@ -28,6 +28,11 @@ namespace Aspit.StudentReg.Gui.Desktop
         private StudentsRepository studentsRepository;
 
         /// <summary>
+        /// Repository for <see cref="AttendanceRegistration"/>s
+        /// </summary>
+        AttendanceRegistrationsRepository registrationsRepository;
+
+        /// <summary>
         /// A list of all students
         /// </summary>
         private List<Student> students;
@@ -43,8 +48,9 @@ namespace Aspit.StudentReg.Gui.Desktop
         /// <summary>
         /// Intializes this StudentViewer's items
         /// </summary>
-        public StudentViewer Intialize(StudentsRepository repository)
+        public StudentViewer Intialize(StudentsRepository repository, AttendanceRegistrationsRepository registrationRepository)
         {
+            registrationsRepository = registrationRepository;
             studentsRepository = repository;
             UpdateStudentList();
             EnableEditing(false);
@@ -59,22 +65,15 @@ namespace Aspit.StudentReg.Gui.Desktop
         {
             students = studentsRepository.GetAll();
             StudentDataGrid.ItemsSource = (from student in students
-                                           let Id = student.Id
                                            let Navn = student.Name
                                            let UniLogin = student.UniLogin
                                            let Status = (student.AttendanceRegistrations.IsDefault()) ? "Væk" : "Her"
                                            select new
                                            {
-                                               Id,
                                                Status,
                                                Navn,
                                                UniLogin
                                            });
-
-            if(StudentDataGrid.Columns.Count != 0)
-            {
-                StudentDataGrid.Columns[0].Visibility = Visibility.Collapsed;
-            }
         }
 
         /// <summary>
@@ -85,7 +84,17 @@ namespace Aspit.StudentReg.Gui.Desktop
             if(StudentDataGrid.SelectedIndex != -1)
             {
                 EnableEditing(true);
-                //Student selectedStudent = StudentDataGrid.ItemsSource
+                Student selectedStudent = students[StudentDataGrid.SelectedIndex];
+                if(selectedStudent.AttendanceRegistrations.IsDefault())
+                {
+                    RegistrationInformationViewer.AttendanceRegistration = default;
+                }
+                else
+                {
+                    RegistrationInformationViewer.AttendanceRegistration = registrationsRepository.GetFromId(selectedStudent.AttendanceRegistrations.Id);
+                }
+                NameTextBox.Text = selectedStudent.Name;
+                UniLoginTextBox.Text = selectedStudent.UniLogin;
             }
             else
             {

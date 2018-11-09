@@ -80,8 +80,8 @@ namespace Aspit.StudentReg.Gui.Desktop
             RegistrationDataGrid.ItemsSource = (from registration in registrations
                                                 let Id = registration.Id
                                                 let Dato = $"{registration.Date.Day}/{registration.Date.Month}/{registration.Date.Year}"
-                                                let Tjekind = DateTime.Equals(registration.MeetingTime, default) ? "-" : registration.MeetingTime.TimeOfDay.ToString()
-                                                let Tjekud = DateTime.Equals(registration.MeetingTime, default) ? "-" : registration.LeavingTime.TimeOfDay.ToString()
+                                                let Tjekind = registration.MeetingTime.TimeOfDay == default ? "-" : registration.MeetingTime.TimeOfDay.ToString()
+                                                let Tjekud = registration.LeavingTime.TimeOfDay == default ? "-" : registration.LeavingTime.TimeOfDay.ToString()
                                                 select new
                                                 {
                                                     Id,
@@ -124,7 +124,7 @@ namespace Aspit.StudentReg.Gui.Desktop
         {
             if(!showingStudent.AttendanceRegistrations.IsDefault() && showingStudent.AttendanceRegistrations.Id == RegistrationViewerControl.AttendanceRegistration.Id)
             {
-                if(RegistrationViewerControl.AttendanceRegistration.LeavingTime != default)
+                if(RegistrationViewerControl.AttendanceRegistration.LeavingTime.TimeOfDay != default)
                 {
                     showingStudent.AttendanceRegistrations = default;
                     studentsRepository.UpdateStudent(showingStudent);

@@ -158,6 +158,14 @@ namespace Aspit.StudentReg.Gui.Desktop
             {
                 ErrorLabel.Content = "Tjekind tidspunktet kan ikke være efter tjekud";
             }
+            else if(CheckInOutDate.SelectedDate + MeetingTimePicker.Time > DateTime.Now)
+            {
+                ErrorLabel.Content = "Tjekind tidspunktet kan ikke være i fremtiden";
+            }
+            else if(CheckInOutDate.SelectedDate + LeavingTimePicker.Time > DateTime.Now)
+            {
+                ErrorLabel.Content = "Tjekud tidspunktet kan ikke være i fremtiden";
+            }
             else
             {
                 if(MeetingTimePicker.Time != default && LeavingTimePicker.Time != default)

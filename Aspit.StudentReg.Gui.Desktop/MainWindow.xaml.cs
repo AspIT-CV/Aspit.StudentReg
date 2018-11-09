@@ -49,7 +49,7 @@ namespace Aspit.StudentReg.Gui.Desktop
             {
                 studentsRepository = new StudentsRepository(RepositoryBase.RetrieveConnectionString());
                 registrationsRepository = new AttendanceRegistrationsRepository(RepositoryBase.RetrieveConnectionString());
-                StudentViewerControl.Intialize(studentsRepository);
+                StudentViewerControl.Intialize(studentsRepository, registrationsRepository);
             }
             catch
             {

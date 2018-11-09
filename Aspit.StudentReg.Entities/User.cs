@@ -65,24 +65,30 @@ namespace Aspit.StudentReg.Entities
 
             set
             {
-                //Check if value is null
-                if(value is null)
-                {
-                    throw new ArgumentNullException("Name cannot be null");
-                }
-
-                //Trim whitespace
+                ValidateName(value);
                 value = value.Trim();
-
-                //Check if value only consits of letters and whitespace
-                Regex reg = new Regex(@"^([a-zA-Z ]+)$");
-                if (!reg.IsMatch(value))
-                {
-                    throw new ArgumentException("Name is invalid");
-                }
-                //Make the first letter of each word uppercase
                 name = System.Globalization.CultureInfo.CurrentCulture.TextInfo.ToTitleCase(value.ToLower());
             }
+        }
+
+        public static bool ValidateName(string name)
+        {
+            if(name is null)
+            {
+                throw new ArgumentNullException("Name cannot be null");
+            }
+
+            //Trim whitespace
+            name = name.Trim();
+
+            //Check if value only consits of letters and whitespace
+            Regex reg = new Regex(@"^([a-zA-Z ]+)$");
+            if(!reg.IsMatch(name))
+            {
+                throw new ArgumentException("Name is invalid");
+            }
+
+            return true;
         }
     }
 }

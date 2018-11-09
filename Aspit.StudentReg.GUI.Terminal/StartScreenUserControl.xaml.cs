@@ -36,7 +36,7 @@ namespace Aspit.StudentReg.GUI.Terminal
         private void StudentListbox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             Student student = StudentListbox.SelectedItem as Student;
-            parent.Content = new CheckedInUserControl(student, parent);
+            parent.Content = new CheckInOrOutPromt(student, parent);
         }
     }
 }

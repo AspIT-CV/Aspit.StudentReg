@@ -73,7 +73,7 @@ namespace Aspit.StudentReg.Entities
 
         public static bool ValidateName(string name)
         {
-            if(name is null)
+            if(string.IsNullOrWhiteSpace(name))
             {
                 throw new ArgumentNullException("Name cannot be null");
             }

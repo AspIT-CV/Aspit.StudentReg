@@ -109,15 +109,63 @@ namespace Aspit.StudentReg.Gui.Desktop
         /// <param name="enableForNew">If the UI for time registrations should be changed too</param>
         private void EnableEditing(bool enable, bool enableForNew = false)
         {
+            SaveButton.IsEnabled = false;
+            NameTextBox.Text = "";
+            UniLoginTextBox.Text = "";
+
             NameTextBox.IsEnabled = enable;
             UniLoginTextBox.IsEnabled = enable;
-            SaveButton.IsEnabled = false;
 
             if(!enableForNew || !enable)
             {
                 ShowRegistrationsButton.IsEnabled = enable;
                 RegistrationInformationViewer.IsEnabled = enable;
             }
+        }
+
+        private void StudentInformation_Changed(object sender, TextChangedEventArgs e)
+        {
+            ValidateInformation();
+        }
+
+        private void ValidateInformation()
+        {
+            try
+            {
+                Student.ValidateName(NameTextBox.Text);
+            }
+            catch(ArgumentNullException)
+            {
+                ErrorLabel.Content = "Navnet må ikke være ingenting.";
+                SaveButton.IsEnabled = false;
+                return;
+            }
+            catch(ArgumentException)
+            {
+                ErrorLabel.Content = "Navnet kan kun indeholde bogstaver.";
+                SaveButton.IsEnabled = false;
+                return;
+            }
+
+            try
+            {
+                Student.ValidateUniLogin(UniLoginTextBox.Text);
+            }
+            catch(ArgumentNullException)
+            {
+                ErrorLabel.Content = "Unilogin må ikke være ingenting.";
+                SaveButton.IsEnabled = false;
+                return;
+            }
+            catch(ArgumentException)
+            {
+                ErrorLabel.Content = "Unilogin er ugyldigt.";
+                SaveButton.IsEnabled = false;
+                return;
+            }
+
+            ErrorLabel.Content = "";
+            SaveButton.IsEnabled = true;
         }
     }
 }

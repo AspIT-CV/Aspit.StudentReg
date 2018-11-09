@@ -51,6 +51,11 @@ namespace Aspit.StudentReg.Gui.Desktop
         }
 
         /// <summary>
+        /// Invoke when page to should change to registrations
+        /// </summary>
+        public RoutedEventHandler GoToViewScreen { get; set; }
+
+        /// <summary>
         /// Intializes this StudentViewer's items
         /// </summary>
         public StudentViewer Intialize(StudentsRepository repository, AttendanceRegistrationsRepository registrationRepository)
@@ -222,6 +227,34 @@ namespace Aspit.StudentReg.Gui.Desktop
             selectedStudent = null;
             StudentDataGrid.SelectedIndex = -1;
             EnableEditing(true,true);
+        }
+
+        /// <summary>
+        /// Invoked when the AttendanceRegistration-usercontrol's button has been clicked
+        /// </summary>
+        private void RegistrationSaveButton_Clicked(object sender, RoutedEventArgs e)
+        {
+            selectedStudent.AttendanceRegistrations = RegistrationInformationViewer.AttendanceRegistration;
+            if(RegistrationInformationViewer.IsNew)
+            {
+                registrationsRepository.CreateRegistration(selectedStudent);
+                studentsRepository.UpdateStudent(selectedStudent);
+            }
+            else
+            {
+                registrationsRepository.Update(selectedStudent.AttendanceRegistrations);
+            }
+
+            UpdateStudentList();
+            EnableEditing(false);
+        }
+
+        /// <summary>
+        /// Invoked when the show registrations button has been clicked
+        /// </summary>
+        private void ShowRegistrationsButton_Clicked(object sender, RoutedEventArgs e)
+        {
+            GoToViewScreen?.Invoke(selectedStudent, null);
         }
     }
 }

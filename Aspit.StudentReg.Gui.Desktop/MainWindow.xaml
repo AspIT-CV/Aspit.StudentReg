@@ -18,7 +18,7 @@
       <StatusBarItem Content="" />
     </StatusBar>
     <Grid>
-      <local:StudentViewer x:Name="StudentViewerControl"/>
+      <local:StudentViewer x:Name="StudentViewerControl" GoToViewScreen="GoToViewScreen_Clicked"/>
       <local:StudentRegistrationsViewer x:Name="RegistrationsViewerControl" Visibility="Collapsed"/>
     </Grid>
   </DockPanel>

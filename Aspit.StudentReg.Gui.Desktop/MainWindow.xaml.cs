@@ -65,5 +65,16 @@ namespace Aspit.StudentReg.Gui.Desktop
                 }
             }
         }
+
+        /// <summary>
+        /// Gets invoked when StudentViewer wants to change the page to the RegistrationsViewer
+        /// </summary>
+        /// <param name="sender">the student whose registrations should be viewed</param>
+        private void GoToViewScreen_Clicked(object sender, RoutedEventArgs e)
+        {
+            StudentViewerControl.Visibility = Visibility.Collapsed;
+            RegistrationsViewerControl.Visibility = Visibility.Visible;
+            RegistrationsViewerControl.Intialize(registrationsRepository, sender as Student);
+        }
     }
 }

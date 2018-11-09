@@ -45,9 +45,25 @@ namespace Aspit.StudentReg.Gui.Desktop
         {
             get
             {
-                return (!string.IsNullOrEmpty(HoursTextBox.Text)
+                if(!string.IsNullOrEmpty(HoursTextBox.Text)
                     && !string.IsNullOrEmpty(MinutesTextBox.Text)
-                    && !string.IsNullOrEmpty(SecondsTextBox.Text));
+                    && !string.IsNullOrEmpty(SecondsTextBox.Text))
+                {
+                    return true;
+                }
+                else
+                {
+                    if(string.IsNullOrEmpty(HoursTextBox.Text)
+                        && string.IsNullOrEmpty(MinutesTextBox.Text)
+                        && string.IsNullOrEmpty(SecondsTextBox.Text))
+                    {
+                        return true;
+                    }
+                    else
+                    {
+                        return false;
+                    }
+                }
             }
         }
 
@@ -60,10 +76,19 @@ namespace Aspit.StudentReg.Gui.Desktop
             {
                 if(IsValidTime)
                 {
-                    return new TimeSpan(
-                        Convert.ToInt32(HoursTextBox.Text), 
-                        Convert.ToInt32(MinutesTextBox.Text), 
-                        Convert.ToInt32(SecondsTextBox.Text));
+                    if(string.IsNullOrEmpty(HoursTextBox.Text)
+                        && string.IsNullOrEmpty(MinutesTextBox.Text)
+                        && string.IsNullOrEmpty(SecondsTextBox.Text))
+                    {
+                        return default;
+                    }
+                    else
+                    {
+                        return new TimeSpan(
+                            Convert.ToInt32(HoursTextBox.Text),
+                            Convert.ToInt32(MinutesTextBox.Text),
+                            Convert.ToInt32(SecondsTextBox.Text));
+                    }
                 }
                 else
                 {

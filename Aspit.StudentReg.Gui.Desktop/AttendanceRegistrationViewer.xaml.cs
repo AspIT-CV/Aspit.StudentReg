@@ -105,6 +105,12 @@ namespace Aspit.StudentReg.Gui.Desktop
         }
 
         /// <summary>
+        /// Choses if this registration shouldnt warn if nothing is selected
+        /// </summary>
+        public bool NoWarnIfNull { get; set; }
+
+
+        /// <summary>
         /// Invoked when the save button is clicked
         /// </summary>
         public RoutedEventHandler SaveButtonClicked{ get; set; }
@@ -131,32 +137,43 @@ namespace Aspit.StudentReg.Gui.Desktop
         private void ValidateInformation()
         {
             SaveButton.IsEnabled = false;
-            InformationLabel.Content = "";
+            InformationLabel.Content = "Tid i alt: -";
 
             if(CheckInOutDate.SelectedDate is null)
             {
                 ErrorLabel.Content = "Der er ikke valgt nogen dag.";
-                return;
             }
-            if(!MeetingTimePicker.IsValidTime)
+            else if((!MeetingTimePicker.IsValidTime || MeetingTimePicker.Time == default) && (!LeavingTimePicker.IsValidTime || LeavingTimePicker.Time == default))
             {
-                ErrorLabel.Content = "Tjekind tidspunktet er tomt.";
-                return;
+                ErrorLabel.Content = "Tjekind og tjekud tidspunkterne må ikke begge være tomme.";
             }
-            if (!LeavingTimePicker.IsValidTime)
+            else if(!MeetingTimePicker.IsValidTime)
             {
-                ErrorLabel.Content = "Tjekud tidspunktet er tomt.";
-                return;
+                ErrorLabel.Content = "Tjekind tidspunktet er ugyldigt.";
             }
-            if(MeetingTimePicker.Time >= LeavingTimePicker.Time)
+            else if(!LeavingTimePicker.IsValidTime)
+            {
+                ErrorLabel.Content = "Tjekud tidspunktet er ugyldigt.";
+            }
+            else if(MeetingTimePicker.Time != default && LeavingTimePicker.Time != default && MeetingTimePicker.Time >= LeavingTimePicker.Time)
             {
                 ErrorLabel.Content = "Tjekind tidspunktet kan ikke være efter tjekud";
-                return;
+            }
+            else
+            {
+                if(MeetingTimePicker.Time != default && LeavingTimePicker.Time != default)
+                {
+                    InformationLabel.Content = "Tid i alt: " + (LeavingTimePicker.Time - MeetingTimePicker.Time);
+                }
+
+                ErrorLabel.Content = "";
+                SaveButton.IsEnabled = true;
             }
 
-            InformationLabel.Content = "Tid i alt: " + (LeavingTimePicker.Time - MeetingTimePicker.Time);
-            ErrorLabel.Content = "";
-            SaveButton.IsEnabled = true;
+            if(NoWarnIfNull && LeavingTimePicker.IsValidTime && LeavingTimePicker.Time == default && MeetingTimePicker.IsValidTime && MeetingTimePicker.Time == default)
+            {
+                ErrorLabel.Content = "";
+            }
         }
 
         /// <summary>

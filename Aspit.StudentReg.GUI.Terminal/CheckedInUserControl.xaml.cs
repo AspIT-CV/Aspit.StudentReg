@@ -29,7 +29,7 @@ namespace Aspit.StudentReg.GUI.Terminal
             InitializeComponent();
             mainTextBlock.Text = "Du blev checket ind " + student.Name;
             StudentsRepository studentsRepository = new StudentsRepository(RepositoryBase.RetrieveConnectionString());
-            studentsRepository.CheckIn(student);
+            studentsRepository.CheckIn(student, DateTime.Now);
             goBackToStart(); 
         }
 

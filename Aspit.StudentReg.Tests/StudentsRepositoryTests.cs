@@ -41,6 +41,22 @@ namespace Aspit.StudentReg.Tests
         }
 
         [TestMethod()]
+        public void CheckedIn()
+        {
+            StudentsRepository repository = CreateRepository();
+            Student student = new Student(0, "bla", "blax2345");
+
+            repository.CreateStudent(student);
+
+            Assert.AreEqual(repository.IsCheckedIn(student), false);
+
+            repository.CheckIn(student, DateTime.Now);
+
+            Assert.AreEqual(repository.IsCheckedIn(student), true);
+
+        }
+
+        [TestMethod()]
         public void UpdateTest()
         {
             StudentsRepository repository = CreateRepository();

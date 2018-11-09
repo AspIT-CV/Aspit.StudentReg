@@ -19,7 +19,7 @@
     </StatusBar>
     <Grid>
       <local:StudentViewer x:Name="StudentViewerControl" GoToViewScreen="GoToViewScreen_Clicked"/>
-      <local:StudentRegistrationsViewer x:Name="RegistrationsViewerControl" Visibility="Collapsed"/>
+      <local:StudentRegistrationsViewer x:Name="RegistrationsViewerControl" Visibility="Collapsed" GoBack="GoToStudentScreen_Clicked"/>
     </Grid>
   </DockPanel>
 </Window>

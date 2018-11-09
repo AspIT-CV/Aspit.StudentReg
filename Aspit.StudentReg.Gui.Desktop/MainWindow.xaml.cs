@@ -76,5 +76,12 @@ namespace Aspit.StudentReg.Gui.Desktop
             RegistrationsViewerControl.Visibility = Visibility.Visible;
             RegistrationsViewerControl.Intialize(registrationsRepository, sender as Student);
         }
+
+        private void GoToStudentScreen_Clicked(object sender, RoutedEventArgs e)
+        {
+            StudentViewerControl.Visibility = Visibility.Visible;
+            RegistrationsViewerControl.Visibility = Visibility.Collapsed;
+            StudentViewerControl.Intialize(studentsRepository, registrationsRepository);
+        }
     }
 }

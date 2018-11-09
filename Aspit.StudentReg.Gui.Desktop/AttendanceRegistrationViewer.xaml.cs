@@ -30,7 +30,6 @@ namespace Aspit.StudentReg.Gui.Desktop
         {
             InitializeComponent();
             CheckInOutDate.DisplayDateEnd = DateTime.Now;
-            ValidateInformation();
         }
 
         /// <summary>

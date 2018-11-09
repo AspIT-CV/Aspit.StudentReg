@@ -37,6 +37,8 @@ namespace Aspit.StudentReg.Gui.Desktop
         /// </summary>
         private Student showingStudent;
 
+        public RoutedEventHandler GoBack{get; set; }
+
         /// <summary>
         /// Intializes a new <see cref="StudentRegistrationsViewer"/>
         /// </summary>
@@ -55,7 +57,7 @@ namespace Aspit.StudentReg.Gui.Desktop
             registrationsRepository = repository;
             showingStudent = student;
             UpdateRegistrationDataGrid();
-            StudentsNameLabel.Content = student.Name + "s (" + student.UniLogin + ") tidsregistreringer:";
+            StudentsNameLabel.Content = "(" + student.UniLogin + ") " + student.Name + "s tidsregistreringer:";
 
             return this;
         }
@@ -83,6 +85,11 @@ namespace Aspit.StudentReg.Gui.Desktop
             {
                 RegistrationDataGrid.Columns[0].Visibility = Visibility.Collapsed;
             }
+        }
+
+        private void BackButton_Clicked(object sender, RoutedEventArgs e)
+        {
+            GoBack?.Invoke(sender, e);
         }
     }
 }

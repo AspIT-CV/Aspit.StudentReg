@@ -60,6 +60,7 @@ namespace Aspit.StudentReg.Gui.Desktop
         /// </summary>
         public StudentViewer Intialize(StudentsRepository repository, AttendanceRegistrationsRepository registrationRepository)
         {
+            StudentDataGrid.SelectedIndex = -1;
             registrationsRepository = registrationRepository;
             studentsRepository = repository;
             UpdateStudentList();

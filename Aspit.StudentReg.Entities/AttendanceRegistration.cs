@@ -53,7 +53,7 @@ namespace Aspit.StudentReg.Entities
         {
             get
             {
-                return meetingTime;
+                return new DateTime(meetingTime.Ticks / 10000000 * 10000000);
             }
 
             set
@@ -73,7 +73,7 @@ namespace Aspit.StudentReg.Entities
         {
             get
             {
-                return leavingTime;
+                return new DateTime(leavingTime.Ticks / 10000000 * 10000000);
             }
 
             set
@@ -82,7 +82,7 @@ namespace Aspit.StudentReg.Entities
                 {
                     throw new ArgumentException("LeavingTime cannot be in the future.");
                 }
-                leavingTime = value;
+                leavingTime = new DateTime(value.Ticks / 1000000 * 1000000);
             }
         }
 

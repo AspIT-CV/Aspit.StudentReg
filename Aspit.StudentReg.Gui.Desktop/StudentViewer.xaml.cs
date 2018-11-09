@@ -244,6 +244,11 @@ namespace Aspit.StudentReg.Gui.Desktop
             else
             {
                 registrationsRepository.Update(selectedStudent.AttendanceRegistrations);
+                if(selectedStudent.AttendanceRegistrations.LeavingTime.TimeOfDay != default)
+                {
+                    selectedStudent.AttendanceRegistrations = default;
+                    studentsRepository.UpdateStudent(selectedStudent);
+                }
             }
 
             UpdateStudentList();

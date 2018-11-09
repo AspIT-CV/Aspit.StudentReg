@@ -138,7 +138,7 @@ namespace Aspit.StudentReg.DataAccess
             }
         }
 
-        public void CheckIn(Student student)
+        public void CheckIn(Student student, DateTime time)
         {
             AttendanceRegistrationsRepository attendanceRegistrationsRepository = new AttendanceRegistrationsRepository(RepositoryBase.RetrieveConnectionString());
             

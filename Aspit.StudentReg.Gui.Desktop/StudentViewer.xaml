@@ -44,12 +44,13 @@
             <TextBox Grid.Column="1" Grid.Row="0" MaxHeight="50" VerticalContentAlignment="Center" Margin="5" x:Name="NameTextBox" TextChanged="StudentInformation_Changed" />
             <Label Content="UniLogin:" Grid.Column="0" Grid.Row="1" HorizontalAlignment="Right" VerticalAlignment="Center"/>
             <TextBox Grid.Column="1" Grid.Row="1" MaxHeight="50" VerticalContentAlignment="Center" Margin="5" x:Name="UniLoginTextBox" TextChanged="StudentInformation_Changed" />
-            <Label Content="Tidsregistreringer:" Grid.Column="0" Grid.Row="2" HorizontalAlignment="Right" VerticalAlignment="Center" x:Name="ShowRegistrationsButton" />
-            <Button Content="Se tidsregistreringer" Grid.Column="1" Grid.Row="2" MaxHeight="50" Margin="5" />
+            <Label Content="Tidsregistreringer:" Grid.Column="0" Grid.Row="2" HorizontalAlignment="Right" VerticalAlignment="Center" />
+            <Button Content="Se tidsregistreringer" Grid.Column="1" Grid.Row="2" MaxHeight="50" Margin="5" x:Name="ShowRegistrationsButton" />
             <Label Foreground="Red" Grid.Column="1" Grid.Row="3" x:Name="ErrorLabel"/>
             <DockPanel Grid.Column="1" Grid.Row="5" LastChildFill="False">
-              <Button Content="Gem" DockPanel.Dock="Right" MaxHeight="50" Margin="5" Width="100" x:Name="SaveButton"/>
-              <Button Content="Tilføj ny elev" DockPanel.Dock="Right" MaxHeight="50" Margin="5" Width="150" />
+              <Button Content="Gem" DockPanel.Dock="Right" MaxHeight="50" Margin="5" Width="100" x:Name="SaveButton" Click="SaveButton_Clicked" />
+              <Button Content="Tilføj ny elev" DockPanel.Dock="Right" MaxHeight="50" Margin="5" Width="150"
+                                    Click="CreateNewButton_Clicked" />
             </DockPanel>
           </Grid>
         </GroupBox>

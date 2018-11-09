@@ -124,6 +124,20 @@ namespace Aspit.StudentReg.DataAccess
                 }
             }
         }
+
+
+        public bool IsCheckedIn(Student student)
+        {
+            if (student.AttendanceRegistrations.IsDefault())
+            {
+                return false;
+            }
+            else
+            {
+                return true;
+            }
+        }
+
         public void CheckIn(Student student)
         {
             AttendanceRegistrationsRepository attendanceRegistrationsRepository = new AttendanceRegistrationsRepository(RepositoryBase.RetrieveConnectionString());

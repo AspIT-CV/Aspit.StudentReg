@@ -75,7 +75,7 @@ namespace Aspit.StudentReg.Entities
         /// <returns>true if the uniLogin is valid, throws error if false</returns>
         public static bool ValidateUniLogin(string uniLogin)
         {
-            if(uniLogin is null)
+            if(string.IsNullOrWhiteSpace(uniLogin))
             {
                 throw new ArgumentNullException("Unilogin cannot be null");
             }

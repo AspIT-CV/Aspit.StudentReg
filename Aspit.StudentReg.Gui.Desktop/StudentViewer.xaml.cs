@@ -38,6 +38,11 @@ namespace Aspit.StudentReg.Gui.Desktop
         private List<Student> students;
 
         /// <summary>
+        /// The student the user is editing
+        /// </summary>
+        private Student selectedStudent;
+
+        /// <summary>
         /// Intializes a new <see cref="StudentViewer"/>
         /// </summary>
         public StudentViewer()
@@ -84,7 +89,8 @@ namespace Aspit.StudentReg.Gui.Desktop
             if(StudentDataGrid.SelectedIndex != -1)
             {
                 EnableEditing(true);
-                Student selectedStudent = students[StudentDataGrid.SelectedIndex];
+
+                selectedStudent = students[StudentDataGrid.SelectedIndex];
                 if(selectedStudent.AttendanceRegistrations.IsDefault())
                 {
                     RegistrationInformationViewer.AttendanceRegistration = default;
@@ -109,15 +115,113 @@ namespace Aspit.StudentReg.Gui.Desktop
         /// <param name="enableForNew">If the UI for time registrations should be changed too</param>
         private void EnableEditing(bool enable, bool enableForNew = false)
         {
+            SaveButton.IsEnabled = false;
+            NameTextBox.Text = "";
+            UniLoginTextBox.Text = "";
+
             NameTextBox.IsEnabled = enable;
             UniLoginTextBox.IsEnabled = enable;
-            SaveButton.IsEnabled = false;
 
             if(!enableForNew || !enable)
             {
                 ShowRegistrationsButton.IsEnabled = enable;
                 RegistrationInformationViewer.IsEnabled = enable;
             }
+
+            ValidateInformation();
+            if(!enable)
+            {
+                ErrorLabel.Content = "";
+            }
+        }
+
+        /// <summary>
+        /// Invoked when any one of the information text boxes
+        /// </summary>
+        private void StudentInformation_Changed(object sender, TextChangedEventArgs e)
+        {
+            ValidateInformation();
+        }
+
+        /// <summary>
+        /// Validates the information in the text boxes
+        /// </summary>
+        private void ValidateInformation()
+        {
+            try
+            {
+                Student.ValidateName(NameTextBox.Text);
+            }
+            catch(ArgumentNullException)
+            {
+                ErrorLabel.Content = "Navnet må ikke være ingenting.";
+                SaveButton.IsEnabled = false;
+                return;
+            }
+            catch(ArgumentException)
+            {
+                ErrorLabel.Content = "Navnet kan kun indeholde bogstaver.";
+                SaveButton.IsEnabled = false;
+                return;
+            }
+
+            try
+            {
+                Student.ValidateUniLogin(UniLoginTextBox.Text);
+            }
+            catch(ArgumentNullException)
+            {
+                ErrorLabel.Content = "Unilogin må ikke være ingenting.";
+                SaveButton.IsEnabled = false;
+                return;
+            }
+            catch(ArgumentException)
+            {
+                ErrorLabel.Content = "Unilogin er ugyldigt.";
+                SaveButton.IsEnabled = false;
+                return;
+            }
+
+            ErrorLabel.Content = "";
+            SaveButton.IsEnabled = true;
+        }
+
+        /// <summary>
+        /// Invoked when the save button has been clicked - Saves/Creates the student
+        /// </summary>
+        private void SaveButton_Clicked(object sender, RoutedEventArgs e)
+        {
+            bool isNewStudent = false;
+            if(selectedStudent == null)
+            {
+                selectedStudent = new Student(0,"newStudent","news1234");
+                isNewStudent = true;
+            }
+
+            selectedStudent.Name = NameTextBox.Text;
+            selectedStudent.UniLogin = UniLoginTextBox.Text;
+
+            if(isNewStudent)
+            {
+                studentsRepository.CreateStudent(selectedStudent);
+            }
+            else
+            {
+                studentsRepository.UpdateStudent(selectedStudent);
+            }
+
+            UpdateStudentList();
+            EnableEditing(false);
+        }
+
+        /// <summary>
+        /// Invoked when the create new student button has been clicked
+        /// </summary>
+        private void CreateNewButton_Clicked(object sender, RoutedEventArgs e)
+        {
+            selectedStudent = null;
+            StudentDataGrid.SelectedIndex = -1;
+            EnableEditing(true,true);
         }
     }
 }

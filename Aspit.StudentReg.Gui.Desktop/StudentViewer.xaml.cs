@@ -139,7 +139,7 @@ namespace Aspit.StudentReg.Gui.Desktop
                 }
                 else
                 {
-                    RegistrationInformationViewer.AttendanceRegistration = registrationsRepository.GetFromId(selectedStudent.AttendanceRegistrations.Id);
+                    RegistrationInformationViewer.AttendanceRegistration = selectedStudent.AttendanceRegistrations;
                 }
                 NameTextBox.Text = selectedStudent.Name;
                 UniLoginTextBox.Text = selectedStudent.UniLogin;

@@ -24,7 +24,7 @@
           <Button Content="Søg" DockPanel.Dock="Right" Margin="5" Width="50" Click="SearchButton_Clicked" />
           <TextBox DockPanel.Dock="Right" Margin="5" VerticalContentAlignment="Center" x:Name="SearchTextBox"/>
         </DockPanel>
-        <DataGrid AlternatingRowBackground="Silver" Grid.Row="1" Margin="5" RowHeight="20" SelectionMode="Single" x:Name="StudentDataGrid" SelectionChanged="StudentDateGrid_Changed" />
+        <ListBox Grid.Row="1" HorizontalContentAlignment="Stretch" Margin="5" SelectionMode="Single" x:Name="StudentsListBox" SelectionChanged="StudentsListBox_Changed" />
       </Grid>
     </GroupBox>
     <GroupBox Grid.Column="1" Header="Elev" Margin="5" >

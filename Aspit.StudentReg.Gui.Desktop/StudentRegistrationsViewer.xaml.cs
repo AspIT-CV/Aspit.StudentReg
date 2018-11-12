@@ -72,22 +72,51 @@ namespace Aspit.StudentReg.Gui.Desktop
         }
 
         /// <summary>
+        /// Creates a dockpanel showing information about an attendanceRegistration
+        /// </summary>
+        /// <param name="registration">The attendanceRegistration to show information for</param>
+        /// <returns>A dockpanel containing information about the attendanceRegistration</returns>
+        private static DockPanel RegistrationView(AttendanceRegistration registration)
+        {
+            DockPanel registrationDockPanel = new DockPanel() {LastChildFill = false };
+
+            if(registration.Date != DateTime.Now.Date && (registration.LeavingTime.TimeOfDay == default || registration.MeetingTime.TimeOfDay == default) )
+            {
+                registrationDockPanel.Background = Brushes.PaleVioletRed;
+            }
+
+            Label splitLine = new Label() { Height = 1, Background = Brushes.Black };
+            DockPanel.SetDock(splitLine, Dock.Bottom);
+            registrationDockPanel.Children.Add(splitLine);
+
+            Label date = new Label() { Margin = new Thickness(5, 0, 5, 0), Width = 100, Content = $"{registration.Date.Day}/{registration.Date.Month}/{registration.Date.Year} :" };
+            DockPanel.SetDock(date, Dock.Left);
+            registrationDockPanel.Children.Add(date);
+
+            Label meetingTime = new Label() { Margin = new Thickness(30, 0, 5, 0), Content = registration.MeetingTime.TimeOfDay.ToString() };
+            DockPanel.SetDock(meetingTime, Dock.Left);
+            registrationDockPanel.Children.Add(meetingTime);
+
+            Label leavingTime = new Label() { Margin = new Thickness(5, 0, 30, 0), Content = registration.LeavingTime.TimeOfDay.ToString() };
+            DockPanel.SetDock(leavingTime, Dock.Right);
+            registrationDockPanel.Children.Add(leavingTime);
+
+            return registrationDockPanel;
+        }
+
+        /// <summary>
         /// Updates the <see cref="AttendanceRegistration"/> data grid
         /// </summary>
-        public void UpdateRegistrationDataGrid()
+        private void UpdateRegistrationDataGrid()
         {
             registrations = registrationsRepository.GetUsersRegistrations(showingStudent);
             registrations.Sort(AttendanceRegistration.Compare);
-            RegistrationDataGrid.ItemsSource = (from registration in registrations
-                                                let Dato = $"{registration.Date.Day}/{registration.Date.Month}/{registration.Date.Year}"
-                                                let Tjekind = registration.MeetingTime.TimeOfDay == default ? "-" : registration.MeetingTime.TimeOfDay.ToString()
-                                                let Tjekud = registration.LeavingTime.TimeOfDay == default ? "-" : registration.LeavingTime.TimeOfDay.ToString()
-                                                select new
-                                                {
-                                                    Dato,
-                                                    Tjekind,
-                                                    Tjekud
-                                                });
+
+            RegistrationsListBox.Items.Clear();
+            foreach(AttendanceRegistration registration in registrations)
+            {
+                RegistrationsListBox.Items.Add(RegistrationView(registration));
+            }
         }
 
         /// <summary>
@@ -99,14 +128,14 @@ namespace Aspit.StudentReg.Gui.Desktop
         }
 
         /// <summary>
-        /// Invoked when the RegistrationsDataGrid selection changed
+        /// Invoked when the RegistrationsListBox selection changed
         /// </summary>
-        private void RegistrationDataGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private void RegistrationsListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            if(RegistrationDataGrid.SelectedIndex != -1)
+            if(RegistrationsListBox.SelectedIndex != -1)
             {
                 RegistrationViewerControl.IsEnabled = true;
-                RegistrationViewerControl.AttendanceRegistration = registrations[RegistrationDataGrid.SelectedIndex];
+                RegistrationViewerControl.AttendanceRegistration = registrations[RegistrationsListBox.SelectedIndex];
             }
             else
             {
@@ -130,7 +159,7 @@ namespace Aspit.StudentReg.Gui.Desktop
 
             registrationsRepository.Update(RegistrationViewerControl.AttendanceRegistration);
             UpdateRegistrationDataGrid();
-            RegistrationDataGrid.SelectedIndex = -1;
+            RegistrationsListBox.SelectedIndex = -1;
         }
     }
 }

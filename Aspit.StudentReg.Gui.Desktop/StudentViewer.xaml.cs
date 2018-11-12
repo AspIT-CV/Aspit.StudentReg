@@ -60,7 +60,7 @@ namespace Aspit.StudentReg.Gui.Desktop
         /// </summary>
         public StudentViewer Intialize(StudentsRepository repository, AttendanceRegistrationsRepository registrationRepository)
         {
-            StudentDataGrid.SelectedIndex = -1;
+            StudentsListBox.SelectedIndex = -1;
             registrationsRepository = registrationRepository;
             studentsRepository = repository;
             UpdateStudentList();
@@ -70,41 +70,69 @@ namespace Aspit.StudentReg.Gui.Desktop
         }
 
         /// <summary>
+        /// Creates a dockpanel showing information about a student
+        /// </summary>
+        /// <param name="student">The student to show information for</param>
+        /// <returns>A dockpanel containing information about the student</returns>
+        private static DockPanel StudentView(Student student)
+        {
+            DockPanel studentDockPanel = new DockPanel() {LastChildFill = false };
+
+            Label isHere = new Label() { Width = 20, Height = 20 };
+            if(student.AttendanceRegistrations.IsDefault())
+            {
+                isHere.Background = Brushes.Red;
+            }
+            else
+            {
+                isHere.Background = Brushes.Green;
+            }
+            DockPanel.SetDock(isHere, Dock.Left);
+            studentDockPanel.Children.Add(isHere);
+
+            Label name = new Label() {Content = student.Name };
+            DockPanel.SetDock(name, Dock.Left);
+            studentDockPanel.Children.Add(name);
+
+            Label uniLogin = new Label() { Content = student.UniLogin };
+            DockPanel.SetDock(uniLogin, Dock.Right);
+            studentDockPanel.Children.Add(uniLogin);
+
+            return studentDockPanel;
+        }
+
+        /// <summary>
         /// Updates the list of students
         /// </summary>
         private void UpdateStudentList(string searchString = "")
         {
             searchString = searchString.Trim().ToLower();
-            StudentDataGrid.SelectedIndex = -1;
+            StudentsListBox.SelectedIndex = -1;
             students = studentsRepository.GetAll();
 
             //remove students who aren't found in the search
             students.RemoveAll((student) => !(student.ToString().ToLower().Contains(searchString) || student.UniLogin.Contains(searchString)));
 
             students.Sort(Student.Compare);
-            StudentDataGrid.ItemsSource = (from student in students
-                                           let Navn = student.Name
-                                           let UniLogin = student.UniLogin
-                                           let Status = (student.AttendanceRegistrations.IsDefault()) ? "Væk" : "Her"
-                                           select new
-                                           {
-                                               Status,
-                                               Navn,
-                                               UniLogin
-                                           });
+
+            StudentsListBox.Items.Clear();
+            foreach(Student student in students)
+            {
+                StudentsListBox.Items.Add(StudentView(student));
+            }
         }
 
         /// <summary>
         /// Invoked when StudentDataGrid selection has changed
         /// Choses which student the controller is changing
         /// </summary>
-        private void StudentDateGrid_Changed(object sender, SelectionChangedEventArgs e)
+        private void StudentsListBox_Changed(object sender, SelectionChangedEventArgs e)
         {
-            if(StudentDataGrid.SelectedIndex != -1)
+            if(StudentsListBox.SelectedIndex != -1)
             {
                 EnableEditing(true);
 
-                selectedStudent = students[StudentDataGrid.SelectedIndex];
+                selectedStudent = students[StudentsListBox.SelectedIndex];
                 if(selectedStudent.AttendanceRegistrations.IsDefault())
                 {
                     RegistrationInformationViewer.AttendanceRegistration = default;
@@ -237,7 +265,7 @@ namespace Aspit.StudentReg.Gui.Desktop
         private void CreateNewButton_Clicked(object sender, RoutedEventArgs e)
         {
             selectedStudent = null;
-            StudentDataGrid.SelectedIndex = -1;
+            StudentsListBox.SelectedIndex = -1;
             EnableEditing(true,true);
         }
 

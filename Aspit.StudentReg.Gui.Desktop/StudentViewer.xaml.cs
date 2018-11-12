@@ -133,14 +133,7 @@ namespace Aspit.StudentReg.Gui.Desktop
                 EnableEditing(true);
 
                 selectedStudent = students[StudentsListBox.SelectedIndex];
-                if(selectedStudent.AttendanceRegistrations.IsDefault())
-                {
-                    RegistrationInformationViewer.AttendanceRegistration = default;
-                }
-                else
-                {
-                    RegistrationInformationViewer.AttendanceRegistration = selectedStudent.AttendanceRegistrations;
-                }
+                RegistrationInformationViewer.AttendanceRegistration = selectedStudent.AttendanceRegistrations;
                 NameTextBox.Text = selectedStudent.Name;
                 UniLoginTextBox.Text = selectedStudent.UniLogin;
             }

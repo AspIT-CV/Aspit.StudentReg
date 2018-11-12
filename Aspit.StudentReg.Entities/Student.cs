@@ -140,7 +140,7 @@ namespace Aspit.StudentReg.Entities
 
         public void colorSet()
         {
-            if (AttendanceRegistrations.IsDefault())
+            if (!AttendanceRegistrations.IsDefault())
             {
                 Color = new BrushConverter().ConvertFromString("#27ae60") as SolidColorBrush;
             }
@@ -152,13 +152,13 @@ namespace Aspit.StudentReg.Entities
 
         public void iconset()
         {
-            if (AttendanceRegistrations.IsDefault())
+            if (!AttendanceRegistrations.IsDefault())
             {
-                Icon = "✗";
+                Icon = "✓";
             }
             else
             {
-                Icon = "✓";
+                Icon = "✗";
             }
         }
 

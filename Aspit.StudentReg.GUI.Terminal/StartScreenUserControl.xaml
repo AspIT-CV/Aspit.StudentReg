@@ -20,8 +20,8 @@
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <WrapPanel>
-                            <TextBlock FontSize="40" FontFamily="Comic Sans MS" Text="{Binding Icon}" Foreground="{Binding Color}"/>
-                            <TextBlock FontSize="40" FontFamily="Comic Sans MS" Text="{Binding Name}" Foreground="{Binding Color}"/>
+                            <TextBlock FontSize="60" VerticalAlignment="Center" Text="{Binding Icon}" Margin="0,0,10,0" Foreground="{Binding Color}"/>
+                            <TextBlock FontSize="40" VerticalAlignment="Center" Text="{Binding Name}" />
                         </WrapPanel>
                     </DataTemplate>
                 </ListView.ItemTemplate>

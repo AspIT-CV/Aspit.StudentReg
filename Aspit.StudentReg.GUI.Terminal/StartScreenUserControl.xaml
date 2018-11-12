@@ -15,8 +15,19 @@
             <TextBlock Text="Velkommen!" HorizontalAlignment="Center" FontSize="45" Margin="10"></TextBlock>
             <TextBlock Text="Vælg dit navn for at checke ind eller ud" HorizontalAlignment="Center" FontSize="35" Margin="10"></TextBlock>
 
-            <ListBox Padding="10" x:Name="StudentListbox" SelectionChanged="StudentListbox_SelectionChanged" >
-            </ListBox>
+
+            <ListView Margin="10" x:Name="StudentListbox" SelectionChanged="StudentListbox_SelectionChanged">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <WrapPanel>
+                            <TextBlock FontSize="40" FontFamily="Comic Sans MS" Text="{Binding Icon}" Foreground="{Binding Color}"/>
+                            <TextBlock FontSize="40" FontFamily="Comic Sans MS" Text="{Binding Name}" Foreground="{Binding Color}"/>
+                        </WrapPanel>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+            
+            
 
         </StackPanel>
 

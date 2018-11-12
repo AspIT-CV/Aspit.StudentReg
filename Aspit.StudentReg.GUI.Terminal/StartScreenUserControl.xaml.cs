@@ -32,8 +32,12 @@ namespace Aspit.StudentReg.GUI.Terminal
 
             //Populate StudentListbox with all students
             StudentListbox.DisplayMemberPath = Name;
+
             StudentListbox.ItemsSource = studentsRepository.GetAll();
-            
+
+
+
+
         }
 
         private void StudentListbox_SelectionChanged(object sender, SelectionChangedEventArgs e)

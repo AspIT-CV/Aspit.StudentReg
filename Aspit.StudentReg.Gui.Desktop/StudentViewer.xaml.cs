@@ -72,9 +72,13 @@ namespace Aspit.StudentReg.Gui.Desktop
         /// <summary>
         /// Updates the list of students
         /// </summary>
-        private void UpdateStudentList()
+        private void UpdateStudentList(string searchString = "")
         {
+            searchString = searchString.Trim().ToLower();
+            StudentDataGrid.SelectedIndex = -1;
             students = studentsRepository.GetAll();
+            students.RemoveAll((student) => !(student.ToString().ToLower().Contains(searchString) || student.UniLogin.Contains(searchString)));
+
             StudentDataGrid.ItemsSource = (from student in students
                                            let Navn = student.Name
                                            let UniLogin = student.UniLogin
@@ -261,6 +265,23 @@ namespace Aspit.StudentReg.Gui.Desktop
         private void ShowRegistrationsButton_Clicked(object sender, RoutedEventArgs e)
         {
             GoToViewScreen?.Invoke(selectedStudent, null);
+        }
+
+        /// <summary>
+        /// Invoked when the refresh button has been clicked
+        /// </summary>
+        private void RefreshButtn_Clicked(object sender, RoutedEventArgs e)
+        {
+            SearchTextBox.Text = "";
+            UpdateStudentList();
+        }
+
+        /// <summary>
+        /// Invoked when the search button has been clicked
+        /// </summary>
+        private void SearchButton_Clicked(object sender, RoutedEventArgs e)
+        {
+            UpdateStudentList(SearchTextBox.Text);
         }
     }
 }

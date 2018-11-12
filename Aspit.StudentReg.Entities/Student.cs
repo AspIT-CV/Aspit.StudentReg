@@ -4,6 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Text.RegularExpressions;
+using System.Drawing;
+using System.Windows.Media;
 
 namespace Aspit.StudentReg.Entities
 {
@@ -19,6 +21,10 @@ namespace Aspit.StudentReg.Entities
         /// </summary>
         AttendanceRegistration attendanceRegistrations;
 
+        SolidColorBrush color;
+
+        string icon;
+
         /// <summary>
         /// Intializes a new <see cref="Student"/> using the given parameters
         /// </summary>
@@ -32,6 +38,8 @@ namespace Aspit.StudentReg.Entities
             Name = name;
             UniLogin = uniLogin;
             AttendanceRegistrations = attendanceRegistrations;
+            colorSet();
+            iconset();
         }
 
         /// <summary>
@@ -68,6 +76,32 @@ namespace Aspit.StudentReg.Entities
             }
         }
 
+        public SolidColorBrush Color
+        {
+            get
+            {
+                return this.color;
+            }
+
+            set
+            {
+                this.color = value;
+            }
+        }
+
+        public string Icon
+        {
+            get
+            {
+                return this.icon;
+            }
+
+            set
+            {
+                this.icon = value;
+            }
+        }
+
         /// <summary>
         /// Tests if a uniLogin string is valid
         /// </summary>
@@ -101,6 +135,30 @@ namespace Aspit.StudentReg.Entities
             } else
             {
                 return "✓ - " + Name;
+            }
+        }
+
+        public void colorSet()
+        {
+            if (AttendanceRegistrations.IsDefault())
+            {
+                Color = new BrushConverter().ConvertFromString("#27ae60") as SolidColorBrush;
+            }
+            else
+            {
+                Color = new BrushConverter().ConvertFromString("#c0392b") as SolidColorBrush;
+            }
+        }
+
+        public void iconset()
+        {
+            if (AttendanceRegistrations.IsDefault())
+            {
+                Icon = "✗";
+            }
+            else
+            {
+                Icon = "✓";
             }
         }
 

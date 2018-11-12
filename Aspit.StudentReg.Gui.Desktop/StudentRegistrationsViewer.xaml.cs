@@ -76,13 +76,18 @@ namespace Aspit.StudentReg.Gui.Desktop
         /// </summary>
         /// <param name="registration">The attendanceRegistration to show information for</param>
         /// <returns>A dockpanel containing information about the attendanceRegistration</returns>
-        private static DockPanel RegistrationView(AttendanceRegistration registration)
+        private DockPanel RegistrationView(AttendanceRegistration registration)
         {
             DockPanel registrationDockPanel = new DockPanel() {LastChildFill = false };
 
             if(registration.Date != DateTime.Now.Date && (registration.LeavingTime.TimeOfDay == default || registration.MeetingTime.TimeOfDay == default) )
             {
                 registrationDockPanel.Background = Brushes.PaleVioletRed;
+            }
+
+            if(registration == showingStudent.AttendanceRegistrations)
+            {
+                registrationDockPanel.Background = Brushes.LightGreen;
             }
 
             Label splitLine = new Label() { Height = 1, Background = Brushes.Black };

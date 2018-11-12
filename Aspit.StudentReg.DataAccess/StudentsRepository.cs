@@ -83,7 +83,7 @@ namespace Aspit.StudentReg.DataAccess
         /// <returns>a list containing all the <see cref="Student"/>s</returns>
         public List<Student> GetAll()
         {
-            SqlCommand getCommand = new SqlCommand("SELECT * FROM Users");
+            SqlCommand getCommand = new SqlCommand("SELECT * FROM Users ORDER BY CAST(name as Varchar(1000))");
             DataSet getOutput = Execute(getCommand);
 
             if (getOutput.Tables.Count < 0)

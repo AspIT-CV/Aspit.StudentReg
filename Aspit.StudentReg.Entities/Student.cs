@@ -95,7 +95,13 @@ namespace Aspit.StudentReg.Entities
 
         public override string ToString()
         {
-            return Name;
+            if (this.AttendanceRegistrations.IsDefault())
+            {
+                return "✗ - " + Name;
+            } else
+            {
+                return "✓ - " + Name;
+            }
         }
 
         /// <summary>

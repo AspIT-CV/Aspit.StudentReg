@@ -72,9 +72,16 @@ namespace Aspit.StudentReg.Gui.Desktop
         /// <summary>
         /// Updates the list of students
         /// </summary>
-        private void UpdateStudentList()
+        private void UpdateStudentList(string searchString = "")
         {
+            searchString = searchString.Trim().ToLower();
+            StudentDataGrid.SelectedIndex = -1;
             students = studentsRepository.GetAll();
+
+            //remove students who aren't found in the search
+            students.RemoveAll((student) => !(student.ToString().ToLower().Contains(searchString) || student.UniLogin.Contains(searchString)));
+
+            students.Sort(Student.Compare);
             StudentDataGrid.ItemsSource = (from student in students
                                            let Navn = student.Name
                                            let UniLogin = student.UniLogin
@@ -89,6 +96,7 @@ namespace Aspit.StudentReg.Gui.Desktop
 
         /// <summary>
         /// Invoked when StudentDataGrid selection has changed
+        /// Choses which student the controller is changing
         /// </summary>
         private void StudentDateGrid_Changed(object sender, SelectionChangedEventArgs e)
         {
@@ -142,7 +150,8 @@ namespace Aspit.StudentReg.Gui.Desktop
         }
 
         /// <summary>
-        /// Invoked when any one of the information text boxes
+        /// Invoked when any one of the information text boxes' text changes
+        /// Calls <see cref="ValidateInformation"/>
         /// </summary>
         private void StudentInformation_Changed(object sender, TextChangedEventArgs e)
         {
@@ -193,7 +202,8 @@ namespace Aspit.StudentReg.Gui.Desktop
         }
 
         /// <summary>
-        /// Invoked when the save button has been clicked - Saves/Creates the student
+        /// Invoked when the save button has been clicked
+        /// Saves/Creates the student
         /// </summary>
         private void SaveButton_Clicked(object sender, RoutedEventArgs e)
         {
@@ -222,6 +232,7 @@ namespace Aspit.StudentReg.Gui.Desktop
 
         /// <summary>
         /// Invoked when the create new student button has been clicked
+        /// enables the create new student gui
         /// </summary>
         private void CreateNewButton_Clicked(object sender, RoutedEventArgs e)
         {
@@ -232,6 +243,7 @@ namespace Aspit.StudentReg.Gui.Desktop
 
         /// <summary>
         /// Invoked when the AttendanceRegistration-usercontrol's button has been clicked
+        /// saves the registration in the student
         /// </summary>
         private void RegistrationSaveButton_Clicked(object sender, RoutedEventArgs e)
         {
@@ -257,10 +269,30 @@ namespace Aspit.StudentReg.Gui.Desktop
 
         /// <summary>
         /// Invoked when the show registrations button has been clicked
+        /// Changes the visible usercontrol into a place where you can see all the registrations for the student
         /// </summary>
         private void ShowRegistrationsButton_Clicked(object sender, RoutedEventArgs e)
         {
             GoToViewScreen?.Invoke(selectedStudent, null);
+        }
+
+        /// <summary>
+        /// Invoked when the refresh button has been clicked
+        /// refreshes the student list
+        /// </summary>
+        private void RefreshButtn_Clicked(object sender, RoutedEventArgs e)
+        {
+            SearchTextBox.Text = "";
+            UpdateStudentList();
+        }
+
+        /// <summary>
+        /// Invoked when the search button has been clicked
+        /// Searches using the searchtextbox string and shows result in the list
+        /// </summary>
+        private void SearchButton_Clicked(object sender, RoutedEventArgs e)
+        {
+            UpdateStudentList(SearchTextBox.Text);
         }
     }
 }

@@ -48,11 +48,11 @@ namespace Aspit.StudentReg.Tests
 
             repository.CreateStudent(student);
 
-            Assert.AreEqual(repository.IsCheckedIn(student), false);
+            Assert.AreEqual(!student.AttendanceRegistrations.IsDefault(), false);
 
             repository.CheckIn(student, DateTime.Now);
 
-            Assert.AreEqual(repository.IsCheckedIn(student), true);
+            Assert.AreEqual(!student.AttendanceRegistrations.IsDefault(), true);
 
         }
 
@@ -64,11 +64,11 @@ namespace Aspit.StudentReg.Tests
 
             repository.CreateStudent(student);
             repository.CheckIn(student, DateTime.Now);
-            Assert.AreEqual(repository.IsCheckedIn(student), true);
+            Assert.AreEqual(!student.AttendanceRegistrations.IsDefault(), true);
 
             repository.CheckOut(student, DateTime.Now);
 
-            Assert.AreEqual(repository.IsCheckedIn(student), false);
+            Assert.AreEqual(!student.AttendanceRegistrations.IsDefault(), false);
 
         }
 

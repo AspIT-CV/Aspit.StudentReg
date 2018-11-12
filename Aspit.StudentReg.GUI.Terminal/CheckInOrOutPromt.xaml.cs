@@ -36,7 +36,7 @@ namespace Aspit.StudentReg.GUI.Terminal
             TopLine.Text = "Hej " + student.Name + "!";
             
             //Check if student is currently checked in
-            if (studentsRepository.IsCheckedIn(student))
+            if (!student.AttendanceRegistrations.IsDefault())
             {
                 //Student is currently checked in
                 if(student.AttendanceRegistrations.MeetingTime.Date == DateTime.Now.Date)

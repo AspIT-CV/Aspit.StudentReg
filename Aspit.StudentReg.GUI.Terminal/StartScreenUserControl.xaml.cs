@@ -29,12 +29,15 @@ namespace Aspit.StudentReg.GUI.Terminal
             parent = parentArg;
             InitializeComponent();
             StudentsRepository studentsRepository = new StudentsRepository(RepositoryBase.RetrieveConnectionString());
+
+            //Populate StudentListbox with all students
             StudentListbox.DisplayMemberPath = Name;
             StudentListbox.ItemsSource = studentsRepository.GetAll();
         }
 
         private void StudentListbox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+            //Set usercontrol to CheckInOrOutPromt with the selcted student 
             Student student = StudentListbox.SelectedItem as Student;
             parent.Content = new CheckInOrOutPromt(student, parent);
         }

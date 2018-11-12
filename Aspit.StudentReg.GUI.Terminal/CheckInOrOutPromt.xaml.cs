@@ -32,10 +32,10 @@ namespace Aspit.StudentReg.GUI.Terminal
             InitializeComponent();
             studentsRepository = new StudentsRepository(RepositoryBase.RetrieveConnectionString());
             
-
+            //Set TopLine text
             TopLine.Text = "Hej " + student.Name + "!";
             
-
+            //Check if student is currently checked in
             if (studentsRepository.IsCheckedIn(student))
             {
                 //Student is currently checked in
@@ -58,30 +58,59 @@ namespace Aspit.StudentReg.GUI.Terminal
                 UnderTopLine.Text = "Velkommen tilbage!";
             }
         }
-
+        /// <summary>
+        /// Handle click of the Cancel button
+        /// Send user back to <see cref="StartScreenUserControl"/>
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Cancel_Click(object sender, RoutedEventArgs e)
         {
             parent.Content = new StartScreenUserControl(parent);
         }
 
+        /// <summary>
+        /// Handels click on check out button
+        /// Checks out user and redirects to <see cref="CheckedInUserControl"/>
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void CheckOut_Click(object sender, RoutedEventArgs e)
         {
+            //Check out user
             studentsRepository.CheckIn(student, DateTime.Now);
+
+            //Redirect
             parent.Content = new CheckedInUserControl(student, parent, true);
         }
 
+        /// <summary>
+        /// Handels click on check in button
+        /// Checks in user and redirects to <see cref="CheckedInUserControl"/>
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void CheckIn_Click(object sender, RoutedEventArgs e)
         {
+            //Check in user
             studentsRepository.CheckOut(student, DateTime.Now);
+
+            //Redirect
             parent.Content = new CheckedInUserControl(student, parent, false);
         }
 
+        /// <summary>
+        /// Make GUI only show check out button
+        /// </summary>
         private void OnlyShowCheckOut()
         {
             CheckOut.Visibility = Visibility.Hidden;
             CheckIn.SetValue(Grid.ColumnSpanProperty, 2);
             CheckIn.SetValue(Grid.ColumnProperty, 0);
         }
+        /// <summary>
+        /// Make GUI only show check in button
+        /// </summary>
         private void OnlyShowCheckIn()
         {
             CheckIn.Visibility = Visibility.Hidden;

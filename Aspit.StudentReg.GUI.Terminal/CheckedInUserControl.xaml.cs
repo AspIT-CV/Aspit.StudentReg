@@ -27,22 +27,34 @@ namespace Aspit.StudentReg.GUI.Terminal
         {
             parent = parentArg;
             InitializeComponent();
-
+            //Check if the action was check in
             if (checkIn)
             {
+                //Display check in text
                 mainTextBlock.Text = "Du blev checket ind " + student.Name;
+
+                //Change Backgroundcolor to green
                 this.Background = new BrushConverter().ConvertFromString("#27ae60") as SolidColorBrush;
             } else
             {
+                //Display check out text
                 mainTextBlock.Text = "Du blev checket ud " + student.Name;
+
+                //Change Backgroundcolor to red
                 this.Background = new BrushConverter().ConvertFromString("#c0392b") as SolidColorBrush;
             }           
             goBackToStart(); 
         }
-
+        /// <summary>
+        /// Makes usercontrol go back to <see cref="StartScreenUserControl"/> after 3 seconds
+        /// </summary>
+        /// <returns></returns>
         private async Task goBackToStart()
         {
+            //Wait 3 seconds
             await Task.Delay(3000);
+
+            //Redirect to StartScreenUserControl
             parent.Content = new StartScreenUserControl(parent);
         }
     }

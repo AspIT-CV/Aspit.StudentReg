@@ -77,23 +77,17 @@ namespace Aspit.StudentReg.Gui.Desktop
         public void UpdateRegistrationDataGrid()
         {
             registrations = registrationsRepository.GetUsersRegistrations(showingStudent);
+            registrations.Sort(AttendanceRegistration.Compare);
             RegistrationDataGrid.ItemsSource = (from registration in registrations
-                                                let Id = registration.Id
                                                 let Dato = $"{registration.Date.Day}/{registration.Date.Month}/{registration.Date.Year}"
                                                 let Tjekind = registration.MeetingTime.TimeOfDay == default ? "-" : registration.MeetingTime.TimeOfDay.ToString()
                                                 let Tjekud = registration.LeavingTime.TimeOfDay == default ? "-" : registration.LeavingTime.TimeOfDay.ToString()
                                                 select new
                                                 {
-                                                    Id,
                                                     Dato,
                                                     Tjekind,
                                                     Tjekud
                                                 });
-
-            if(RegistrationDataGrid.Columns.Count != 0)
-            {
-                RegistrationDataGrid.Columns[0].Visibility = Visibility.Collapsed;
-            }
         }
 
         /// <summary>

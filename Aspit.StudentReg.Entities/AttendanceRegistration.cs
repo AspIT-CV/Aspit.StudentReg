@@ -191,5 +191,27 @@ namespace Aspit.StudentReg.Entities
         {
             return !(left == right);
         }
+
+        /// <summary>
+        /// Compares two registrations and outputs a number based on which registration should show first in a list
+        /// </summary>
+        /// <param name="registration1">The first registration</param>
+        /// <param name="registration2">The second registration</param>
+        /// <returns>returns 1 if the first registration should be highest, -1 if lowest and 0 if it doesnt matter</returns>
+        public static int Compare(AttendanceRegistration registration1, AttendanceRegistration registration2)
+        {
+            bool registration1Done = (registration1.LeavingTime.TimeOfDay != default && registration1.meetingTime.TimeOfDay != default);
+            bool registration2Done = (registration2.LeavingTime.TimeOfDay != default && registration2.meetingTime.TimeOfDay != default);
+            if(registration1Done && !registration2Done)
+            {
+                return 1;
+            }
+            else if(!registration1Done && registration2Done)
+            {
+                return -1;
+            }
+
+            return registration2.Date.CompareTo(registration1.Date);
+        }
     }
 }

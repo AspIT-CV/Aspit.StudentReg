@@ -80,5 +80,21 @@ namespace Aspit.StudentReg.Tests
         {
             Student student = new Student(-1, name, uniLogin);
         }
+
+        [TestMethod()]
+        public void Compare()
+        {
+            //Test if names are sorted alphabeticly
+            Student student1 = new Student(0, "Morten", uniLogin);
+            Student student2 = new Student(1, "Magnus", uniLogin);
+            Assert.AreEqual(1, Student.Compare(student1, student2));
+
+            //Test if students with an attendanceRegistration sorts
+            student1.AttendanceRegistrations = new AttendanceRegistration
+            {
+                MeetingTime = DateTime.Now
+            };
+            Assert.AreEqual(-1, Student.Compare(student1, student2));
+        }
     }
 }

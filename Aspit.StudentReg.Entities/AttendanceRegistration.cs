@@ -211,7 +211,7 @@ namespace Aspit.StudentReg.Entities
                 return 1;
             }
 
-            if(registration1.Date.CompareTo(registration2.Date) != 0)
+            if(registration1.Date != registration2.Date)
             {
                 return registration2.Date.CompareTo(registration1.Date);
             }

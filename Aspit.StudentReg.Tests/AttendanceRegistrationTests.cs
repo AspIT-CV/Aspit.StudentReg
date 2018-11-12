@@ -104,5 +104,33 @@ namespace Aspit.StudentReg.Tests
             };
             Assert.IsFalse(registration.IsDefault());
         }
+
+        [TestMethod()]
+        public void Compare()
+        {
+            //Test if a registration with a higher date outputs -1
+            AttendanceRegistration registration1 = new AttendanceRegistration
+            {
+                Id = 1,
+                MeetingTime = new DateTime(2018, 6, 10, 9, 0, 0),
+                LeavingTime = new DateTime(2018, 6, 10, 15, 0, 0)
+            };
+            AttendanceRegistration registration2 = new AttendanceRegistration
+            {
+                Id = 2,
+                MeetingTime = new DateTime(2018, 6, 9, 8, 0, 0),
+                LeavingTime = new DateTime(2018, 6, 9, 9, 0, 0)
+            };
+            Assert.AreEqual(-1, AttendanceRegistration.Compare(registration1, registration2));
+
+            //Test if a registration with a lower time outputs 1
+            registration1 = new AttendanceRegistration
+            {
+                Id = 1,
+                MeetingTime = new DateTime(2018, 6, 9, 7, 0, 0),
+                LeavingTime = new DateTime(2018, 6, 9, 8, 0, 0)
+            };
+            Assert.AreEqual(1, AttendanceRegistration.Compare(registration1, registration2));
+        }
     }
 }

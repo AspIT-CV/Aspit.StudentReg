@@ -82,7 +82,7 @@ namespace Aspit.StudentReg.Entities
             name = name.Trim();
 
             //Check if value only consits of letters and whitespace
-            Regex reg = new Regex(@"^([a-zA-Z ]+)$");
+            Regex reg = new Regex(@"^([\p{L} ]+)$");
             if(!reg.IsMatch(name))
             {
                 throw new ArgumentException("Name is invalid");

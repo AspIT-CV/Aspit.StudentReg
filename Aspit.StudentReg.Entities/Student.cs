@@ -84,7 +84,7 @@ namespace Aspit.StudentReg.Entities
             uniLogin = uniLogin.Trim();
 
             //Check if value is a correct unilogin format
-            Regex reg = new Regex(@"^[a-x]{4}[a-x0-9]{4}$");
+            Regex reg = new Regex(@"^[\p{L}]{4}[\p{L}0-9]{4}$");
             if(!reg.IsMatch(uniLogin))
             {
                 throw new ArgumentException("Unilogin is invalid");
@@ -95,7 +95,7 @@ namespace Aspit.StudentReg.Entities
 
         public override string ToString()
         {
-            if (this.AttendanceRegistrations.IsDefault())
+            if (AttendanceRegistrations.IsDefault())
             {
                 return "✗ - " + Name;
             } else

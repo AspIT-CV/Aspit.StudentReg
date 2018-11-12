@@ -6,13 +6,19 @@
              xmlns:local="clr-namespace:Aspit.StudentReg.GUI.Terminal"
              mc:Ignorable="d" 
              d:DesignHeight="1080" d:DesignWidth="1920" Background="White">
-    <Grid Margin="300,100,300,20">
-        <StackPanel HorizontalAlignment="Center" Margin="0" Width="1320">
-            <TextBlock Text="Hej" HorizontalAlignment="Center" FontSize="35" Margin="20"></TextBlock>
 
-            <ListBox x:Name="StudentListbox" SelectionChanged="StudentListbox_SelectionChanged" >
+
+
+    <Grid Margin="300,100,300,20">
+       
+        <StackPanel HorizontalAlignment="Center" Margin="0" Width="1320">
+            <TextBlock Text="Velkommen!" HorizontalAlignment="Center" FontSize="45" Margin="10"></TextBlock>
+            <TextBlock Text="Vælg dit navn for at checke ind eller ud" HorizontalAlignment="Center" FontSize="35" Margin="10"></TextBlock>
+
+            <ListBox Padding="10" x:Name="StudentListbox" SelectionChanged="StudentListbox_SelectionChanged" >
             </ListBox>
 
         </StackPanel>
+
     </Grid>
 </UserControl>

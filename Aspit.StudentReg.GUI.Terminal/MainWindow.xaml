@@ -5,8 +5,9 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Aspit.StudentReg.GUI.Terminal"
         mc:Ignorable="d"
-        Title="MainWindow"
-         
+        Title="Student Registration"
+         ResizeMode="NoResize"
+        WindowStyle="None"
         WindowStartupLocation="CenterScreen" WindowState="Maximized">
     <Window.Resources>
 

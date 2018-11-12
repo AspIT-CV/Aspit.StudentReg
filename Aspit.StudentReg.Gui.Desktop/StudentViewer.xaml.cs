@@ -77,7 +77,11 @@ namespace Aspit.StudentReg.Gui.Desktop
             searchString = searchString.Trim().ToLower();
             StudentDataGrid.SelectedIndex = -1;
             students = studentsRepository.GetAll();
+
+            //remove students who aren't found in the search
             students.RemoveAll((student) => !(student.ToString().ToLower().Contains(searchString) || student.UniLogin.Contains(searchString)));
+
+            students.Sort(Student.Compare);
 
             StudentDataGrid.ItemsSource = (from student in students
                                            let Navn = student.Name

@@ -97,5 +97,27 @@ namespace Aspit.StudentReg.Entities
         {
             return Name;
         }
+
+        /// <summary>
+        /// Compares two students and outputs a number based on which student should show first in a list
+        /// </summary>
+        /// <param name="student1">The first student</param>
+        /// <param name="student2">The second student</param>
+        /// <returns>returns 1 if the first student should be highest, -1 if lowest and 0 if it doesnt matter</returns>
+        public static int Compare(Student student1, Student student2)
+        {
+            if(student1.AttendanceRegistrations.IsDefault() && !student2.AttendanceRegistrations.IsDefault())
+            {
+                return 1;
+            }
+            else if(!student1.AttendanceRegistrations.IsDefault() && student2.AttendanceRegistrations.IsDefault())
+            {
+                return -1;
+            }
+            else
+            {
+                return string.Compare(student1.ToString(), student2.ToString());
+            }
+        }
     }
 }
